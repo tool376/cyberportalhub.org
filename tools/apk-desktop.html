@@ -45,6 +45,8 @@
   .brand{ font-family: var(--mono); font-size: 13px; color: var(--paper-dim); letter-spacing: 0.02em; }
   .brand a{ color: var(--paper); }
   .brand a:hover{ color: var(--amber); }
+  .back-btn{display:inline-flex;align-items:center;gap:7px;color:var(--paper);text-decoration:none;font-family:var(--sans);font-weight:500;font-size:14px;padding:7px 14px;border:1px solid var(--paper-dim);border-radius:5px;transition:border-color .15s,color .15s;}
+  .back-btn:hover{border-color:var(--amber);color:var(--amber);text-decoration:none;}
 
   main{ max-width: 940px; margin: 0 auto; padding: 0 28px; }
 
@@ -194,7 +196,7 @@
 
 <header class="top">
   <div class="wrap">
-    <div class="brand"><a href="https://cyberportalhub.org">Cyber Portal Hub</a> / <a href="index.html">Tools</a> / Desktop EXE</div>
+    <a class="back-btn" href="index.html">← Back to Tools</a>
     <div class="brand">v3.3</div>
   </div>
 </header>
