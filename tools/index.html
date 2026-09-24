@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools — Cyber Portal Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12181F; --ink-soft:#1B232C; --paper:#ECE6D8; --paper-dim:#C9C0AC;
+    --amber:#C98A2B; --steel:#6E8A93; --rule:rgba(236,230,216,0.14);
+    --serif:'Source Serif 4',Georgia,serif; --sans:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.6;}
+  a{color:var(--amber);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+  header.top{border-bottom:1px solid var(--rule);padding:16px 0;}
+  header.top .wrap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--paper-dim);}
+  header.top a{color:var(--paper);text-decoration:none;} header.top a:hover{color:var(--amber);}
+  main{max-width:900px;margin:0 auto;padding:48px 24px 80px;}
+  h1{font-family:var(--serif);font-size:clamp(28px,4vw,38px);margin:0 0 10px;}
+  .lede{color:#D9D2C3;max-width:60ch;margin:0 0 36px;}
+  .grid{display:grid;gap:16px;}
+  .card{border:1px solid var(--paper-dim);padding:22px 24px;display:flex;gap:16px;align-items:flex-start;text-decoration:none;color:inherit;transition:border-color .15s;}
+  .card:hover{border-color:var(--amber);text-decoration:none;}
+  .card .icon{font-size:28px;line-height:1;}
+  .card h2{font-family:var(--serif);font-size:19px;margin:0 0 6px;color:var(--paper);}
+  .card p{margin:0;font-size:14px;color:#C7BFAF;}
+  .card .go{margin-left:auto;color:var(--amber);font-family:var(--mono);font-size:13px;align-self:center;white-space:nowrap;}
+  footer{padding:30px 0 50px;border-top:1px solid var(--rule);margin-top:40px;}
+  footer p{font-size:12.5px;color:var(--paper-dim);max-width:640px;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div><a href="https://cyberportalhub.org">Cyber Portal Hub</a> / Tools</div>
+  </div>
+</header>
+
+<main>
+  <h1>Tools</h1>
+  <p class="lede">Free, browser-based utilities from Cyber Portal Hub. Nothing here needs an install — pick a tool below.</p>
+  <div class="grid" id="toolGrid"></div>
+</main>
+
+<footer>
+  <div class="wrap" style="max-width:900px;">
+    <p>Independently operated. Tools on this page run static analysis only and do not execute or install any file you provide. Part of <a href="https://cyberportalhub.org">cyberportalhub.org</a>.</p>
+  </div>
+</footer>
+
+<script>
+// To add a new tool later: just add one object here.
+const TOOLS = [
+  {
+    icon: "🔍",
+    title: "Android APK Scanner",
+    desc: "Static triage for Android APKs — permissions, embedded strings, signing info and known SDKs, generated as a downloadable report.",
+    href: "scan.html",
+    tag: "Open tool →"
+  },
+  {
+    icon: "🌐",
+    title: "Translator",
+    desc: "Quick online translator for everyday text, hosted on Cyber Portal Hub's tools.",
+    href: "https://tool376.github.io/online-translator/",
+    tag: "Open tool →"
+  },
+  {
+    icon: "अ",
+    title: "CYFORIXA Hindi Font Converter",
+    desc: "Convert Kruti Dev text to Unicode Mangal font, right in your browser.",
+    href: "https://tool376.github.io/krutidev-mangal-converter/",
+    tag: "Open tool →"
+  }
+];
+
+document.getElementById('toolGrid').innerHTML = TOOLS.map(t => `
+  <a class="card" href="${t.href}">
+    <span class="icon">${t.icon}</span>
+    <div>
+      <h2>${t.title}</h2>
+      <p>${t.desc}</p>
+    </div>
+    <span class="go">${t.tag}</span>
+  </a>
+`).join('');
+</script>
+
+</body>
+</html>
