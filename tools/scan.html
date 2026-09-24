@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APK Scanner — Cyber Portal Hub Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root{
+    --ink:#12181F; --ink-soft:#1B232C; --paper:#ECE6D8; --paper-dim:#C9C0AC;
+    --amber:#C98A2B; --steel:#6E8A93; --brick:#A9503F; --rule:rgba(236,230,216,0.14);
+    --serif:'Source Serif 4',Georgia,serif; --sans:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.6;}
+  a{color:var(--amber);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+  header.top{border-bottom:1px solid var(--rule);padding:16px 0;}
+  header.top .wrap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--paper-dim);}
+  header.top a{color:var(--paper);text-decoration:none;} header.top a:hover{color:var(--amber);}
+  main{max-width:900px;margin:0 auto;padding:40px 24px 80px;}
+  h1{font-family:var(--serif);font-size:clamp(28px,4vw,38px);margin:0 0 10px;}
+  .lede{color:#D9D2C3;max-width:60ch;margin:0 0 28px;}
+  .privacy-note{border-left:3px solid var(--steel);padding:14px 18px;background:var(--ink-soft);font-size:14px;color:#DAD3C4;margin-bottom:28px;}
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  .meta-grid input{background:var(--ink-soft);border:1px solid var(--paper-dim);color:var(--paper);padding:10px 12px;font-family:var(--mono);font-size:13px;border-radius:3px;}
+  .meta-grid input::placeholder{color:#8A8270;}
+  #dropzone{border:2px dashed var(--paper-dim);border-radius:6px;padding:48px 24px;text-align:center;cursor:pointer;transition:border-color .15s;}
+  #dropzone:hover,#dropzone.drag{border-color:var(--amber);}
+  #dropzone p{margin:6px 0;color:#C7BFAF;}
+  #dropzone .big{font-family:var(--serif);font-size:20px;color:var(--paper);}
+  #fileInput{display:none;}
+  #status{font-family:var(--mono);font-size:13px;color:var(--amber);margin:18px 0;min-height:18px;}
+  #report{display:none;}
+  section.block{padding:24px 0;border-top:1px solid var(--rule);}
+  h2{font-family:var(--serif);font-size:20px;margin:0 0 14px;}
+  .kv{display:grid;grid-template-columns:180px 1fr;gap:6px 14px;font-size:14px;margin-bottom:6px;}
+  .kv dt{color:var(--paper-dim);font-family:var(--mono);font-size:12px;}
+  .kv dd{margin:0;font-family:var(--mono);word-break:break-all;color:#E4DFD3;}
+  .perm-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
+  .perm-list li{padding:8px 12px;border-left:2px solid var(--steel);font-family:var(--mono);font-size:13px;}
+  .perm-list li.danger{border-left-color:var(--brick);background:rgba(169,80,63,0.12);}
+  .tag{display:inline-block;font-size:10px;font-family:var(--mono);padding:2px 6px;border-radius:2px;background:var(--brick);color:#fff;margin-left:8px;vertical-align:middle;}
+  .indicator-box{background:var(--ink-soft);border:1px solid var(--rule);padding:14px 16px;font-family:var(--mono);font-size:12.5px;max-height:220px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;}
+  .btn{display:inline-flex;padding:11px 20px;font-weight:500;border-radius:3px;background:var(--amber);color:var(--ink);border:none;font-size:14px;cursor:pointer;font-family:var(--sans);}
+  .btn:hover{background:#DB9A3C;}
+  .btn-ghost{background:transparent;border:1px solid var(--paper-dim);color:var(--paper);}
+  .empty{color:#8A8270;font-size:13px;font-style:italic;}
+  footer{padding:30px 0 50px;border-top:1px solid var(--rule);margin-top:10px;}
+  footer p{font-size:12.5px;color:var(--paper-dim);max-width:640px;}
+
+  .letterhead{display:none;border-bottom:2px solid var(--amber);padding-bottom:14px;margin-bottom:20px;}
+  .letterhead .org{font-family:var(--serif);font-size:19px;color:var(--paper);}
+  .letterhead .sub{font-family:var(--mono);font-size:11px;color:var(--paper-dim);margin-top:2px;}
+  #report.ready .letterhead{display:block;}
+
+  .summary-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:8px;}
+  .summary-bar div{background:var(--ink);padding:14px 16px;}
+  .summary-bar .num{font-family:var(--serif);font-size:26px;color:var(--amber);line-height:1;}
+  .summary-bar .lbl{font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);margin-top:4px;text-transform:uppercase;letter-spacing:.04em;}
+
+  .svc-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
+  .svc-list li{padding:8px 12px;border-left:2px solid var(--amber);font-family:var(--mono);font-size:13px;background:rgba(201,138,43,0.08);}
+
+  @media print{
+    body{background:#fff;color:#111;}
+    header.top,#dropzone,#fileInput,.privacy-note,.meta-grid,#downloadBtn,footer,.lede{display:none;}
+    #report{display:block !important;}
+    section.block{border-top:1px solid #ccc;break-inside:avoid;}
+    .kv dd,.perm-list li,.indicator-box,.svc-list li{color:#111;}
+    .summary-bar div{background:#f5f2ea;border:1px solid #ddd;}
+    a{color:#111;text-decoration:underline;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div><a href="https://cyberportalhub.org">Cyber Portal Hub</a> / <a href="index.html">Tools</a> / APK Scanner</div>
+    <div>runs in your browser</div>
+  </div>
+</header>
+
+<main>
+  <h1>Android APK Scanner</h1>
+  <p class="lede">Static triage, right here in the browser. Upload an APK and get a structural report — permissions, file layout, embedded strings, signing artefacts.</p>
+
+  <div class="privacy-note">
+    <strong>Nothing leaves this device.</strong> The APK is read and parsed entirely in your browser's memory using JavaScript. No file, hash, or report is uploaded to any server — this page has no backend.
+  </div>
+
+  <div class="meta-grid">
+    <input id="caseId" placeholder="Case / evidence ID (optional)">
+    <input id="analyst" placeholder="Analyst name (optional)">
+  </div>
+
+  <div id="dropzone">
+    <div class="big">Drop an APK here, or click to choose a file</div>
+    <p>Static analysis only — the APK is never installed or executed.</p>
+  </div>
+  <input type="file" id="fileInput" accept=".apk">
+  <div id="status"></div>
+
+  <div id="report">
+    <div class="letterhead">
+      <div class="org">🇮🇳 India Cyber Portal Hub — Static Triage Report</div>
+      <div class="sub" id="letterheadMeta"></div>
+    </div>
+
+    <div class="summary-bar" id="summaryBar"></div>
+
+    <section class="block">
+      <h2>File</h2>
+      <dl class="kv" id="fileInfo"></dl>
+      <button class="btn" id="downloadBtn" style="margin-top:10px;">Download report (.txt)</button>
+      <button class="btn btn-ghost" onclick="window.print()" style="margin-top:10px;">Print / Save as PDF</button>
+    </section>
+
+    <section class="block">
+      <h2>Third-party services &amp; SDKs</h2>
+      <ul class="svc-list" id="svcList"></ul>
+    </section>
+
+    <section class="block">
+      <h2>Permissions <span id="permCount"></span></h2>
+      <ul class="perm-list" id="permList"></ul>
+    </section>
+
+    <section class="block">
+      <h2>App structure</h2>
+      <dl class="kv" id="structInfo"></dl>
+    </section>
+
+    <section class="block">
+      <h2>Signing artefacts</h2>
+      <dl class="kv" id="sigInfo"></dl>
+    </section>
+
+    <section class="block">
+      <h2>String indicators</h2>
+      <p style="font-size:13px;color:#8A8270;margin:0 0 10px;">URLs, IPs and API calls found in the compiled code and resources. Leads only — confirm manually.</p>
+      <div id="indicators"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="max-width:900px;">
+    <p>Static triage tool. Findings are investigative leads, not conclusions — they require manual or dynamic validation before use in a report. Absence of a finding does not establish absence of the behaviour. Part of <a href="https://cyberportalhub.org">cyberportalhub.org</a>.</p>
+  </div>
+</footer>
+
+<script>
+const dz = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const statusEl = document.getElementById('status');
+const report = document.getElementById('report');
+
+dz.addEventListener('click', () => fileInput.click());
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => { if (e.target.files.length) handleFile(e.target.files[0]); });
+
+const DANGEROUS = ['CAMERA','RECORD_AUDIO','ACCESS_FINE_LOCATION','ACCESS_COARSE_LOCATION',
+  'ACCESS_BACKGROUND_LOCATION','READ_CONTACTS','WRITE_CONTACTS','READ_CALL_LOG','WRITE_CALL_LOG',
+  'READ_SMS','SEND_SMS','RECEIVE_SMS','READ_PHONE_STATE','CALL_PHONE','READ_EXTERNAL_STORAGE',
+  'WRITE_EXTERNAL_STORAGE','MANAGE_EXTERNAL_STORAGE','SYSTEM_ALERT_WINDOW','REQUEST_INSTALL_PACKAGES',
+  'BIND_ACCESSIBILITY_SERVICE','BIND_DEVICE_ADMIN','QUERY_ALL_PACKAGES','GET_ACCOUNTS','READ_CALENDAR',
+  'BODY_SENSORS','ACTIVITY_RECOGNITION','PROCESS_OUTGOING_CALLS','ANSWER_PHONE_CALLS'];
+
+const SUSPICIOUS_APIS = ['DexClassLoader','loadLibrary','Runtime.exec','/system/bin/su','getRuntime',
+  'sendTextMessage','SmsManager','HttpURLConnection','Cipher.getInstance','TelephonyManager',
+  'getDeviceId','getSubscriberId','AccessibilityService','DeviceAdminReceiver'];
+
+const SERVICE_SIGNATURES = [
+  {name:'Firebase (Google)', patterns:['com/google/firebase','firebaseio.com','firebaseapp.com','firebasedatabase.app']},
+  {name:'Google Play Services (GMS)', patterns:['com/google/android/gms']},
+  {name:'Google Analytics / Tag Manager', patterns:['google-analytics.com','googletagmanager.com']},
+  {name:'AdMob / Google Ads', patterns:['com/google/android/gms/ads','googleadservices.com','doubleclick.net']},
+  {name:'Facebook SDK', patterns:['com/facebook','graph.facebook.com']},
+  {name:'AWS (Amazon Web Services)', patterns:['amazonaws.com','com/amazonaws']},
+  {name:'OneSignal (Push notifications)', patterns:['com/onesignal','onesignal.com']},
+  {name:'Crashlytics', patterns:['com/crashlytics','crashlytics.com']},
+  {name:'AppsFlyer', patterns:['com/appsflyer']},
+  {name:'Branch.io', patterns:['io/branch']},
+  {name:'Adjust', patterns:['com/adjust']},
+  {name:'Razorpay', patterns:['com/razorpay','razorpay.com']},
+  {name:'Stripe', patterns:['com/stripe','stripe.com']},
+  {name:'PayU', patterns:['payu.in','com/payu']},
+  {name:'Paytm', patterns:['paytm.com','com/paytm']},
+  {name:'Unity Ads / Unity', patterns:['com/unity3d']},
+  {name:'Mixpanel', patterns:['mixpanel.com','com/mixpanel']},
+  {name:'Cloudflare', patterns:['cloudflare.com']}
+];
+
+let reportText = '';
+
+async function handleFile(file){
+  report.style.display = 'none';
+  reportText = '';
+  if (!file.name.toLowerCase().endsWith('.apk')){
+    statusEl.textContent = 'This does not look like an .apk file.'; return;
+  }
+  statusEl.textContent = 'Reading file...';
+  const buf = await file.arrayBuffer();
+
+  statusEl.textContent = 'Hashing (SHA-256)...';
+  const hashBuf = await crypto.subtle.digest('SHA-256', buf);
+  const sha256 = [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2,'0')).join('');
+
+  statusEl.textContent = 'Unpacking archive...';
+  let zip;
+  try { zip = await JSZip.loadAsync(buf); }
+  catch(e){ statusEl.textContent = 'Could not open this file as a ZIP/APK archive.'; return; }
+
+  const names = Object.keys(zip.files);
+  const dexFiles = names.filter(n => /^classes\d*\.dex$/.test(n));
+  const libArches = [...new Set(names.filter(n => n.startsWith('lib/')).map(n => n.split('/')[1]).filter(Boolean))];
+  const sigFiles = names.filter(n => /^META-INF\/.*\.(RSA|DSA|EC)$/i.test(n));
+
+  statusEl.textContent = 'Scanning manifest for permissions...';
+  let permissions = [];
+  const manifestEntry = zip.files['AndroidManifest.xml'];
+  if (manifestEntry){
+    const mbuf = await manifestEntry.async('uint8array');
+    permissions = extractPermissions(mbuf);
+  }
+
+  statusEl.textContent = 'Hashing signing artefacts...';
+  const sigResults = [];
+  for (const sf of sigFiles.slice(0,5)){
+    const sbuf = await zip.files[sf].async('arraybuffer');
+    const sh = await crypto.subtle.digest('SHA-256', sbuf);
+    sigResults.push({name: sf, sha256: [...new Uint8Array(sh)].map(b=>b.toString(16).padStart(2,'0')).join('')});
+  }
+
+  statusEl.textContent = 'Scanning code for string indicators (this can take a moment)...';
+  const indicators = await scanIndicators(zip, dexFiles);
+
+  statusEl.textContent = '';
+  renderReport({file, sha256, names, dexFiles, libArches, sigResults, permissions, indicators});
+}
+
+function extractPermissions(bytes){
+  const found = new Set();
+  const re = /[A-Za-z][A-Za-z0-9_.]*\.permission\.[A-Z_][A-Za-z0-9_]*/g;
+  // pass 1: UTF-16LE decode
+  let s16 = '';
+  for (let i = 0; i + 1 < bytes.length; i += 2){
+    const code = bytes[i] | (bytes[i+1] << 8);
+    s16 += (code >= 32 && code < 0xD800) ? String.fromCharCode(code) : ' ';
+  }
+  (s16.match(re) || []).forEach(p => found.add(p));
+  // pass 2: latin1/UTF-8-ish decode
+  let s8 = '';
+  for (let i = 0; i < bytes.length; i++){
+    const c = bytes[i];
+    s8 += (c >= 32 && c < 127) ? String.fromCharCode(c) : ' ';
+  }
+  (s8.match(re) || []).forEach(p => found.add(p));
+  return [...found].sort();
+}
+
+async function scanIndicators(zip, dexFiles){
+  const urlSet = new Set(), ipSet = new Set(), apiHits = {}, svcHits = new Set();
+  const urlRe = /https?:\/\/[^\s"'<>]{4,120}/g;
+  const ipRe = /\b(?:\d{1,3}\.){3}\d{1,3}\b/g;
+  let scannedBytes = 0;
+  const CAP = 25 * 1024 * 1024;
+  for (const df of dexFiles){
+    if (scannedBytes > CAP) break;
+    const buf = await zip.files[df].async('uint8array');
+    scannedBytes += buf.length;
+    let text = '';
+    for (let i = 0; i < buf.length; i++){
+      const c = buf[i];
+      text += (c >= 32 && c < 127) ? String.fromCharCode(c) : ' ';
+    }
+    (text.match(urlRe) || []).forEach(u => urlSet.add(u));
+    (text.match(ipRe) || []).forEach(ip => { if (ip !== '0.0.0.0') ipSet.add(ip); });
+    for (const api of SUSPICIOUS_APIS){
+      if (text.includes(api)) apiHits[api] = (apiHits[api]||0) + 1;
+    }
+    for (const svc of SERVICE_SIGNATURES){
+      if (svc.patterns.some(p => text.includes(p))) svcHits.add(svc.name);
+    }
+  }
+  return {
+    urls: [...urlSet].slice(0,30),
+    ips: [...ipSet].slice(0,20),
+    apis: Object.keys(apiHits),
+    services: [...svcHits].sort()
+  };
+}
+
+function renderReport(d){
+  const dangerFlags = d.permissions.filter(p => DANGEROUS.some(x => p.endsWith(x)));
+  const now = new Date();
+
+  document.getElementById('letterheadMeta').textContent =
+    `Report generated ${now.toLocaleString()} · Case: ${document.getElementById('caseId').value || 'not provided'} · Analyst: ${document.getElementById('analyst').value || 'not provided'}`;
+
+  document.getElementById('summaryBar').innerHTML = `
+    <div><div class="num">${d.permissions.length}</div><div class="lbl">Permissions</div></div>
+    <div><div class="num">${dangerFlags.length}</div><div class="lbl">Sensitive flagged</div></div>
+    <div><div class="num">${d.indicators.services.length}</div><div class="lbl">Services / SDKs</div></div>
+    <div><div class="num">${d.indicators.urls.length + d.indicators.ips.length}</div><div class="lbl">Network indicators</div></div>
+    <div><div class="num">${d.sigResults.length}</div><div class="lbl">Signing artefacts</div></div>`;
+
+  document.getElementById('svcList').innerHTML = d.indicators.services.length ?
+    d.indicators.services.map(s => `<li>${escapeHtml(s)}</li>`).join('') :
+    '<li class="empty" style="border:none;background:none;">No known third-party SDKs or backend services detected from string signatures.</li>';
+
+  document.getElementById('fileInfo').innerHTML = `
+    <dt>File name</dt><dd>${escapeHtml(d.file.name)}</dd>
+    <dt>Size</dt><dd>${(d.file.size/1024/1024).toFixed(2)} MB (${d.file.size.toLocaleString()} bytes)</dd>
+    <dt>SHA-256</dt><dd>${d.sha256}</dd>
+    <dt>Files in archive</dt><dd>${d.names.length}</dd>`;
+
+  document.getElementById('permCount').textContent = `(${d.permissions.length} found, ${dangerFlags.length} flagged)`;
+  const permList = document.getElementById('permList');
+  permList.innerHTML = d.permissions.length ? d.permissions.map(p =>
+    `<li class="${dangerFlags.includes(p)?'danger':''}">${escapeHtml(p)}${dangerFlags.includes(p)?'<span class="tag">sensitive</span>':''}</li>`
+  ).join('') : '<li class="empty">No permission strings detected (manifest may be missing or heavily obfuscated).</li>';
+
+  document.getElementById('structInfo').innerHTML = `
+    <dt>classes.dex files</dt><dd>${d.dexFiles.length}${d.dexFiles.length>1?' (multidex)':''}</dd>
+    <dt>Native lib archs</dt><dd>${d.libArches.length ? d.libArches.join(', ') : 'none found'}</dd>
+    <dt>Has assets/</dt><dd>${d.names.some(n=>n.startsWith('assets/'))?'yes':'no'}</dd>
+    <dt>Has res/</dt><dd>${d.names.some(n=>n.startsWith('res/'))?'yes':'no'}</dd>`;
+
+  document.getElementById('sigInfo').innerHTML = d.sigResults.length ? d.sigResults.map(s =>
+    `<dt>${escapeHtml(s.name)}</dt><dd>${s.sha256}</dd>`).join('') :
+    '<dt style="grid-column:1/-1;" class="empty">No signature block found under META-INF/ (unsigned, or non-standard signing).</dd>';
+
+  const ind = document.getElementById('indicators');
+  ind.innerHTML = `
+    <h3 style="font-size:14px;margin:0 0 6px;">URLs (${d.indicators.urls.length})</h3>
+    <div class="indicator-box">${d.indicators.urls.length? d.indicators.urls.map(escapeHtml).join('\n') : 'none found'}</div>
+    <h3 style="font-size:14px;margin:16px 0 6px;">IP addresses (${d.indicators.ips.length})</h3>
+    <div class="indicator-box">${d.indicators.ips.length? d.indicators.ips.map(escapeHtml).join('\n') : 'none found'}</div>
+    <h3 style="font-size:14px;margin:16px 0 6px;">Notable API references (${d.indicators.apis.length})</h3>
+    <div class="indicator-box">${d.indicators.apis.length? d.indicators.apis.join('\n') : 'none found'}</div>`;
+
+  reportText = buildReportText(d, dangerFlags);
+  report.style.display = 'block';
+  report.classList.add('ready');
+}
+
+function buildReportText(d, dangerFlags){
+  const caseId = document.getElementById('caseId').value || '(not provided)';
+  const analyst = document.getElementById('analyst').value || '(not provided)';
+  const line = '='.repeat(64);
+  const thin = '-'.repeat(64);
+  return [
+    line,
+    'INDIA CYBER PORTAL HUB',
+    'ANDROID APK — STATIC TRIAGE REPORT',
+    line,
+    `Generated       : ${new Date().toString()}`,
+    `Case/evidence ID: ${caseId}`,
+    `Analyst         : ${analyst}`,
+    '',
+    thin, 'FILE', thin,
+    `Name    : ${d.file.name}`,
+    `Size    : ${d.file.size} bytes (${(d.file.size/1024/1024).toFixed(2)} MB)`,
+    `SHA-256 : ${d.sha256}`,
+    `Entries : ${d.names.length} files in archive`,
+    '',
+    thin, `SUMMARY`, thin,
+    `Permissions found       : ${d.permissions.length}`,
+    `  - flagged sensitive   : ${dangerFlags.length}`,
+    `Third-party services    : ${d.indicators.services.length}`,
+    `Network indicators      : ${d.indicators.urls.length + d.indicators.ips.length}`,
+    `Signing artefacts       : ${d.sigResults.length}`,
+    '',
+    thin, `PERMISSIONS (${d.permissions.length})`, thin,
+    ...(d.permissions.length ? d.permissions.map(p => `  ${p}${dangerFlags.includes(p)?'   [SENSITIVE]':''}`) : ['  none detected']),
+    '',
+    thin, 'THIRD-PARTY SERVICES / SDKS', thin,
+    ...(d.indicators.services.length ? d.indicators.services.map(s => `  - ${s}`) : ['  none detected from string signatures']),
+    '',
+    thin, 'APP STRUCTURE', thin,
+    `  classes.dex files        : ${d.dexFiles.length}`,
+    `  Native lib architectures : ${d.libArches.join(', ') || 'none'}`,
+    '',
+    thin, 'SIGNING ARTEFACTS', thin,
+    ...(d.sigResults.length ? d.sigResults.map(s => `  ${s.name}\n    SHA-256: ${s.sha256}`) : ['  none found']),
+    '',
+    thin, 'STRING INDICATORS', thin,
+    `  URLs (${d.indicators.urls.length}):`,
+    ...(d.indicators.urls.length ? d.indicators.urls.map(u => `    ${u}`) : ['    none found']),
+    `  IP addresses (${d.indicators.ips.length}):`,
+    ...(d.indicators.ips.length ? d.indicators.ips.map(u => `    ${u}`) : ['    none found']),
+    `  Notable API references (${d.indicators.apis.length}):`,
+    ...(d.indicators.apis.length ? d.indicators.apis.map(a => `    ${a}`) : ['    none found']),
+    '',
+    line,
+    'NOTE: Static triage only. This report is an investigative lead, not a conclusion.',
+    'The APK was not executed at any point in this analysis.',
+    'Absence of a finding does not establish absence of the behaviour.',
+    'Findings require manual or, where warranted, dynamic validation before use in a case file.',
+    line
+  ].join('\n');
+}
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  const blob = new Blob([reportText], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'apk-triage-report.txt';
+  a.click();
+});
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+</script>
+
+</body>
+</html>

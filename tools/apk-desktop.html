@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Android APK Analyzer — Cyber Portal Hub Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #12181F;
+    --ink-soft: #1B232C;
+    --paper: #ECE6D8;
+    --paper-dim: #C9C0AC;
+    --amber: #C98A2B;
+    --steel: #6E8A93;
+    --brick: #A9503F;
+    --rule: rgba(236,230,216,0.14);
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--amber); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--amber); outline-offset: 3px; }
+
+  .wrap{ max-width: 780px; margin: 0 auto; padding: 0 28px; }
+
+  header.top{
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+  }
+  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; max-width: 940px; }
+  .brand{ font-family: var(--mono); font-size: 13px; color: var(--paper-dim); letter-spacing: 0.02em; }
+  .brand a{ color: var(--paper); }
+  .brand a:hover{ color: var(--amber); }
+
+  main{ max-width: 940px; margin: 0 auto; padding: 0 28px; }
+
+  /* Hero */
+  .hero{
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 48px;
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .hero h1{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 50px);
+    line-height: 1.08;
+    margin: 0 0 18px;
+    max-width: 11ch;
+  }
+  .hero .lede{
+    font-size: 18px;
+    color: #D9D2C3;
+    max-width: 46ch;
+    margin: 0 0 28px;
+  }
+  .cta-row{ display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 12px 20px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+  }
+  .btn-primary{ background: var(--amber); color: var(--ink); }
+  .btn-primary:hover{ background: #DB9A3C; text-decoration:none; }
+  .btn-ghost{ border-color: var(--paper-dim); color: var(--paper); }
+  .btn-ghost:hover{ border-color: var(--paper); text-decoration:none; }
+
+  .tag-panel{
+    border: 1px solid var(--paper-dim);
+    padding: 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--paper);
+    background: var(--ink-soft);
+  }
+  .tag-panel .stub{
+    color: var(--amber);
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .tag-panel dl{ margin:0; display:grid; grid-template-columns: auto 1fr; gap: 8px 14px; }
+  .tag-panel dt{ color: var(--paper-dim); }
+  .tag-panel dd{ margin:0; }
+
+  section{ padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type{ border-bottom: none; }
+  h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 27px;
+    margin: 0 0 20px;
+  }
+  .col{ max-width: 640px; }
+  p{ margin: 0 0 16px; color: #DAD3C4; }
+
+  .capabilities{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .capabilities li{
+    padding-left: 18px;
+    border-left: 2px solid var(--steel);
+  }
+  .capabilities li strong{
+    display:block;
+    color: var(--paper);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .capabilities li span{ color: #C7BFAF; font-size: 15px; }
+
+  .evidence-box{
+    background: var(--ink-soft);
+    border-left: 3px solid var(--brick);
+    padding: 22px 24px;
+    margin-top: 8px;
+  }
+  .evidence-box p{ color: #E4DFD3; margin: 0 0 10px; }
+  .evidence-box p:last-child{ margin-bottom: 0; }
+
+  .steps{ list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .steps li{
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .steps li:first-child{ border-top: none; }
+  .steps li::before{
+    content: counter(step);
+    font-family: var(--mono);
+    color: var(--amber);
+    font-size: 14px;
+  }
+  .steps h3{ margin: 0 0 4px; font-size: 16px; font-weight: 600; color: var(--paper); font-family: var(--sans); }
+  .steps p{ margin: 0; font-size: 14px; color: #C7BFAF; }
+
+  .req-table{ width:100%; border-collapse: collapse; font-size: 14px; }
+  .req-table td{ padding: 10px 0; border-top: 1px solid var(--rule); }
+  .req-table td:first-child{ font-family: var(--mono); color: var(--amber); width: 220px; }
+  .req-table tr:first-child td{ border-top: none; }
+
+  .download-panel{
+    display:grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 12px;
+  }
+  .dl-card{
+    border: 1px solid var(--paper-dim);
+    padding: 24px;
+  }
+  .dl-card h3{ font-family: var(--serif); font-size: 20px; margin: 0 0 8px; font-weight: 600; }
+  .dl-card p{ font-size: 14px; margin-bottom: 18px; }
+
+  footer{ padding: 40px 0 64px; }
+  footer p{ font-size: 13px; color: var(--paper-dim); max-width: 640px; }
+
+  @media (max-width: 720px){
+    .hero{ grid-template-columns: 1fr; padding-top: 48px; }
+    .download-panel{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a href="https://cyberportalhub.org">Cyber Portal Hub</a> / <a href="index.html">Tools</a> / Desktop EXE</div>
+    <div class="brand">v3.3</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-bottom:none; padding-bottom:0;">
+    <div>
+      <h1>Android APK Analyzer</h1>
+      <p class="lede">Desktop (Windows EXE) edition. For the no-install browser version, use the <a href="scan.html">APK Scanner</a> instead.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="AndroidAPKAnalyzerV3-source.zip" download>Download source package</a>
+        <a class="btn btn-ghost" href="#build">Build instructions</a>
+      </div>
+    </div>
+    <div class="tag-panel">
+      <div class="stub">FIELD REFERENCE</div>
+      <dl>
+        <dt>Edition</dt><dd>Police Forensic</dd>
+        <dt>Version</dt><dd>3.3</dd>
+        <dt>Platform</dt><dd>Windows (EXE build)</dd>
+        <dt>Interface</dt><dd>Desktop GUI</dd>
+        <dt>Execution</dt><dd>Static only — APK is never run</dd>
+        <dt>Runtime</dt><dd>Python 3.11+</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>What it does</h2>
+      <p>The analyzer performs static triage on an APK and produces a report an investigator can act on. It inspects the file without executing it, so a suspect application never runs on the analyst's machine during the scan.</p>
+      <p>Results are a starting point, not a verdict. They're built to point an investigator toward the manifest entries, permissions, and code paths worth a closer, manual look.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>Capabilities</h2>
+      <ul class="capabilities">
+        <li>
+          <strong>Static analysis engine</strong>
+          <span>Core analyzer parses and reports on the APK without decompiling it into a running process.</span>
+        </li>
+        <li>
+          <strong>YARA rule matching (optional)</strong>
+          <span>Add rule files under a rules folder to flag known patterns during a scan. Skipped automatically if yara-python isn't installed.</span>
+        </li>
+        <li>
+          <strong>Threat intel lookups (optional, off by default)</strong>
+          <span>VirusTotal and AbuseIPDB checks only run if VT_API_KEY or ABUSEIPDB_API_KEY are set as environment variables. Nothing is uploaded just by selecting a file.</span>
+        </li>
+        <li>
+          <strong>Windows GUI</strong>
+          <span>android_forensic_gui.py wraps the core analyzer in a desktop interface, built into a single EXE by the included PyInstaller spec.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>Evidence handling</h2>
+      <p>Static triage findings are leads, not conclusions — a clean scan doesn't rule out malicious behaviour, and every flagged item still needs manual review or, where warranted, dynamic testing in an isolated environment.</p>
+      <div class="evidence-box">
+        <p><strong>Before scanning:</strong> record the APK's SHA-256 hash, its source or point of seizure, the acquisition time, and the analyst's identity.</p>
+        <p><strong>During scanning:</strong> work from a copy — the original evidence file should stay unaltered in storage.</p>
+        <p><strong>After scanning:</strong> file the generated report alongside the case and evidence identifiers it belongs to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="col">
+      <h2>Building the EXE</h2>
+      <p>The package ships as Python source. <span style="color:var(--paper)">setup_and_build.bat</span> handles the rest on a Windows machine.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Install Python</h3>
+            <p>Python 3.11 or newer, with "Add Python to PATH" checked during setup.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Keep all files together</h3>
+            <p>Extract the source package into one folder — the build script expects everything alongside it.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Run setup_and_build.bat</h3>
+            <p>It installs requests and cryptography first, then PyInstaller, then tries yara-python (scans still work without it).</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Collect the EXE</h3>
+            <p>PyInstaller writes AndroidAPKAnalyzerV3.exe to the dist folder, and the script offers to add a desktop shortcut.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>Requirements</h2>
+      <table class="req-table">
+        <tr><td>requests</td><td>&ge; 2.31 — core dependency, installed first</td></tr>
+        <tr><td>cryptography</td><td>&ge; 42.0.0 — core dependency, installed first</td></tr>
+        <tr><td>yara-python</td><td>&ge; 4.5.0 — optional, enables YARA rule scanning</td></tr>
+        <tr><td>pyinstaller</td><td>installed by the build script, not run standalone</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>Download</h2>
+      <p><a href="scan.html">Prefer not to install anything? Use the in-browser scanner instead</a> — same static triage, no build required.</p>
+      <div class="download-panel">
+        <div class="dl-card">
+          <h3>Source package</h3>
+          <p>All six files — core analyzer, GUI, PyInstaller spec, build script, requirements, and README — zipped for a one-folder build.</p>
+          <a class="btn btn-primary" href="AndroidAPKAnalyzerV3-source.zip" download>Download .zip</a>
+        </div>
+        <div class="dl-card">
+          <h3>Read first</h3>
+          <p>README.txt in the package covers the build steps, optional threat-intel keys, and the evidence-handling notes above in full.</p>
+          <a class="btn btn-ghost" href="#build">Jump to build steps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="max-width:940px;">
+    <p>Static triage tool. Findings are investigative leads and require manual or dynamic validation before they go in a report. Part of <a href="https://cyberportalhub.org">cyberportalhub.org</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
