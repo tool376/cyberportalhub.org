@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>India Cyber & Digital Investigation Portal Hub</title>
 <meta name="description" content="Verified links to India's official cyber crime, telecom, Aadhaar and platform-grievance reporting portals, in one directory.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%87%AE%F0%9F%87%B3%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1448557659666187" crossorigin="anonymous"></script>
 <style>
 :root{
@@ -36,8 +36,14 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
 .digital{font-weight:800;text-align:center;font-size:13px;line-height:1.1}
 .digital b{display:block;font-size:20px;color:#f4b44c}
 .wrap{max-width:1500px;margin:auto;padding:14px 24px 28px}
-.toolbar{display:flex;gap:10px;margin-bottom:12px}
-.search{flex:1;position:relative}
+.toolbar{display:flex;gap:10px;margin-bottom:12px;align-items:stretch}
+.search{flex:0 1 420px;position:relative}
+.quick-tools{display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:0 20px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14.5px;white-space:nowrap;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
+.quick-tools:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(63,45,24,.18)}
+.quick-tools .qicon{font-size:21px;line-height:1}
+.quick-tools .qtext{display:flex;flex-direction:column;line-height:1.15}
+.quick-tools .qtext b{font-size:14.5px}
+.quick-tools .qtext span{font-size:10.5px;font-weight:500;opacity:.85}
 .search span{position:absolute;left:14px;top:11px;font-size:18px}
 .search input{width:100%;height:45px;border:1px solid #c9b28f;border-radius:9px;background:var(--cream2);padding:0 15px 0 42px;font-size:15px;outline:0}
 .search input:focus{border-color:var(--red2);box-shadow:0 0 0 3px rgba(143,16,23,.10)}
@@ -103,7 +109,7 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
 @media(max-width:900px){.grid{grid-template-columns:1fr}.card{grid-template-columns:82px 1fr 125px}.stats{display:none}}
 @media(max-width:600px){
  .header-inner{padding:13px 12px}.gov{font-size:30px}.digital{display:none}.brand h1{font-size:19px}.brand p{font-size:10px}.brand p.sub{font-size:11px}.brand p.tag{font-size:10px}.disclaimer{font-size:10px;padding:6px 10px}
- .wrap{padding:10px 10px 22px}.toolbar{flex-direction:column}.reset{height:42px}
+ .wrap{padding:10px 10px 22px}.toolbar{flex-direction:column}.reset{height:42px}.search{flex:1}.quick-tools{height:45px;justify-content:center}
  .card{grid-template-columns:70px 1fr;min-height:150px}.logo-box{width:65px;height:65px}
  .card-actions{grid-column:1/-1;flex-direction:row;gap:8px;margin-top:6px}
  .card-actions .guide-btn,.card-actions .open{flex:1;padding:11px 6px;font-size:12px}
@@ -129,6 +135,7 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
  <div class="toolbar">
   <div class="search"><span>🔍</span><input id="search" oninput="apply()" placeholder="Search portal, platform, service or keyword…"></div>
   <button class="reset" onclick="resetAll()">↺ Reset</button>
+  <a class="quick-tools" href="/tools/"><span class="qicon">🛠️</span><span class="qtext"><b>Other Useful Tools</b><span>APK Scanner &amp; more</span></span></a>
  </div>
  <div class="info">
    <span><b id="count">0</b> portals &nbsp;•&nbsp; All links open in a new tab</span>
@@ -233,7 +240,7 @@ const P=[
 ["Food Delivery", "https://www.zomato.com", "ZOMATO SUPPORT", "Zomato", "Customer support and contact resources.", "https://www.zomato.com/contact", "🍕"],
 ["Classified / Marketplace", "https://www.olx.in", "OLX HELP CENTER", "OLX", "Help center and reporting/support resources.", "https://help.olx.in/hc/en-us", "📋"],
 ["Classified / Marketplace", "https://www.quikr.com", "QUIKR SUPPORT", "Quikr", "Quikr support and service information.", "https://www.quikr.com/", "🗂️"],
-["Digital Forensics Tools", "/tools/", "Android APK Scanner", "Cyber Portal Hub Tools", "Static analysis of Android APKs — permissions, indicators, signing info — right in your browser, no install needed.", "/tools/scan.html", "🔍"],
+["Other Useful Tools", "/tools/", "Android APK Scanner", "Cyber Portal Hub Tools", "Static analysis of Android APKs — permissions, indicators, signing info — right in your browser, no install needed.", "/tools/scan.html", "🔍"],
 ["Other Useful Tools", "https://globe.adsbexchange.com", "LIVE AIR TRAFFIC", "ADS-B Exchange", "Live aircraft traffic map.", "https://globe.adsbexchange.com/", "✈️"]
 ];
 
