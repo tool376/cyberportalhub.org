@@ -526,7 +526,7 @@ document.getElementById("count").textContent=P.length;
 const NO_FAVICON_DOMAINS=["sancharsaathi.gov.in", "tafcop.sancharsaathi.gov.in", "ceir.sancharsaathi.gov.in", "cybercrime.gov.in", "www.cybercrime.gov.in"];
 function logo(url,name,icon){
  const domain=new URL(url).hostname.replace(/^www\./,'');
- if(icon && /^https?:\/\//i.test(icon)){
+ if(icon && (/^https?:\/\//i.test(icon) || /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(icon))){
    return `<div class="logo-box"><img src="${icon}" alt="${name} logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>`;
  }
  const fallbackEmoji=(icon||'🔗').replace(/'/g,"&#39;");
