@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Document & PDF Tools</title>
 <link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#063b63;--red:#a91520;--cream:#fff8ea;--border:#e4d5b8;--text:#17324a}
 *{box-sizing:border-box}
@@ -60,10 +61,11 @@ small{color:#697a87}
 
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/legacy/build/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://unpkg.com/docx@9.5.1/build/index.umd.js"></script>
 
@@ -73,10 +75,17 @@ const $ = id => document.getElementById(id);
 
 if (window.pdfjsLib) {
   pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js';
+    'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/legacy/build/pdf.worker.min.js';
 }
 
-const { PDFDocument, rgb, degrees, StandardFonts } = PDFLib;
+const PDFLibSafe = window.PDFLib || {};
+const PDFDocument = PDFLibSafe.PDFDocument;
+const rgb = PDFLibSafe.rgb;
+const degrees = PDFLibSafe.degrees;
+const StandardFonts = PDFLibSafe.StandardFonts;
+if (!PDFDocument) {
+  console.error('pdf-lib failed to load — PDF-editing tools will show an error when used, but the rest of the page still works.');
+}
 
 function save(bytes, name, type = 'application/pdf') {
   const blob = new Blob([bytes], { type });
@@ -107,8 +116,49 @@ function parsePages(str, max) {
 }
 
 async function loadPDF(file) {
+  if (!PDFDocument) throw new Error('PDF engine (pdf-lib) failed to load — check your internet connection and refresh the page.');
   if (!file) throw new Error('Please select a PDF file.');
   return PDFDocument.load(await file.arrayBuffer());
+}
+
+/* Render any HTML content to a paginated, Unicode-safe PDF using the
+   browser's own font rendering (so Hindi / any script renders correctly). */
+async function htmlToPdf(innerHtml, opts = {}) {
+  if (!window.html2canvas) throw new Error('html2canvas failed to load — check your internet connection and refresh the page.');
+  const { jsPDF } = window.jspdf;
+  const pageWpx = opts.widthPx || 780;
+  const box = document.createElement('div');
+  box.style.cssText = `position:fixed;left:-99999px;top:0;width:${pageWpx}px;padding:24px;background:#fff;color:#000;font-family:'Noto Sans','Noto Sans Devanagari',Arial,sans-serif;font-size:14px;line-height:1.6;`;
+  box.innerHTML = innerHtml;
+  document.body.appendChild(box);
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+  const fullCanvas = await html2canvas(box, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+  document.body.removeChild(box);
+
+  const pageRatio = opts.orientation === 'landscape' ? 297 / 210 : 297 / 210; // A4 h/w in mm, used via px ratio below
+  const pxPageHeight = Math.floor(fullCanvas.width * (opts.orientation === 'landscape' ? 210 / 297 : 297 / 210));
+
+  const doc = new jsPDF({ orientation: opts.orientation || 'portrait', unit: 'mm', format: 'a4' });
+  const pageWmm = doc.internal.pageSize.getWidth();
+  const pageHmm = doc.internal.pageSize.getHeight();
+
+  let y = 0;
+  let first = true;
+  while (y < fullCanvas.height) {
+    const sliceH = Math.min(pxPageHeight, fullCanvas.height - y);
+    const slice = document.createElement('canvas');
+    slice.width = fullCanvas.width;
+    slice.height = sliceH;
+    slice.getContext('2d').drawImage(fullCanvas, 0, y, fullCanvas.width, sliceH, 0, 0, fullCanvas.width, sliceH);
+    const imgData = slice.toDataURL('image/jpeg', 0.92);
+    if (!first) doc.addPage();
+    const imgHmm = (sliceH / fullCanvas.width) * pageWmm;
+    doc.addImage(imgData, 'JPEG', 0, 0, pageWmm, Math.min(imgHmm, pageHmm));
+    y += sliceH;
+    first = false;
+  }
+  return doc;
 }
 
 async function pdfjsDoc(file) {
@@ -443,18 +493,13 @@ $('docPdfBtn').addEventListener('click', async () => {
     if (!f) throw new Error('Select a file.');
     if (f.name.toLowerCase().endsWith('.doc'))
       throw new Error('Legacy .doc needs a server-side Office engine. Use .docx.');
+    st.textContent = 'Reading document…';
     const r = await mammoth.extractRawText({ arrayBuffer: await f.arrayBuffer() });
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    let y = 15;
-    for (const line of r.value.split('\n')) {
-      const chunks = doc.splitTextToSize(line || ' ', 180);
-      if (y + chunks.length * 6 > 280) { doc.addPage(); y = 15; }
-      doc.text(chunks, 15, y);
-      y += 6 * chunks.length;
-    }
+    const escaped = r.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    st.textContent = 'Rendering…';
+    const doc = await htmlToPdf(`<div style="white-space:pre-wrap;">${escaped}</div>`);
     doc.save('document.pdf');
-    st.textContent = 'DOCX converted to PDF text.';
+    st.textContent = 'DOCX converted to PDF.';
   } catch (e) { st.textContent = e.message; }
 });
 
@@ -464,18 +509,16 @@ $('excelPdfBtn').addEventListener('click', async () => {
   try {
     const f = $('excelFile').files[0];
     if (!f) throw new Error('Select an Excel file.');
+    st.textContent = 'Reading spreadsheet…';
     const wb = XLSX.read(await f.arrayBuffer(), { type: 'array' });
     const s = wb.Sheets[wb.SheetNames[0]];
     const rows = XLSX.utils.sheet_to_json(s, { header: 1 });
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: 'landscape' });
-    let y = 15;
-    rows.forEach(row => {
-      const line = row.map(x => String(x ?? '')).join(' | ').slice(0, 150);
-      doc.text(line, 10, y);
-      y += 6;
-      if (y > 195) { doc.addPage(); y = 15; }
-    });
+    const esc = x => String(x ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const tableHtml = `<table style="border-collapse:collapse;width:100%;">${
+      rows.map(row => `<tr>${row.map(c => `<td style="border:1px solid #999;padding:5px 8px;">${esc(c)}</td>`).join('')}</tr>`).join('')
+    }</table>`;
+    st.textContent = 'Rendering…';
+    const doc = await htmlToPdf(tableHtml, { orientation: 'landscape', widthPx: 1000 });
     doc.save('excel.pdf');
     st.textContent = 'First sheet exported as PDF.';
   } catch (e) { st.textContent = e.message; }
