@@ -137,6 +137,7 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
   <button class="reset" onclick="resetAll()">↺ Reset</button>
   <a class="quick-tools" href="/tools/"><span class="qicon">🛠️</span><span class="qtext"><b>Other Useful Tools</b><span>APK Scanner &amp; more</span></span></a>
   <a class="quick-tools" href="/gov-portals.html"><span class="qicon">🏛️</span><span class="qtext"><b>Gov. Portals</b><span>India.gov.in &amp; more</span></span></a>
+  <a class="quick-tools" href="/awareness.html"><span class="qicon">📰</span><span class="qtext"><b>Safety Blogs</b><span>15 awareness guides</span></span></a>
  </div>
  <div class="info">
    <span><b id="count">0</b> portals &nbsp;•&nbsp; All links open in a new tab</span>
@@ -192,7 +193,11 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
       </div>
     </div>
   </div>
-  <div class="footer-bottom"><b>India Cyber Portal Hub</b> • Independently compiled quick-access directory • Not affiliated with the Government of India or any listed platform • Use official websites and support channels<br><a href="/privacy.html" style="color:var(--gold)">Privacy Policy</a> &nbsp;•&nbsp; <a href="/contact.html" style="color:var(--gold)">Contact Us</a> &nbsp;•&nbsp; <a href="/about.html" style="color:var(--gold)">About Us</a> &nbsp;•&nbsp; <a href="/tools/" style="color:var(--gold)">Tools</a></div>
+  <div class="footer-bottom"><b>India Cyber Portal Hub</b> • Independently compiled quick-access directory • Not affiliated with the Government of India or any listed platform • Use official websites and support channels
+    <div style="font-size:10.5px;color:#a0b2c6;margin-top:8px;max-width:1000px;margin-left:auto;margin-right:auto;line-height:1.55;">
+      <strong>Disclaimer:</strong> This website is an independent information reference directory designed to assist users in locating official public grievance and support channels. We are not affiliated with, authorized by, or associated with any Government entity or private platform. All logos, names, and trademarks belong to their respective owners.
+    </div>
+    <br><a href="/privacy.html" style="color:var(--gold)">Privacy Policy</a> &nbsp;•&nbsp; <a href="/contact.html" style="color:var(--gold)">Contact Us</a> &nbsp;•&nbsp; <a href="/about.html" style="color:var(--gold)">About Us</a> &nbsp;•&nbsp; <a href="/tools/" style="color:var(--gold)">Tools</a> &nbsp;•&nbsp; <a href="/awareness.html" style="color:var(--gold)">Safety Blogs</a></div>
 </footer>
 
 <script>
@@ -525,7 +530,7 @@ document.getElementById("count").textContent=P.length;
 
 const NO_FAVICON_DOMAINS=["sancharsaathi.gov.in", "tafcop.sancharsaathi.gov.in", "ceir.sancharsaathi.gov.in", "cybercrime.gov.in", "www.cybercrime.gov.in"];
 function logo(url,name,icon){
- const domain=new URL(url).hostname.replace(/^www\./,'');
+ let domain='';try{domain=new URL(url,location.href).hostname.replace(/^www\./,'')}catch(e){}
  if(icon && (/^https?:\/\//i.test(icon) || /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(icon))){
    return `<div class="logo-box"><img src="${icon}" alt="${name} logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>`;
  }
@@ -586,7 +591,7 @@ function closeGuide(){
 }
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeGuide();});
 
-render(P);
+try{render(P);}catch(e){console.error('render failed',e);}
 
 const SLOGANS=[
  "Think before you click — verify before you trust.",
