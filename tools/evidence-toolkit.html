@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cyber Evidence Toolkit – Screenshot, File Check &amp; QR Decoder</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<style>
+:root{
+  --navy:#062744;--navy2:#0b365b;--cream:#f3e5cf;--cream2:#fffaf2;--cream3:#ead7b9;
+  --red:#8f1017;--red2:#b51d24;--gold:#c69a55;--ink:#15263a;--muted:#687677;--line:#d9c5a6;
+  --shadow:0 7px 18px rgba(63,45,24,.10);
+  --ok:#1b6b3a;--okb:#e3f1e3;--wr:#7a4a00;--wrb:#fbe9bf;--er:#8f1017;--erb:#f9dcd9;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:var(--cream);padding:28px 16px 66px;text-align:center;border-bottom:4px solid var(--gold)}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none;font-size:13px;background:rgba(255,255,255,.15);padding:7px 14px;border-radius:20px;margin-bottom:14px}
+.back-btn:hover{background:rgba(255,255,255,.28)}
+.hero h1{margin:0 0 6px;font-size:1.65rem;color:var(--cream2)}.hero p{margin:0 auto;max-width:560px;font-size:.95rem;color:var(--cream3)}
+.pill{display:inline-block;border:1px solid var(--gold);color:var(--cream);border-radius:99px;padding:4px 14px;font-size:.78rem;margin-top:12px}
+main{max-width:780px;margin:-46px auto 0;padding:0 14px 40px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.tabs button{padding:12px 6px;border:1.5px solid var(--line);background:var(--cream2);color:var(--navy);border-radius:14px;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.tabs button span{display:block;font-size:1.4rem;line-height:1.2}
+.tabs button[aria-selected=true]{background:var(--navy);color:var(--cream2);border-color:var(--navy);box-shadow:inset 0 -4px 0 var(--gold),var(--shadow)}
+section{background:var(--cream2);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+section[hidden]{display:none}
+h2{margin:0 0 2px;font-size:1.2rem;color:var(--navy)}.lead{color:var(--muted);margin:0 0 12px;font-size:.92rem}
+.how{background:var(--cream);border:1px solid var(--cream3);border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.how b{font-size:.9rem;color:var(--navy)}
+.how ol{margin:6px 0 0;padding-left:20px;font-size:.9rem}.how li{margin:4px 0}
+.btn{display:inline-block;padding:11px 18px;border-radius:12px;border:2px solid var(--red);background:var(--red);color:#fff;font:inherit;font-size:.93rem;font-weight:700;cursor:pointer;box-shadow:0 3px 0 #5e0a0f;transition:transform .08s,background .15s}
+.btn:hover{background:var(--red2);border-color:var(--red2)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #5e0a0f}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.alt{background:var(--navy);border-color:var(--navy);color:var(--cream2);box-shadow:0 3px 0 #02101d}
+.btn.alt:hover{background:var(--navy2);border-color:var(--navy2)}
+.btn.alt:active{box-shadow:0 1px 0 #02101d}
+button:focus-visible,input:focus-visible,.drop:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+.urlrow{display:flex;gap:8px}.urlrow input{flex:1;margin:0}
+.or{text-align:center;color:var(--muted);font-size:.8rem;margin:10px 0}
+.drop{display:block;border:2px dashed var(--gold);border-radius:14px;padding:22px 12px;text-align:center;color:var(--muted);cursor:pointer;margin:6px 0;background:var(--cream)}
+.drop.on{border-color:var(--red);background:var(--cream3)}.drop input{display:none}.drop b{color:var(--navy)}
+input[type=text]{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;margin:4px 0 8px}
+label.f{font-size:.82rem;color:var(--muted)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.note{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+.badge{padding:12px 14px;border-radius:12px;font-weight:700;margin:12px 0}
+.badge.ok{background:var(--okb);color:var(--ok)}.badge.wr{background:var(--wrb);color:var(--wr)}.badge.er{background:var(--erb);color:var(--er)}
+.row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.row .k{flex:0 0 104px;color:var(--muted)}.row .v{flex:1;min-width:0;overflow-wrap:anywhere}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem}
+.box{border:1px solid var(--line);background:var(--cream);border-radius:10px;padding:10px;overflow-wrap:anywhere;margin:6px 0;user-select:all}
+ul.w{margin:8px 0;padding-left:20px;font-size:.9rem}
+img.prev{max-width:100%;border:1px solid var(--line);border-radius:10px;margin-top:8px;display:block}
+.legend{display:grid;gap:6px;margin-top:16px;font-size:.84rem}
+.legend div{padding:8px 10px;border-radius:10px}
+.l1{background:var(--okb);color:var(--ok)}.l2{background:var(--wrb);color:var(--wr)}.l3{background:var(--erb);color:var(--er)}
+.tip{border-left:4px solid var(--gold);background:var(--cream);padding:10px 12px;border-radius:0 10px 10px 0;font-size:.85rem;margin-top:14px}
+.foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:18px}
+@media(max-width:480px){.urlrow{flex-direction:column}}
+</style></head>
+<body>
+<div class="hero">
+<a class="back-btn" href="index.html">← Back to Tools</a>
+<h1>🛡️ Cyber Evidence Toolkit</h1>
+<p>Create proof of online fraud, spot suspicious files, and see what a QR code really contains before you open it — all free.</p>
+<div class="pill">🔒 Everything runs in your browser — your files are never uploaded</div>
+</div>
+<main>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="shot"><span>📸</span>Screenshot</button>
+<button role="tab" aria-selected="false" data-t="sig"><span>🧬</span>File Check</button>
+<button role="tab" aria-selected="false" data-t="qr"><span>🔳</span>QR Decoder</button>
+</div>
+
+<section id="shot">
+<h2>📸 Evidence Screenshot Capturer</h2>
+<p class="lead">Take a screenshot of any website. A date-time stamp and a digital fingerprint (SHA-256) are added, so it can be used as proof in your complaint.</p>
+<div class="how"><b>How to use</b>
+<ol>
+<li>Enter the <b>website link</b> below and press <b>"Take screenshot"</b> → the screenshot appears in a few seconds.</li>
+<li>Or upload <b>your own screenshot</b> (or paste it with Ctrl+V) → the time, link and fingerprint are written on it.</li>
+<li><b>Save</b> the image shown below (PC: right-click → Save image; mobile: long-press the image) and attach it to your complaint.</li>
+</ol></div>
+<label class="f">Website link (URL)</label>
+<div class="urlrow"><input type="text" id="url" placeholder="https://example.com" inputmode="url" autocomplete="off"><button class="btn" id="go">Take screenshot</button></div>
+<div class="or">— or —</div>
+<label class="drop" id="d1">📎 <b>Choose your screenshot</b> / drop it here / paste it (Ctrl+V)<input type="file" accept="image/*" id="f1"></label>
+<div class="acts"><button class="btn alt" id="cap">🖥️ Capture my screen / tab (PC only)</button></div>
+<label class="f">Complaint / reference number (optional)</label><input type="text" id="ref" placeholder="e.g. acknowledgement number or case name">
+<p class="note" id="shotMsg" role="status"></p>
+<div id="shotOut" hidden>
+<div class="badge ok">✅ Ready! The stamped screenshot is below — save it.</div>
+<img class="prev" id="pv" alt="Stamped evidence preview">
+<div class="box mono" id="hs"></div>
+</div>
+<img class="prev" id="raw" alt="" hidden>
+<div class="tip"><b>Keep in mind:</b> (1) Always keep the original screenshot you took yourself — it is the strongest proof. (2) For URL screenshots the link is sent to an online service, so do not enter private or logged-in links. (3) The service may see the page differently from you — your own screenshot of what you saw is best.</div>
+</section>
+
+<section id="sig" hidden>
+<h2>🧬 File Type / Signature Identifier</h2>
+<p class="lead">What is a file really? The name may say "photo.pdf" while the inside is a virus (EXE). This tool looks inside the file and tells you.</p>
+<div class="how"><b>How to use</b>
+<ol>
+<li><b>Choose any file</b> below (PDF, photo, APK, ZIP, anything) → the file is not opened, only checked.</li>
+<li>The result shows the <b>real type</b>, size and SHA-256 fingerprint.</li>
+<li>If you see a <b>red</b> warning, <b>do not open or install</b> the file, and do not trust whoever sent it.</li>
+</ol></div>
+<label class="drop" id="d2">📂 <b>Choose a file</b> or drop it here<input type="file" id="f2"></label>
+<div id="sigOut"></div>
+<div class="legend">
+<div class="l1">🟢 Green: the name and the real type match.</div>
+<div class="l2">🟡 Yellow: be careful — the file can run code or was not recognised.</div>
+<div class="l3">🔴 Red: fake or double extension — do not open the file.</div>
+</div>
+<div class="tip">The fingerprint (SHA-256) lets you prove later that the file has not been changed. Note it down in your complaint.</div>
+</section>
+
+<section id="qr" hidden>
+<h2>🔳 QR Code Decoder</h2>
+<p class="lead">Scanning a QR can open a link or take money. Upload the QR image here and see what is inside first, without opening anything.</p>
+<div class="how"><b>How to use</b>
+<ol>
+<li>Choose a <b>screenshot or photo</b> of the QR (or paste it with Ctrl+V).</li>
+<li>The tool shows the <b>link / UPI / text</b> inside — the link <b>is never opened automatically</b>.</li>
+<li>Read the yellow/red warnings. If in doubt, <b>do not open it</b>, and call 1930 or report at cybercrime.gov.in.</li>
+</ol></div>
+<label class="drop" id="d3">🖼️ <b>Choose the QR image</b> / drop it / paste it<input type="file" accept="image/*" id="f3"></label>
+<div id="qrOut"></div>
+<div class="legend">
+<div class="l1">🟢 Green: no obvious danger in the link (still check the domain yourself).</div>
+<div class="l2">🟡 Yellow: UPI payment, shortened link, or no https — be careful.</div>
+<div class="l3">🔴 Red: look-alike domain, IP address, "@" in the link, or an APK download.</div>
+</div>
+<div class="tip"><b>Remember:</b> you never need to scan a QR or enter your UPI PIN to <u>receive</u> money. Anyone who says "scan this and money will arrive" is a fraudster.</div>
+</section>
+<p class="foot">This tool is for assistance only, not legal advice. Always keep your original files.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const row=(k,v,m)=>{const r=h('div','row');r.append(h('span','k',k),h('span','v'+(m?' mono':''),v));return r};
+const badge=(k,t)=>h('div','badge '+k,t);
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const sha=async b=>hex(await crypto.subtle.digest('SHA-256',b));
+const copyBtn=t=>{const b=h('button','btn alt','Copy fingerprint');b.onclick=async()=>{try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Select the text above and copy it'}};return b};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  ['shot','sig','qr'].forEach(id=>$('#'+id).hidden=id!==b.dataset.t);
+});
+function wireDrop(dz,inp,fn){
+  inp.onchange=()=>inp.files[0]&&fn(inp.files[0]);
+  ['dragover','dragenter'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.add('on')}));
+  ['dragleave','drop'].forEach(e=>dz.addEventListener(e,()=>dz.classList.remove('on')));
+  dz.addEventListener('drop',ev=>{ev.preventDefault();ev.dataTransfer.files[0]&&fn(ev.dataTransfer.files[0])});
+}
+
+/* 1. screenshot */
+const S={bmp:null,hash:'',time:'',via:''};
+const msg=t=>$('#shotMsg').textContent=t;
+async function setShot(blob,via){
+  try{S.bmp=await createImageBitmap(blob)}catch(e){msg('This file is not a readable image.');return}
+  S.hash=await sha(await blob.arrayBuffer());
+  S.via=via||'Image captured/uploaded by user';
+  S.time=new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata',hour12:false})+' IST';
+  msg('');$('#raw').hidden=true;$('#shotOut').hidden=false;drawShot();
+  $('#shotOut').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function drawShot(){
+  const b=S.bmp;if(!b)return;
+  const c=document.createElement('canvas'),x=c.getContext('2d');
+  const fs=Math.max(14,Math.round(b.width/70));
+  const L=['Captured: '+S.time];
+  const u=$('#url').value.trim(),r=$('#ref').value.trim();
+  if(u)L.push('URL: '+u.slice(0,110));
+  if(r)L.push('Ref: '+r.slice(0,110));
+  L.push('Method: '+S.via,'SHA-256 of original image:',S.hash.slice(0,32),S.hash.slice(32));
+  const fh=Math.round(L.length*fs*1.45+fs);
+  c.width=b.width;c.height=b.height+fh;
+  x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(b,0,0);
+  x.fillStyle='#0b1020';x.fillRect(0,b.height,c.width,fh);
+  x.fillStyle='#fff';x.font=fs+'px monospace';x.textBaseline='top';
+  L.forEach((l,i)=>x.fillText(l,fs*.6,b.height+fs*.6+i*fs*1.45));
+  $('#pv').src=c.toDataURL('image/png');
+  $('#hs').textContent='SHA-256 (original): '+S.hash;
+}
+$('#ref').oninput=drawShot;
+$('#url').oninput=()=>{if(S.bmp)drawShot()};
+$('#url').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()});
+$('#go').onclick=async()=>{
+  let u=$('#url').value.trim();
+  if(!u){msg('Please enter a website link first.');return}
+  if(!/^https?:\/\//i.test(u))u='https://'+u;
+  try{new URL(u)}catch(e){msg('That link does not look valid.');return}
+  $('#url').value=u;$('#go').disabled=true;msg('⏳ Taking the screenshot… this can take 10–30 seconds.');
+  const apis=[
+    ['thum.io','https://image.thum.io/get/width/1280/png/noanimate/'+u],
+    ['microlink.io','https://api.microlink.io/?url='+encodeURIComponent(u)+'&screenshot=true&meta=false&embed=screenshot.url']
+  ];
+  let done=false;
+  for(const [n,a] of apis){
+    try{
+      const r=await fetch(a);if(!r.ok)throw 0;
+      const b=await r.blob();if(!b.type.startsWith('image/'))throw 0;
+      await setShot(b,'Online screenshot service ('+n+')');done=true;break;
+    }catch(e){}
+  }
+  if(!done){
+    const im=$('#raw');im.onerror=()=>msg('Could not take the screenshot. Check the link, or upload your own screenshot instead.');
+    im.onload=()=>msg('The stamp could not be added automatically. Save the image below, then upload it using "Choose your screenshot" above to add the time and fingerprint.');
+    im.src=apis[0][1];im.hidden=false;
+  }
+  $('#go').disabled=false;
+};
+$('#cap').onclick=async()=>{
+  try{
+    const s=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+    const v=document.createElement('video');v.srcObject=s;v.muted=true;await v.play();
+    await new Promise(r=>setTimeout(r,500));
+    const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;
+    c.getContext('2d').drawImage(v,0,0);s.getTracks().forEach(t=>t.stop());
+    c.toBlob(b=>setShot(b,'Screen capture by user'),'image/png');
+  }catch(e){msg('Capture was cancelled or is not supported on this device. Please upload a screenshot instead.')}
+};
+wireDrop($('#d1'),$('#f1'),f=>setShot(f));
+document.addEventListener('paste',e=>{
+  const f=[...(e.clipboardData?.files||[])].find(f=>f.type.startsWith('image/'));if(!f)return;
+  $('#qr').hidden?setShot(f):decodeQR(f);
+});
+
+/* 2. file signature */
+const SIG=[
+['PDF document','25504446',['pdf']],['PNG image','89504e470d0a1a0a',['png']],['JPEG image','ffd8ff',['jpg','jpeg','jpe']],
+['GIF image','47494638',['gif']],['WebP image','52494646????????57454250',['webp']],['WAV audio','52494646????????57415645',['wav']],
+['AVI video','52494646????????41564920',['avi']],['ZIP-based file (ZIP / DOCX / XLSX / PPTX / APK / JAR)','504b0304',['zip','docx','xlsx','pptx','apk','jar','odt','ods','xpi','aab']],
+['RAR archive','526172211a07',['rar']],['7-Zip archive','377abcaf271c',['7z']],['GZIP archive','1f8b08',['gz','tgz']],
+['Windows program (EXE / DLL)','4d5a',['exe','dll','sys','scr','ocx'],1],['Linux program (ELF)','7f454c46',['elf','so','o','out'],1],
+['macOS program (Mach-O)','cffaedfe',['dylib','app'],1],['Java class file','cafebabe',['class'],1],
+['Old MS Office / MSI (OLE)','d0cf11e0a1b11ae1',['doc','xls','ppt','msi','msg']],['RTF document','7b5c72746631',['rtf']],
+['SQLite database','53514c69746520666f726d6174203300',['db','sqlite','sqlite3']],['MP4 / MOV / HEIC','????????66747970',['mp4','m4a','m4v','mov','3gp','heic','heif']],
+['MP3 audio (ID3)','494433',['mp3']],['MP3 audio','fffb',['mp3']],['OGG media','4f676753',['ogg','oga','ogv','opus']],
+['Matroska / WebM video','1a45dfa3',['mkv','webm']],['TIFF image','49492a00',['tif','tiff']],['TIFF image','4d4d002a',['tif','tiff']],['BMP image','424d',['bmp']]
+];
+const RISKY=['exe','scr','bat','cmd','com','js','vbs','ps1','apk','msi','jar','lnk','dll'];
+function match(bytes,pat){
+  for(let i=0;i<pat.length/2;i++){const p=pat.substr(i*2,2);if(p!=='??'&&bytes[i]!==parseInt(p,16))return false}
+  return bytes.length>=pat.length/2;
+}
+async function identify(file){
+  const buf=await file.arrayBuffer(),u8=new Uint8Array(buf.slice(0,512));
+  const name=file.name,ext=(name.includes('.')?name.split('.').pop():'').toLowerCase();
+  const hit=SIG.find(s=>match(u8,s[1]));
+  let label,exts=null,risk=false;
+  if(hit){label=hit[0];exts=hit[2];risk=!!hit[3]}
+  else{
+    const txt=u8.length>0&&[...u8].every(b=>b===9||b===10||b===13||(b>=32&&b<127)||b>=128);
+    label=txt?'Text file (HTML / script / CSV / plain text)':'Unrecognised (no known signature)';
+  }
+  const warns=[];let level='ok';
+  if(hit){
+    if(!ext)warns.push('The file has no extension.');
+    else if(!exts.includes(ext)){level='er';warns.push('The extension ".'+ext+'" does not match the real content. The file may be disguised — do not open it.')}
+  }
+  if(risk){if(level==='ok')level='wr';warns.push('This is an executable program. Run it only if you fully trust the source.')}
+  if(/\.[a-z0-9]{2,5}\.(exe|scr|bat|cmd|js|vbs|apk|msi|jar|lnk)$/i.test(name)){level='er';warns.push('The file name has a double extension — a common malware trick.')}
+  if(name.includes('\u202e')){level='er';warns.push('The name contains a hidden character that disguises the real extension.')}
+  if(!hit&&RISKY.includes(ext)){if(level==='ok')level='wr';warns.push('The extension ".'+ext+'" can run code, and the content could not be verified.')}
+  if(!hit&&label.startsWith('Unrecognised')&&level==='ok')level='wr';
+  const head=level==='ok'?'🟢 All good: name and real type match':level==='wr'?'🟡 Be careful':'🔴 Danger: disguised / suspicious file';
+  return{file,label,ext,u8,warns,level,head,hash:await sha(buf)};
+}
+async function showSig(file){
+  const out=$('#sigOut');out.replaceChildren(h('p','note','Checking…'));
+  const r=await identify(file);out.replaceChildren();
+  out.append(badge(r.level,r.head));
+  out.append(row('File name',r.file.name),row('Size',r.file.size.toLocaleString('en-IN')+' bytes'),
+    row('Extension',r.ext?'.'+r.ext:'(none)'),row('Real type',r.label),
+    row('First bytes',[...r.u8.slice(0,16)].map(b=>b.toString(16).padStart(2,'0')).join(' '),1),
+    row('SHA-256',r.hash,1));
+  if(r.warns.length){const ul=h('ul','w');r.warns.forEach(w=>ul.append(h('li',null,w)));out.append(ul)}
+  const a=h('div','acts');a.append(copyBtn(r.hash));out.append(a);
+}
+wireDrop($('#d2'),$('#f2'),showSig);
+
+/* 3. QR decoder */
+const SHORT=['bit.ly','tinyurl.com','t.co','goo.gl','cutt.ly','is.gd','rb.gy','shorturl.at','ow.ly','tiny.cc','s.id'];
+function analyze(t){
+  const w=[];let kind='Text',level='ok',det=[];
+  if(/^upi:\/\//i.test(t)){
+    kind='🟡 UPI payment link';level='wr';
+    try{const p=new URL(t).searchParams;
+      if(p.get('pa'))det.push(['Payee UPI ID',p.get('pa')]);if(p.get('pn'))det.push(['Payee name',p.get('pn')]);
+      if(p.get('am'))det.push(['Amount','₹'+p.get('am')]);if(p.get('tn'))det.push(['Note',p.get('tn')]);}catch(e){}
+    w.push('This QR is for SENDING money from your account. You never need to scan a QR or enter your UPI PIN to receive money — anyone who says so is running a scam.');
+  }else if(/^https?:\/\//i.test(t)){
+    kind='Website link';
+    try{const u=new URL(t);det.push(['Domain',u.hostname]);
+      if(u.protocol==='http:'){level='wr';w.push('The link is not encrypted (http, not https).')}
+      if(SHORT.includes(u.hostname.replace(/^www\./,''))){level='wr';w.push('Shortened link — the real destination is hidden.')}
+      if(u.hostname.includes('xn--')){level='er';w.push('Punycode domain — look-alike letters may imitate a real brand.')}
+      if(/^\d{1,3}(\.\d{1,3}){3}$/.test(u.hostname)){level='er';w.push('The link uses a raw IP address instead of a domain name.')}
+      if(u.username||t.includes('@')){level='er';w.push('The link contains "@" — the real destination may differ from what it looks like.')}
+      if(/\.(apk)(\?|$)/i.test(u.pathname)){level='er';w.push('This links to an APK (Android app) file. Install apps only from the Play Store.')}
+      if(level==='ok')w.push('No obvious red flags in the link, but that does not prove it is safe. Check the domain yourself.');
+    }catch(e){level='wr';w.push('The link could not be parsed.')}
+  }else if(/^(WIFI:|tel:|sms:|smsto:|mailto:|BEGIN:VCARD|geo:)/i.test(t)){
+    kind=t.split(/[:\n]/)[0].toUpperCase()+' data';level='wr';w.push('This is not a web link. Read the content carefully before acting on it.');
+  }
+  return{kind,level,w,det};
+}
+async function decodeQR(file){
+  const out=$('#qrOut');out.replaceChildren();
+  if(typeof jsQR==='undefined'){out.append(badge('er','The decoder failed to load. Check your connection and reload the page.'));return}
+  let bmp;try{bmp=await createImageBitmap(file)}catch(e){out.append(badge('er','This image could not be read.'));return}
+  let res=null;
+  for(const max of [bmp.width,1200,600]){
+    const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
+    const c=document.createElement('canvas');c.width=Math.round(bmp.width*sc);c.height=Math.round(bmp.height*sc);
+    const x=c.getContext('2d',{willReadFrequently:true});x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);
+    res=jsQR(x.getImageData(0,0,c.width,c.height).data,c.width,c.height,{inversionAttempts:'attemptBoth'});
+    if(res)break;
+  }
+  if(!res){out.append(badge('wr','No QR code found. Use a sharp, close-up image showing the whole code.'));return}
+  const a=analyze(res.data);
+  out.append(badge(a.level,(a.level==='er'?'🔴 ':a.level==='ok'?'🟢 ':'')+a.kind));
+  out.append(h('div','note','Content inside the QR (not opened):'));
+  out.append(h('div','box mono',res.data));
+  a.det.forEach(d=>out.append(row(d[0],d[1])));
+  const ul=h('ul','w');a.w.forEach(x=>ul.append(h('li',null,x)));out.append(ul);
+  const ac=h('div','acts');const cb=copyBtn(res.data);cb.textContent='Copy content';ac.append(cb);out.append(ac);
+}
+wireDrop($('#d3'),$('#f3'),decodeQR);
+</script>
+</body></html>
