@@ -490,7 +490,7 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
         <a class="open" href="https://globe.adsbexchange.com/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
       </div>
    </article></div></div>
- <div id="empty" class="empty" style="display:none">No matching portal found.</div>
+ <div id="empty" class="empty" style="display:none"></div>
 </main>
 
 <div class="modal-overlay" id="guideModal" onclick="if(event.target===this)closeGuide()">
@@ -529,7 +529,7 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
     <div class="footer-col">
       <h4>Contact</h4>
       <p><a href="mailto:support@cyberportalhub.org">📧 support@cyberportalhub.org</a></p>
-      <p class="slogan" id="dailySlogan">Loading…</p>
+      <p class="slogan" id="dailySlogan">💡 Think before you click — verify before you trust.</p>
     </div>
     <div class="footer-col">
       <h4>Follow &amp; Connect</h4>
@@ -940,7 +940,7 @@ function render(list){
    }).join("");
    content.appendChild(grid);
  });
- document.getElementById("empty").style.display=total?"none":"block";
+ const em=document.getElementById("empty"); em.textContent=total?"":"No matching portal found."; em.style.display=total?"none":"block";
 }
 function apply(){
  const q=document.getElementById("search").value.toLowerCase().trim();
