@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Type Zip Extractor — ZIP, RAR, 7z, TAR and more | Cyber Portal Hub Tools</title>
+<meta name="description" content="Open ZIP, RAR, 7z, TAR, GZ, ISO and many more archive formats in your browser, including password-protected ones. Files never leave your device.">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12181F;--ink-soft:#1B232C;--paper:#ECE6D8;--paper-dim:#C9C0AC;--amber:#C98A2B;--steel:#6E8A93;--brick:#A9503F;--rule:rgba(236,230,216,0.14);--serif:'Source Serif 4',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.6}
+a{color:var(--amber)}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+header.top{border-bottom:1px solid var(--rule);padding:14px 0}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.back-btn{display:inline-flex;align-items:center;gap:7px;color:var(--paper);text-decoration:none;font-weight:500;font-size:14px;padding:7px 14px;border:1px solid var(--paper-dim);border-radius:5px;transition:border-color .15s,color .15s}
+.back-btn:hover{border-color:var(--amber);color:var(--amber)}
+.toplink{font:13px var(--mono);color:var(--paper-dim);text-decoration:none}
+.toplink:hover{color:var(--amber)}
+main{max-width:900px;margin:0 auto;padding:40px 24px 60px}
+h1{font:700 clamp(28px,4vw,38px)/1.2 var(--serif);margin:0 0 10px}
+.lede{color:#D9D2C3;max-width:60ch;margin:0 0 28px}
+.drop{border:2px dashed var(--paper-dim);border-radius:6px;padding:44px 20px;text-align:center;transition:border-color .15s}
+.drop:hover,.drop.over{border-color:var(--amber)}
+.drop strong{display:block;font:600 20px var(--serif);margin-bottom:4px}
+.drop span{display:block;color:#C7BFAF;margin-bottom:16px}
+.btn{background:var(--amber);color:var(--ink);border:0;border-radius:5px;padding:9px 18px;font:600 14px var(--sans);cursor:pointer}
+.btn:hover{background:#dba041}
+.btn.alt{padding:6px 12px;font-size:13px}
+.btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--steel);outline-offset:2px}
+.note{font-size:13px;color:var(--paper-dim);margin:14px 0 0}
+.msg{margin:16px 0 0;padding:12px 16px;border-left:3px solid var(--brick);background:rgba(169,80,63,.15);color:#F0C9C0;font-size:14px}
+.hidden{display:none}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:28px 0 12px}
+.bar h2{margin:0;font:600 19px var(--serif);flex:1 1 200px;overflow-wrap:anywhere}
+.bar input{flex:1 1 180px;max-width:300px;padding:9px 11px;border:1px solid var(--paper-dim);border-radius:3px;background:var(--ink-soft);color:var(--paper);font:13px var(--mono)}
+.bar input::placeholder{color:#8A8270}
+.list{border:1px solid var(--rule);border-radius:6px;background:var(--ink-soft);max-height:360px;overflow:auto}
+.row{display:flex;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row.sel{background:rgba(201,138,43,.12)}
+.name{flex:1;min-width:0;overflow-wrap:anywhere;font:13px var(--mono)}
+.tag{font:11.5px var(--mono);padding:2px 8px;border-radius:99px;border:1px solid var(--paper-dim);color:var(--paper-dim);white-space:nowrap}
+.tag.dl{border-color:var(--amber);color:var(--amber)}
+.size{font:12px var(--mono);color:var(--paper-dim);white-space:nowrap;min-width:64px;text-align:right}
+.viewer{margin-top:22px;border:1px solid var(--rule);border-radius:6px;background:var(--ink-soft);overflow:hidden}
+.vhead{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;background:#0d1218;border-bottom:1px solid var(--rule)}
+.vhead b{overflow-wrap:anywhere;font:500 13px var(--mono)}
+.vbody{padding:14px;overflow:auto;max-height:70vh}
+pre{margin:0;white-space:pre-wrap;word-break:break-word;font:13px/1.55 var(--mono);color:#E4DFD3}
+.vbody img,.vbody video{max-width:100%;height:auto;display:block}
+table{border-collapse:collapse;font:12.5px var(--mono)}
+td,th{border:1px solid var(--rule);padding:4px 8px;text-align:left;vertical-align:top}
+th{background:var(--ink);color:var(--paper)}
+.hint{color:var(--paper-dim);font-size:13px;margin:0 0 10px}
+footer{border-top:1px solid var(--rule);padding:28px 0 46px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px;font-size:14px}
+footer p{font-size:12.5px;color:var(--paper-dim);max-width:640px;margin:0 0 6px}
+.pw{margin-top:16px;border:1px solid var(--rule);background:var(--ink-soft);border-radius:6px;padding:16px}
+.pw p{margin:0 0 10px}
+.pwrow{display:flex;gap:10px;flex-wrap:wrap}
+.pwrow input{flex:1 1 220px;padding:9px 11px;border:1px solid var(--paper-dim);border-radius:3px;background:var(--ink);color:var(--paper);font:14px var(--mono)}
+@media(max-width:560px){.size{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="back-btn" href="https://cyberportalhub.org">&larr; Back to Cyber Portal Hub</a>
+<a class="toplink" href="/tools/">All tools</a>
+</div></header>
+
+<main>
+<h1>All Type Zip Extractor</h1>
+<p class="lede">Open ZIP, RAR, 7z, TAR, GZ, ISO and many more archive formats, and read what is inside. Password-protected archives open with their password. Everything happens in your browser. Nothing is uploaded.</p>
+<div class="drop" id="drop">
+<strong>Drop an archive here</strong>
+<span>or choose one from your device</span>
+<button class="btn" id="pick" type="button">Choose archive</button>
+<input id="file" type="file" class="hidden">
+<p class="note">Opens ZIP, RAR, 7z, TAR, GZ, BZ2, XZ, ISO and many more. Files that are not archives open as they are. Limits: 150 MB file, 100 MB unpacked, 500 files.</p>
+</div>
+<div class="note hidden" id="busy" role="status">Opening archive...</div>
+<div class="msg hidden" id="msg" role="alert"></div>
+<div class="pw hidden" id="pw">
+<p id="pwt"></p>
+<div class="pwrow"><input id="pwi" type="password" autocomplete="off" aria-label="Archive password" placeholder="Password"><button class="btn" id="pwb" type="button">Open archive</button></div>
+</div>
+
+<section id="results" class="hidden">
+<div class="bar">
+<h2 id="count"></h2>
+<input id="q" type="search" placeholder="Filter by file name" aria-label="Filter by file name">
+</div>
+<div class="list" id="list"></div>
+<div class="viewer hidden" id="viewer">
+<div class="vhead"><b id="vname"></b><button class="btn alt" id="vdl" type="button">Download file</button></div>
+<div class="vbody" id="vbody"></div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap">
+<nav aria-label="Footer">
+<a href="/about.html">About Us</a>
+<a href="/contact.html">Contact Us</a>
+<a href="/privacy.html">Privacy Policy</a>
+<a href="/tools/">Tools</a>
+<a href="/awareness.html">Safety Blogs</a>
+</nav>
+<p>Questions or feedback: <a href="mailto:support@cyberportalhub.org">support@cyberportalhub.org</a></p>
+<p>Files you open here are read inside your browser and are never uploaded. Archives are opened with 7-Zip (GNU LGPL, with unRAR restriction), compiled to WebAssembly. Part of <a href="https://cyberportalhub.org">cyberportalhub.org</a>, an independent directory that is not a Government of India website.</p>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function(){
+"use strict";
+var MAX_TOTAL=100*1024*1024, MAX_FILES=500, TEXT_CAP=500*1024, CSV_ROWS=200;
+var DOWNLOAD_ONLY=set("pdf docx doc xlsx xls pptx ppt odt ods rtf");
+var IMAGES=set("jpg jpeg png gif webp bmp svg ico");
+var AUDIO={mp3:"audio/mpeg",wav:"audio/wav",ogg:"audio/ogg",m4a:"audio/mp4",aac:"audio/aac"};
+var VIDEO={mp4:"video/mp4",webm:"video/webm",mov:"video/quicktime",m4v:"video/mp4"};
+var TEXTISH=set("txt log md csv tsv json xml html htm css js ts py ini cfg conf yml yaml sql eml srt vcf ics bat sh");
+var entries=[], current=-1, urls=[];
+var $=function(id){return document.getElementById(id)};
+
+function set(s){var o={};s.split(" ").forEach(function(k){o[k]=1});return o}
+function ext(n){var m=/\.([^.\/]+)$/.exec(n);return m?m[1].toLowerCase():""}
+function base(n){return n.split("/").pop()||"file"}
+function fmt(b){return b<1024?b+" B":b<1048576?(b/1024).toFixed(1)+" KB":(b/1048576).toFixed(1)+" MB"}
+function msg(t){var m=$("msg");m.textContent=t||"";m.classList.toggle("hidden",!t)}
+function clearUrls(){urls.forEach(URL.revokeObjectURL);urls=[]}
+function mkUrl(data,type){var u=URL.createObjectURL(new Blob([data],{type:type}));urls.push(u);return u}
+function kind(x){return DOWNLOAD_ONLY[x]?"Download only":IMAGES[x]?"Image":AUDIO[x]?"Audio":VIDEO[x]?"Video":x==="csv"||x==="tsv"?"Table":TEXTISH[x]?"Text":"Other"}
+
+
+function userErr(t){var e=new Error(t);e.userMsg=t;return e}
+var LIBURL=new URL("lib/",location.href).href;
+var SINGLE={gzip:1,bzip2:1,xz:1,zstd:1,lzma:1,lzma86:1,z:1,lz4:1,brotli:1};
+var MAX_IN=150*1024*1024;
+async function getSZ(){
+try{var m=await import(LIBURL+"7zz.es6.js");return m.default}
+catch(e){throw userErr("The extraction engine did not load. Check your connection, and make sure the tools/lib folder is uploaded next to this page.")}
+}
+async function newSZ(){
+var F=await getSZ(),log=[];
+var s=await F({print:function(l){log.push(l)},printErr:function(l){log.push("ERR: "+l)},locateFile:function(n){return LIBURL+n}});
+s._log=log;return s;
+}
+function run(s,a){
+s._log.length=0;var st;
+try{st=s.callMain(a)}catch(e){st=-1}
+return{st:st,txt:s._log.join("\n")};
+}
+function safeBase(n){return String(n||"file").split(/[\\\/]/).pop().replace(/[:*?"<>|]/g,"_")||"file"}
+function parseList(txt){
+var type="",entries=[],cur=null,body=false;
+txt.split("\n").forEach(function(l){
+l=l.replace(/\r$/,"");
+if(l==="----------"){body=true;cur=null;return}
+if(!body){var h=/^Type = (.*)$/.exec(l);if(h)type=h[1];return}
+if(l===""){cur=null;return}
+var m=/^([A-Za-z ]+?) = ?(.*)$/.exec(l);if(!m)return;
+if(!cur){cur={name:"",size:0,enc:false,dir:false};entries.push(cur)}
+if(m[1]==="Path")cur.name=m[2];
+else if(m[1]==="Size")cur.size=parseInt(m[2],10)||0;
+else if(m[1]==="Encrypted")cur.enc=m[2]==="+";
+else if(m[1]==="Folder")cur.dir=m[2]==="+";
+else if(m[1]==="Attributes"&&/^D/.test(m[2]))cur.dir=true;
+});
+return{type:type,entries:entries};
+}
+function singleEntry(sz,path){
+return{name:path.split("/").pop(),size:sz.FS.stat(path).size,get:function(){return Promise.resolve(sz.FS.readFile(path))}};
+}
+async function open7z(file,pw){
+if(file.size>MAX_IN)throw userErr("This file is larger than 150 MB. Open it with a desktop extractor such as 7-Zip.");
+var sz=await newSZ(),P="-p"+(pw||"x_none_x");
+sz.FS.mkdir("/w");
+var cur="/w/"+safeBase(file.name),unwrapped=null;
+sz.FS.writeFile(cur,new Uint8Array(await file.arrayBuffer()));
+for(var depth=0;depth<5;depth++){
+var r=run(sz,["l","-slt",P,cur]),info=parseList(r.txt);
+if(!info.entries.length){
+if(unwrapped)return[singleEntry(sz,unwrapped)];
+if(r.st===-1||/wrong password|encrypted/i.test(r.txt))throw{needPw:!pw,badPw:!!pw};
+return null;
+}
+var enc=info.entries.some(function(e){return e.enc});
+if(enc){
+if(!pw)throw{needPw:true};
+if(!/Everything is Ok/.test(run(sz,["t",P,cur]).txt))throw{badPw:true};
+}
+if(SINGLE[info.type.toLowerCase()]&&info.entries.length===1){
+var sk=info.entries[0].size;
+if(sk>MAX_TOTAL||((!sk||sk<file.size)&&file.size>30*1024*1024))throw userErr("This file unpacks to more than 100 MB. The limit is 100 MB.");
+var od="/u"+depth;sz.FS.mkdir(od);
+run(sz,["x","-y","-o"+od,P,cur]);
+var fl=sz.FS.readdir(od).filter(function(n){return n!=="."&&n!==".."});
+if(!fl.length)throw{badPw:!!enc,needPw:false};
+unwrapped=od+"/"+fl[0];cur=unwrapped;continue;
+}
+var files=info.entries.filter(function(e){return !e.dir&&e.name}),done=false;
+return files.map(function(e){
+var nm=e.name.replace(/^\/+/,"");
+return{name:nm,size:e.size,get:async function(){
+if(!done){run(sz,["x","-y","-o/o",P,cur]);done=true}
+try{return sz.FS.readFile("/o/"+nm)}catch(x){throw new Error("read")}
+}};
+});
+}
+return unwrapped?[singleEntry(sz,unwrapped)]:null;
+}
+
+async function openZip(file){
+if(!window.JSZip)throw userErr("The ZIP library did not load. Check your connection and try again.");
+var zip=await JSZip.loadAsync(file);
+return Object.keys(zip.files).map(function(k){return zip.files[k]}).filter(function(f){return !f.dir}).map(function(f){
+return{name:f.name,size:(f._data&&f._data.uncompressedSize)||0,get:function(){return f.async("uint8array")}};
+});
+}
+var pending=null;
+function showPw(bad){
+$("pw").classList.remove("hidden");
+$("pwt").textContent=bad?"Incorrect password. Check it and try again.":"This archive is password-protected. Enter the password to open it.";
+$("pwi").value="";$("pwi").focus();
+}
+async function load(file,pw){
+msg("");clearUrls();entries=[];current=-1;pending=file;
+["results","viewer","pw"].forEach(function(id){$(id).classList.add("hidden")});
+$("busy").classList.remove("hidden");
+await new Promise(function(r){setTimeout(r,30)});
+var list=null,asFile=false;
+try{
+var h=new Uint8Array(await file.slice(0,4).arrayBuffer());
+if(!pw&&h[0]===0x50&&h[1]===0x4B){try{list=await openZip(file)}catch(e){list=null}}
+if(!list)list=await open7z(file,pw);
+if(!list){asFile=true;list=[{name:file.name,size:file.size,get:async function(){return new Uint8Array(await file.arrayBuffer())}}]}
+}catch(e){
+$("busy").classList.add("hidden");
+if(e&&(e.needPw||e.badPw)){showPw(!!e.badPw&&!e.needPw);return}
+msg(e&&e.userMsg?e.userMsg:"Something went wrong while opening this file. Try again, or try a different file.");return;
+}
+$("busy").classList.add("hidden");
+if(!list.length){msg("This archive has no files inside.");return}
+if(list.length>MAX_FILES){msg("This archive has "+list.length+" files. The limit is "+MAX_FILES+".");return}
+var total=0;list.forEach(function(e){total+=e.size});
+if(total>MAX_TOTAL){msg("This archive unpacks to "+fmt(total)+". The limit is 100 MB.");return}
+entries=list;
+$("count").textContent=asFile?file.name+" (opened as a regular file)":entries.length+(entries.length===1?" file":" files")+" in "+file.name;
+$("q").value="";render();
+$("results").classList.remove("hidden");
+}
+
+function render(){
+var q=$("q").value.trim().toLowerCase(), list=$("list");
+list.textContent="";
+var shown=0;
+entries.forEach(function(e,i){
+if(q&&e.name.toLowerCase().indexOf(q)<0)return;
+shown++;
+var r=document.createElement("div");r.className="row"+(i===current?" sel":"");
+var n=document.createElement("div");n.className="name";n.textContent=e.name;
+var t=document.createElement("span");var k=kind(ext(e.name));t.className="tag"+(k==="Download only"?" dl":"");t.textContent=k;
+var s=document.createElement("span");s.className="size";s.textContent=fmt(e.size);
+var b=document.createElement("button");b.type="button";b.className="btn alt";
+b.textContent=k==="Download only"?"Details":"Read";
+b.addEventListener("click",function(){view(i)});
+r.append(n,t,s,b);list.appendChild(r);
+});
+if(!shown){list.textContent="No files match.";list.style.padding="14px"}else list.style.padding=""
+}
+
+function download(e){
+e.get().then(function(d){
+var a=document.createElement("a");a.href=mkUrl(d,"application/octet-stream");a.download=base(e.name);
+document.body.appendChild(a);a.click();a.remove();
+});
+}
+
+function isText(d){var n=Math.min(d.length,4096);for(var i=0;i<n;i++)if(d[i]===0)return false;return true}
+
+function parseCSV(t,delim){
+var rows=[],row=[],cell="",q=false;
+for(var i=0;i<t.length&&rows.length<=CSV_ROWS;i++){
+var c=t[i];
+if(q){if(c==='"'){if(t[i+1]==='"'){cell+='"';i++}else q=false}else cell+=c}
+else if(c==='"')q=true;
+else if(c===delim){row.push(cell);cell=""}
+else if(c==="\n"||c==="\r"){if(c==="\r"&&t[i+1]==="\n")i++;row.push(cell);rows.push(row);row=[];cell=""}
+else cell+=c;
+}
+if(cell||row.length){row.push(cell);rows.push(row)}
+return rows;
+}
+
+function hexDump(d){
+var out=[],n=Math.min(d.length,512);
+for(var i=0;i<n;i+=16){
+var h=[],a="";
+for(var j=i;j<i+16;j++){
+if(j<n){h.push(d[j].toString(16).padStart(2,"0"));a+=d[j]>31&&d[j]<127?String.fromCharCode(d[j]):"."}
+else h.push("  ");
+}
+out.push(i.toString(16).padStart(6,"0")+"  "+h.join(" ")+"  "+a);
+}
+return out.join("\n");
+}
+
+async function view(i){
+current=i;render();
+var e=entries[i], x=ext(e.name), body=$("vbody");
+clearUrls();body.textContent="Loading...";
+$("vname").textContent=e.name;
+$("vdl").onclick=function(){download(e)};
+$("viewer").classList.remove("hidden");
+$("viewer").scrollIntoView({behavior:"smooth",block:"nearest"});
+function hint(t){var p=document.createElement("p");p.className="hint";p.textContent=t;return p}
+if(DOWNLOAD_ONLY[x]){
+body.textContent="";
+body.appendChild(hint("."+x.toUpperCase()+" files are not previewed here ("+fmt(e.size)+"). Use Download file to open it in your own app."));
+return;
+}
+var d;
+try{d=await e.get()}catch(err){body.textContent="This file could not be read. It may be encrypted or damaged.";return}
+body.textContent="";
+if(IMAGES[x]){
+var im=document.createElement("img");im.alt=base(e.name);
+im.src=mkUrl(d,x==="svg"?"image/svg+xml":"image/"+(x==="jpg"?"jpeg":x));body.appendChild(im);return;
+}
+if(AUDIO[x]||VIDEO[x]){
+var m=document.createElement(AUDIO[x]?"audio":"video");m.controls=true;m.src=mkUrl(d,AUDIO[x]||VIDEO[x]);body.appendChild(m);return;
+}
+if(isText(d)){
+var cut=d.length>TEXT_CAP, txt=new TextDecoder("utf-8").decode(cut?d.subarray(0,TEXT_CAP):d);
+if(cut)body.appendChild(hint("Showing the first "+fmt(TEXT_CAP)+" of "+fmt(d.length)+". Download the file to see the rest."));
+if(x==="csv"||x==="tsv"){
+var rows=parseCSV(txt,x==="tsv"?"\t":",");
+var tb=document.createElement("table");
+rows.slice(0,CSV_ROWS).forEach(function(r,ri){
+var tr=document.createElement("tr");
+r.forEach(function(c){var td=document.createElement(ri===0?"th":"td");td.textContent=c;tr.appendChild(td)});
+tb.appendChild(tr);
+});
+var box=document.createElement("div");box.style.overflowX="auto";box.appendChild(tb);
+if(rows.length>CSV_ROWS)body.appendChild(hint("Showing the first "+CSV_ROWS+" rows."));
+body.appendChild(box);return;
+}
+var pre=document.createElement("pre");pre.textContent=txt;body.appendChild(pre);return;
+}
+body.appendChild(hint("This looks like a binary file, so only the first 512 bytes are shown in hex."));
+var p2=document.createElement("pre");p2.textContent=hexDump(d);body.appendChild(p2);
+}
+
+var drop=$("drop"),inp=$("file");
+$("pick").addEventListener("click",function(){inp.click()});
+inp.addEventListener("change",function(){if(inp.files[0])load(inp.files[0]);inp.value=""});
+["dragenter","dragover"].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add("over")})});
+["dragleave","drop"].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove("over")})});
+drop.addEventListener("drop",function(e){var f=e.dataTransfer.files[0];if(f)load(f)});
+$("q").addEventListener("input",render);
+function submitPw(){if(pending)load(pending,$("pwi").value)}
+$("pwb").addEventListener("click",submitPw);
+$("pwi").addEventListener("keydown",function(e){if(e.key==="Enter")submitPw()});
+})();
+</script>
+</body>
+</html>
