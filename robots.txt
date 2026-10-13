@@ -1,2 +1,28 @@
+# Cyber Portal Hub - all pages, images, scripts and styles may be crawled.
+
 User-agent: *
 Allow: /
+
+# Google AdSense / AdMob crawler (reviews pages where ads are shown)
+User-agent: Mediapartners-Google
+Allow: /
+
+# Google Ads landing-page quality crawler
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# Google Search and image crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing (also used by other search and ad networks)
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://cyberportalhub.org/sitemap.xml

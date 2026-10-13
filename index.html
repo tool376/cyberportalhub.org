@@ -48,8 +48,8 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
 .search input{width:100%;height:45px;border:1px solid #c9b28f;border-radius:9px;background:var(--cream2);padding:0 15px 0 42px;font-size:15px;outline:0}
 .search input:focus{border-color:var(--red2);box-shadow:0 0 0 3px rgba(143,16,23,.10)}
 .reset{border:0;border-radius:9px;background:var(--navy);color:white;padding:0 20px;font-weight:700;cursor:pointer}
-.info{display:flex;align-items:center;justify-content:space-between;background:#e6d0ad;border:1px solid #d1b58b;border-radius:9px;padding:9px 13px;margin-bottom:13px;font-size:12px}
-.info b{font-size:14px;color:var(--navy)}
+.info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;background:#e6d0ad;border:1px solid #d1b58b;border-left:4px solid var(--gold);border-radius:9px;padding:10px 14px;margin-bottom:13px;font-size:13px;line-height:1.5;color:var(--ink)}
+.info b{font-size:15px;color:var(--navy)}
 .section{margin:15px 0 8px;display:flex;align-items:center;gap:9px}
 .section:before{content:"";width:5px;height:23px;border-radius:4px;background:var(--red)}
 .section h2{margin:0;font-size:16px;color:var(--navy)}
@@ -156,9 +156,9 @@ body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);col
   <a class="quick-tools" href="/gov-portals.html"><span class="qicon">🏛️</span><span class="qtext"><b>Gov. Portals</b><span>India.gov.in &amp; more</span></span></a>
   <a class="quick-tools" href="/awareness.html"><span class="qicon">📰</span><span class="qtext"><b>Safety Blogs</b><span>15 awareness guides</span></span></a>
  </div>
- <div class="info">
-   <span><b id="count">47</b> portals &nbsp;•&nbsp; All links open in a new tab</span>
-   <span>🔐 Verify the destination before submitting sensitive information</span>
+ <div class="info" role="note">
+   <span><b id="count">48</b> portals &amp; tools listed &nbsp;•&nbsp; Each link opens in a new tab</span>
+   <span><span aria-hidden="true">🔐</span> Verify the web address before entering personal or financial details. Independent directory, not a government website.</span>
  </div>
  <div id="content"><div class="section"><img class="cat-icon" src="cat-upi.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>💳</span>'"><div class="cat-info"><div class="cat-top"><h2>UPI &amp; Online Payment Help</h2><small>— 2 portals</small></div><div class="cat-sub">UPI fraud • Payment complaint • Transaction help</div></div></div><div class="grid"><article class="card">
       <div class="logo-box"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg" alt="UPI Dispute Redressal Mechanism (Wrong UPI Transaction) logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
