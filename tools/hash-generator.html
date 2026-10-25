@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
   :root{--ink:#12181F;--ink-soft:#1B232C;--paper:#ECE6D8;--paper-dim:#C9C0AC;--amber:#C98A2B;--steel:#6E8A93;--rule:rgba(236,230,216,0.14);--serif:'Source Serif 4',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace}
   *{box-sizing:border-box}
@@ -21,7 +22,16 @@
   main{max-width:820px;margin:0 auto;padding:40px 24px 80px}
   h1{font-family:var(--serif);font-size:clamp(26px,4vw,34px);margin:0 0 8px}
   .lede{color:#D9D2C3;max-width:65ch;margin:0 0 28px}
-  .privacy-note{border-left:3px solid var(--steel);padding:12px 16px;background:var(--ink-soft);font-size:13.5px;color:#DAD3C4;margin-bottom:26px}
+  .privacy-note{border-left:3px solid var(--steel);padding:12px 16px;background:var(--ink-soft);font-size:13.5px;color:#DAD3C4;margin-bottom:18px}
+  .evidence-panel{background:var(--ink-soft);border:1px solid var(--rule);border-radius:6px;padding:16px;margin-bottom:24px}
+  .evidence-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber);margin-bottom:12px}
+  .evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .evidence-grid label{font-size:12px;color:var(--paper-dim);display:flex;flex-direction:column;gap:5px}
+  .evidence-grid input{width:100%;background:#111820;color:var(--paper);border:1px solid #52616a;border-radius:4px;padding:9px 10px;font-family:var(--mono);font-size:12px;outline:none}
+  .evidence-grid input:focus{border-color:var(--amber)}
+  .evidence-grid input[readonly]{color:#bdb5a5;background:#151d24}
+  .device-limit{margin-top:10px;font-size:11px;color:#8f887b}
+  @media(max-width:640px){.evidence-grid{grid-template-columns:1fr}}
   .tabs{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--rule)}
   .tab{padding:10px 18px;font-family:var(--sans);font-size:14px;color:var(--paper-dim);cursor:pointer;border-bottom:2px solid transparent}
   .tab.active{color:var(--paper);border-color:var(--amber)}
@@ -32,6 +42,8 @@
   .drop p{margin:0;color:#C7BFAF;font-size:14px}
   .drop small{display:block;margin-top:8px;color:#8f887b}
   .actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .device-note{margin:10px 0 4px;color:#9f988b;font-size:12px}
+  .device-note b{color:var(--paper-dim)}
   .btn.secondary{background:transparent;color:var(--paper);border:1px solid var(--paper-dim)}
   .btn.secondary:hover{border-color:var(--amber);color:var(--amber);background:transparent}
   .progress{height:8px;background:#283038;border-radius:10px;overflow:hidden;margin:12px 0}
@@ -59,8 +71,27 @@
 
 <main>
   <h1>Forensic Hash Generator</h1>
-  <p class="lede">Generate MD5, SHA-1 and SHA-256 hashes for files, multiple files, or an entire folder. Folder paths and subfolder structure are preserved in the downloadable forensic report.</p>
+  <p class="lede">Generate MD5, SHA-1 and SHA-256 hashes for files and ZIP archives. Select or drop multiple files and folders at once — every file and every folder gets its own named hash entry (a folder gets one deterministic folder hash).</p>
   <div class="privacy-note"><strong>Nothing leaves this device.</strong> Files and text are hashed entirely in your browser. Nothing is uploaded.</div>
+
+  <div class="evidence-panel">
+    <div class="evidence-title">FORENSIC ACQUISITION DETAILS</div>
+    <div class="evidence-grid">
+      <label>Device / Computer Name
+        <input id="deviceName" type="text" placeholder="Enter device/computer name">
+      </label>
+      <label>MAC Address
+        <input id="macAddress" type="text" inputmode="text" placeholder="AA:BB:CC:DD:EE:FF" pattern="^([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$">
+      </label>
+      <label>Platform / Device Type
+        <input id="devicePlatform" type="text" readonly>
+      </label>
+      <label>Report Time (IST)
+        <input id="istTime" type="text" readonly>
+      </label>
+    </div>
+    <div class="device-limit">Browser security does not expose the actual computer hostname or MAC address. Enter them manually when required for a forensic record. Platform and IST timestamp are captured automatically.</div>
+  </div>
 
   <div class="tabs">
     <div class="tab active" data-tab="file">File</div>
@@ -69,17 +100,24 @@
 
   <div class="panel active" id="panel-file">
     <div class="drop" id="drop">
-      <p>Drop file(s) or a folder here, or click to choose</p>
-      <small>For folders, all files inside subfolders are included and their relative paths are preserved.</small>
+      <p>Drop multiple files and/or folders here, or choose them from your computer/mobile</p>
+      <small>Files, ZIP/RAR/7Z, PDF, APK, images, videos, documents and other file types are supported. The selected item is hashed locally on this device.</small>
     </div>
-    <input type="file" id="fileInput" style="display:none">
+    <input type="file" id="fileInput" accept="*/*" multiple style="display:none">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
     <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none">
     <div class="actions">
-      <button class="btn" id="chooseFolderBtn" type="button">Choose Folder</button>
+      <button class="btn" id="chooseFileBtn" type="button">📁 Select File(s)</button>
+      <button class="btn" id="cameraBtn" type="button">📷 Camera / Photo</button>
+      <button class="btn" id="chooseFolderBtn" type="button">📂 Choose Folder</button>
+      <button class="btn secondary" id="clearBtn" type="button">Clear Results</button>
+      <button class="btn secondary" id="downloadSumBtn" type="button" disabled>Download SHA-256 List (sha256sum)</button>
       <button class="btn secondary" id="downloadCsvBtn" type="button" disabled>Download CSV Report</button>
       <button class="btn secondary" id="downloadTxtBtn" type="button" disabled>Download TXT Report</button>
       <button class="btn secondary" id="downloadHtmlBtn" type="button" disabled>Download HTML Report</button>
     </div>
+    <label class="device-note" style="display:block;cursor:pointer"><input type="checkbox" id="listFiles" checked> Include the hash of <b>every file inside a folder</b> (with relative path) in results and reports</label>
+    <div class="device-note"><b>Computer:</b> Select any file or drag & drop. <b>Mobile:</b> Select files from the device, or use Camera / Photo to capture an image and hash it immediately.</div>
     <div class="progress"><i id="progressBar"></i></div>
     <div class="summary" id="summary"></div>
     <div class="fname" id="fname"></div>
@@ -103,7 +141,7 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
   t.classList.add('active');
   document.getElementById('panel-' + t.dataset.tab).classList.add('active');
-  document.getElementById('results').innerHTML = '';
+  if(!busy) clearAll();
 }));
 
 const resultsEl = document.getElementById('results');
@@ -111,14 +149,20 @@ const progressBar = document.getElementById('progressBar');
 const summaryEl = document.getElementById('summary');
 const fnameEl = document.getElementById('fname');
 const fileInput = document.getElementById('fileInput');
+const cameraInput = document.getElementById('cameraInput');
 const folderInput = document.getElementById('folderInput');
 const drop = document.getElementById('drop');
 const chooseFolderBtn = document.getElementById('chooseFolderBtn');
+const chooseFileBtn = document.getElementById('chooseFileBtn');
 const csvBtn = document.getElementById('downloadCsvBtn');
 const txtBtn = document.getElementById('downloadTxtBtn');
 const htmlBtn = document.getElementById('downloadHtmlBtn');
+const sumBtn = document.getElementById('downloadSumBtn');
+const listFilesEl = document.getElementById('listFiles');
+const withFiles = () => listFilesEl.checked;
 
 let reportRows = [];
+let busy = false;
 
 function esc(v) {
   return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -134,24 +178,33 @@ function downloadBlob(blob, name) {
 }
 function setProgress(p) { progressBar.style.width=Math.max(0,Math.min(100,p))+'%'; }
 
-function renderFileResults(rows) {
-  resultsEl.innerHTML = rows.map(r => `
-    <div class="hash-row">
-      <div class="fname">${esc(r.path)}</div>
-      <div class="algo">MD5</div><div class="val">${r.md5}</div>
-      <div class="algo">SHA-1</div><div class="val">${r.sha1}</div>
-      <div class="algo">SHA-256</div><div class="val">${r.sha256}</div>
-      <button type="button" data-copy="${esc(r.sha256)}">Copy SHA-256</button>
-    </div>`).join('');
+function bindCopy() {
   resultsEl.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async ()=>{
     try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied'; }
     catch(e){ b.textContent='Copy failed'; }
   }));
 }
+function renderFileResults(rows) {
+  resultsEl.innerHTML = rows.map(r => `
+    <div class="hash-row">
+      <div class="fname"><strong>#${r.index} · ${esc(r.evidenceType||'File')}</strong> — <span style="color:var(--paper);font-size:14px">${esc(r.name)}</span>${r.folder ? ` <span style="color:var(--amber)">• ${r.fileCount} files</span>` : ''}</div>
+      <div class="algo">MD5${r.folder ? ' — Folder Hash' : ''}</div><div class="val">${r.md5}</div>
+      <div class="algo">SHA-1${r.folder ? ' — Folder Hash' : ''}</div><div class="val">${r.sha1}</div>
+      <div class="algo">SHA-256${r.folder ? ' — Folder Hash' : ''}</div><div class="val">${r.sha256}</div>
+      <button type="button" data-copy="${esc(r.sha256)}">Copy SHA-256</button>
+      ${r.folder && withFiles() ? `<details style="margin-top:8px"><summary style="cursor:pointer;color:var(--amber);font-size:12px">Files inside (${r.files.length}) — SHA-256</summary>${r.files.map(x=>`<div class="val" style="font-size:11.5px;margin-top:6px">${x.sha256}<br><span style="color:var(--paper-dim)">${esc(x.path)}</span></div>`).join('')}</details>` : ''}
+    </div>`).join('');
+  bindCopy();
+}
 function renderTextResults(hashes) {
   resultsEl.innerHTML = Object.entries(hashes).map(([algo,val]) => `
     <div class="hash-row"><div class="algo">${algo}</div><div class="val">${val}</div>
     <button type="button" data-copy="${val}">Copy</button></div>`).join('');
+  bindCopy();
+}
+function clearAll() {
+  reportRows=[]; resultsEl.innerHTML=''; summaryEl.textContent=''; fnameEl.textContent='';
+  setProgress(0); csvBtn.disabled=txtBtn.disabled=htmlBtn.disabled=sumBtn.disabled=true;
 }
 function hashWordArray(wa) {
   return {'SHA-256':CryptoJS.SHA256(wa).toString(),'SHA-1':CryptoJS.SHA1(wa).toString(),'MD5':CryptoJS.MD5(wa).toString()};
@@ -161,65 +214,139 @@ async function hashFile(file, onProgress) {
   const md5=CryptoJS.algo.MD5.create();
   const sha1=CryptoJS.algo.SHA1.create();
   const sha256=CryptoJS.algo.SHA256.create();
-  const chunkSize=8*1024*1024;
+  const chunkSize=4*1024*1024;
+  const total=Math.max(file.size,1);
+
   for(let start=0; start<file.size; start+=chunkSize) {
     const end=Math.min(start+chunkSize,file.size);
     const buf=await file.slice(start,end).arrayBuffer();
-    const wa=CryptoJS.lib.WordArray.create(buf);
-    md5.update(wa); sha1.update(wa); sha256.update(wa);
-    onProgress?.(end/file.size*100);
+    const bytes=new Uint8Array(buf);
+    const wa=CryptoJS.lib.WordArray.create(bytes);
+    md5.update(wa);
+    sha1.update(wa);
+    sha256.update(wa);
+    onProgress?.(end/total*100);
     await new Promise(r=>setTimeout(r,0));
   }
-  return {md5:md5.finalize().toString(),sha1:sha1.finalize().toString(),sha256:sha256.finalize().toString()};
+  if(file.size===0) onProgress?.(100);
+  return {
+    md5:md5.finalize().toString(),
+    sha1:sha1.finalize().toString(),
+    sha256:sha256.finalize().toString()
+  };
 }
 
 function relativePath(file) {
-  return file.webkitRelativePath || file._relativePath || file.name;
+  return String(file.webkitRelativePath || file._relativePath || file.name).replaceAll('\\','/');
 }
-
-async function processFiles(files) {
-  files=[...files].filter(f=>f && typeof f.arrayBuffer==='function');
-  if(!files.length) throw new Error('No files found.');
-  reportRows=[];
-  resultsEl.innerHTML='';
-  setProgress(0);
-  summaryEl.textContent='Preparing files…';
-  const totalBytes=files.reduce((n,f)=>n+f.size,0);
-  let doneBytes=0;
-  const rows=[];
-  for(let i=0;i<files.length;i++){
-    const f=files[i];
-    const path=relativePath(f);
-    fnameEl.textContent=`Processing ${i+1}/${files.length}: ${path}`;
-    summaryEl.textContent=`${i+1} of ${files.length} files • ${(f.size/1024).toFixed(1)} KB`;
-    const h=await hashFile(f,p=>{
-      setProgress(((doneBytes + f.size*(p/100))/Math.max(totalBytes,1))*100);
-    });
-    doneBytes+=f.size;
-    rows.push({index:i+1,path,name:f.name,size:f.size,sizeKB:(f.size/1024).toFixed(2),lastModified:f.lastModified?new Date(f.lastModified).toISOString():'',...h});
-    reportRows=[...rows];
-    renderFileResults(rows);
+// Locale-independent comparison so the folder hash is identical on every computer/browser.
+function cmp(a,b){ return a<b?-1:a>b?1:0; }
+// Split a selection into top-level items: each loose file = 1 item, each folder = 1 item.
+function groupIntoItems(files) {
+  const singles=[], folders=new Map();
+  for(const f of files){
+    const p=relativePath(f);
+    if(p.includes('/')){
+      const root=p.split('/')[0];
+      if(!folders.has(root)) folders.set(root,[]);
+      folders.get(root).push(f);
+    } else singles.push(f);
   }
-  setProgress(100);
-  summaryEl.textContent=`Completed: ${rows.length} file(s) • Total ${(totalBytes/1024/1024).toFixed(2)} MB`;
-  fnameEl.textContent=rows.length===1 ? rows[0].path : 'Folder/file set hashing completed.';
-  csvBtn.disabled=txtBtn.disabled=htmlBtn.disabled=false;
+  return [
+    ...singles.map(f=>({type:'file',name:f.name,files:[f]})),
+    ...[...folders].map(([name,fs])=>({type:'folder',name,files:fs}))
+  ];
 }
 
+function evidenceType(name, mime='') {
+  const n=String(name||'').toLowerCase();
+  if (mime.startsWith('image/')) return 'Image';
+  if (mime.startsWith('audio/')) return 'Audio';
+  if (mime.startsWith('video/')) return 'Video';
+  if (mime==='application/pdf' || n.endsWith('.pdf')) return 'PDF';
+  if (n.endsWith('.zip') || n.endsWith('.rar') || n.endsWith('.7z') || n.endsWith('.tar') || n.endsWith('.gz')) return 'Archive';
+  if (n.endsWith('.apk') || n.endsWith('.aab')) return 'Android Package';
+  if (n.endsWith('.exe') || n.endsWith('.msi') || n.endsWith('.dll')) return 'Executable';
+  if (n.endsWith('.doc') || n.endsWith('.docx') || n.endsWith('.odt') || n.endsWith('.rtf')) return 'Document';
+  if (n.endsWith('.xls') || n.endsWith('.xlsx') || n.endsWith('.csv') || n.endsWith('.ods')) return 'Spreadsheet';
+  if (n.endsWith('.ppt') || n.endsWith('.pptx') || n.endsWith('.odp')) return 'Presentation';
+  if (n.endsWith('.txt') || n.endsWith('.log') || n.endsWith('.json') || n.endsWith('.xml') || n.endsWith('.html') || n.endsWith('.htm')) return 'Text/Web File';
+  return 'File';
+}
+
+async function hashFolder(files, label, prog, grand) {
+  // One deterministic manifest: sorted relative path + size + SHA-256 of each file, then hash the manifest.
+  const sorted=[...files].sort((a,b)=>cmp(relativePath(a),relativePath(b)));
+  const manifest=[], list=[]; let total=0;
+  for(let i=0;i<sorted.length;i++){
+    const f=sorted[i], path=relativePath(f);
+    fnameEl.textContent=`Folder "${label}" — file ${i+1}/${sorted.length}: ${path}`;
+    const h=await hashFile(f,p=>setProgress((prog.done+f.size*p/100)/grand*100));
+    prog.done+=f.size; total+=f.size;
+    manifest.push(`${path}\t${f.size}\t${h.sha256}`);
+    list.push({path,size:f.size,...h});
+  }
+  const wa=CryptoJS.enc.Utf8.parse(manifest.join('\n')+'\n');
+  return {md5:CryptoJS.MD5(wa).toString(),sha1:CryptoJS.SHA1(wa).toString(),sha256:CryptoJS.SHA256(wa).toString(),count:sorted.length,totalBytes:total,files:list};
+}
+
+async function processFiles(input) {
+  const files=[...input].filter(f=>f && typeof f.slice==='function');
+  if(!files.length) throw new Error('No file or folder found.');
+  if(busy){ alert('Hashing is already in progress. Please wait until it finishes.'); return; }
+  busy=true;
+  csvBtn.disabled=txtBtn.disabled=htmlBtn.disabled=sumBtn.disabled=true;
+  try {
+    const items=groupIntoItems(files);
+    const grand=Math.max(files.reduce((n,f)=>n+f.size,0),1);
+    const prog={done:0};
+    setProgress(0);
+    for(let i=0;i<items.length;i++){
+      const it=items[i];
+      summaryEl.textContent=`Processing item ${i+1} of ${items.length}`;
+      let row;
+      if(it.type==='file'){
+        const f=it.files[0];
+        fnameEl.textContent=`Hashing: ${f.name}`;
+        const h=await hashFile(f,p=>setProgress((prog.done+f.size*p/100)/grand*100));
+        prog.done+=f.size;
+        row={path:f.name,name:f.name,evidenceType:evidenceType(f.name,f.type),size:f.size,sizeKB:(f.size/1024).toFixed(2),hashTime:hashTimestampIST(),...h};
+      } else {
+        const fh=await hashFolder(it.files,it.name,prog,grand);
+        row={path:it.name,name:it.name,evidenceType:'Folder',size:fh.totalBytes,sizeKB:(fh.totalBytes/1024).toFixed(2),hashTime:hashTimestampIST(),md5:fh.md5,sha1:fh.sha1,sha256:fh.sha256,folder:true,fileCount:fh.count,files:fh.files};
+      }
+      row.index=reportRows.length+1;
+      reportRows.push(row);
+      renderFileResults(reportRows);
+    }
+    setProgress(100);
+    summaryEl.textContent=`Completed: ${items.length} new item(s) • ${reportRows.length} total in report`;
+    fnameEl.textContent='';
+  } finally {
+    busy=false;
+    csvBtn.disabled=txtBtn.disabled=htmlBtn.disabled=sumBtn.disabled=!reportRows.length;
+  }
+}
 function showError(e) {
-  resultsEl.innerHTML=`<div class="hash-row"><div class="algo">ERROR</div><div class="val">${esc(e?.message||e)}</div></div>`;
+  if(reportRows.length) renderFileResults(reportRows); else resultsEl.innerHTML='';
+  resultsEl.insertAdjacentHTML('beforeend',`<div class="hash-row"><div class="algo">ERROR</div><div class="val">${esc(e?.message||e)}</div></div>`);
   summaryEl.textContent='Hashing stopped.';
   setProgress(0);
 }
 
 drop.addEventListener('click',()=>fileInput.click());
+chooseFileBtn.addEventListener('click',()=>fileInput.click());
+document.getElementById('cameraBtn').addEventListener('click',()=>cameraInput.click());
 chooseFolderBtn.addEventListener('click',()=>folderInput.click());
 drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag');});
 drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));
 drop.addEventListener('drop',async e=>{
   e.preventDefault(); drop.classList.remove('drag');
   try {
-    const items=[...e.dataTransfer.items];
+    // DataTransfer is emptied after the first await, so capture everything NOW.
+    const dropped=[...e.dataTransfer.items].filter(i=>i.kind==='file')
+      .map(i=>({entry:i.webkitGetAsEntry?.(), file:i.getAsFile()}));
+    const fallback=[...e.dataTransfer.files];
     const files=[];
     async function walk(entry,path=''){
       if(entry.isFile){
@@ -232,43 +359,116 @@ drop.addEventListener('drop',async e=>{
         for(const en of entries) await walk(en,path+entry.name+'/');
       }
     }
-    for(const item of items){
-      const entry=item.webkitGetAsEntry?.();
-      if(entry) await walk(entry,'');
+    for(const d of dropped){
+      if(d.entry) await walk(d.entry,'');
+      else if(d.file){ d.file._relativePath=d.file.name; files.push(d.file); }
     }
-    if(files.length) await processFiles(files);
-    else if(e.dataTransfer.files.length) await processFiles(e.dataTransfer.files);
+    await processFiles(files.length?files:fallback);
   } catch(err){showError(err);}
 });
-fileInput.addEventListener('change',e=>processFiles(e.target.files).catch(showError));
-folderInput.addEventListener('change',e=>processFiles(e.target.files).catch(showError));
+fileInput.addEventListener('change',e=>{ const files=e.target.files; processFiles(files).catch(showError); e.target.value=''; });
+cameraInput.addEventListener('change',e=>{ const files=e.target.files; processFiles(files).catch(showError); e.target.value=''; });
+folderInput.addEventListener('change',e=>{ const files=e.target.files; processFiles(files).catch(showError); e.target.value=''; });
+
+const deviceNameEl=document.getElementById('deviceName');
+const macAddressEl=document.getElementById('macAddress');
+const devicePlatformEl=document.getElementById('devicePlatform');
+const istTimeEl=document.getElementById('istTime');
+
+function detectPlatform(){
+  const ua=navigator.userAgent||'';
+  const platform=navigator.userAgentData?.platform || navigator.platform || 'Unknown';
+  let type='Computer';
+  if(/Android/i.test(ua)) type='Android Mobile';
+  else if(/iPhone|iPad|iPod/i.test(ua)) type='iPhone/iPad';
+  else if(/Mac/i.test(platform)) type='macOS Computer';
+  else if(/Win/i.test(platform)) type='Windows Computer';
+  else if(/Linux/i.test(platform)) type='Linux Computer';
+  return `${type} | ${platform}`;
+}
+function nowIST(){
+  return new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(new Date())+' IST';
+}
+function hashTimestampIST(){
+  return new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',fractionalSecondDigits:3,hourCycle:'h23'}).format(new Date())+' IST';
+}
+function refreshAcquisitionInfo(){
+  devicePlatformEl.value=detectPlatform();
+  istTimeEl.value=nowIST();
+}
+refreshAcquisitionInfo();
+setInterval(refreshAcquisitionInfo,1000);
+
+function acquisitionMeta(){
+  return {
+    deviceName:(deviceNameEl.value||'Not provided').trim(),
+    macAddress:(macAddressEl.value||'Not provided').trim(),
+    platform:devicePlatformEl.value||detectPlatform(),
+    istTime:istTimeEl.value||nowIST(),
+    userAgent:navigator.userAgent||'Not available'
+  };
+}
 
 function reportCSV() {
-  return 'No,Path,File Name,Size (bytes),Size (KB),Last Modified,MD5,SHA-1,SHA-256\n' +
-    reportRows.map(r=>[r.index,r.path,r.name,r.size,r.sizeKB,r.lastModified,r.md5,r.sha1,r.sha256].map(csvEsc).join(',')).join('\n');
+  const m=acquisitionMeta();
+  return [
+    'FORENSIC HASH REPORT',
+    'Device / Computer Name,'+csvEsc(m.deviceName),
+    'MAC Address,'+csvEsc(m.macAddress),
+    'Platform / Device Type,'+csvEsc(m.platform),
+    'Report Time (IST),'+csvEsc(m.istTime),
+    '',
+    'No,Type,Evidence Name,Files Inside,Size (bytes),Size (KB),Hash Generated (IST),MD5,SHA-1,SHA-256',
+    ...reportRows.map(r=>[r.index,r.evidenceType||'File',r.name,r.folder?r.fileCount:'',r.size,r.sizeKB,r.hashTime,r.md5,r.sha1,r.sha256].map(csvEsc).join(',')),
+    ...(withFiles() ? reportRows.filter(r=>r.folder).flatMap(r=>['','FOLDER CONTENTS: '+csvEsc(r.name),'Folder,Relative Path,Size (bytes),MD5,SHA-1,SHA-256',...r.files.map(x=>[r.name,x.path,x.size,x.md5,x.sha1,x.sha256].map(csvEsc).join(','))]) : [])
+  ].join('\n');
 }
 function reportTXT() {
+  const m=acquisitionMeta();
   const lines=[
     'FORENSIC HASH REPORT',
-    'Generated: '+new Date().toISOString(),
-    'Files: '+reportRows.length,
+    '========================================',
+    `Device / Computer Name: ${m.deviceName}`,
+    `MAC Address: ${m.macAddress}`,
+    `Platform / Device Type: ${m.platform}`,
+    `Report Time (IST): ${m.istTime}`,
+    `Browser User-Agent: ${m.userAgent}`,
+    '',
+    `Hash Entries: ${reportRows.length}`,
     '',
     ...reportRows.map(r=>[
-      `File: ${r.path}`,`Size: ${r.size} bytes`, `Last Modified: ${r.lastModified}`,
-      `MD5: ${r.md5}`,`SHA-1: ${r.sha1}`,`SHA-256: ${r.sha256}`,''
-    ].join('\n'))
+      `Evidence Type: ${r.evidenceType|| (r.folder?'Folder':'File')}`,
+      `Evidence Name: ${r.name}`,
+      `${r.folder?'Contained files':'Size'}: ${r.folder ? r.fileCount : (r.size+' bytes')}`,
+      `Hash Generated (IST): ${r.hashTime || 'N/A'}`,
+      `MD5: ${r.md5}`,`SHA-1: ${r.sha1}`,`SHA-256: ${r.sha256}`,
+      ...(withFiles() && r.folder ? ['Files inside this folder (SHA-256  path):',...r.files.map(x=>`  ${x.sha256}  ${x.path}`)] : []),'']
+    .join('\n'))
   ];
   return lines.join('\n');
 }
 function reportHTML() {
+  const m=acquisitionMeta();
   return `<!doctype html><html><head><meta charset="utf-8"><title>Forensic Hash Report</title>
-  <style>body{font:14px Arial;background:#f5f5f5;color:#222;padding:24px}h1{font-size:24px}table{border-collapse:collapse;width:100%;background:white}th,td{border:1px solid #ccc;padding:8px;text-align:left;vertical-align:top}th{background:#eee}code{word-break:break-all}</style>
-  </head><body><h1>Forensic Hash Report</h1><p>Generated: ${esc(new Date().toISOString())}</p>
-  <p>Files: ${reportRows.length}</p><table><thead><tr><th>No.</th><th>Path</th><th>Size</th><th>Last Modified</th><th>MD5</th><th>SHA-1</th><th>SHA-256</th></tr></thead><tbody>
-  ${reportRows.map(r=>`<tr><td>${r.index}</td><td>${esc(r.path)}</td><td>${r.size}</td><td>${esc(r.lastModified)}</td><td><code>${r.md5}</code></td><td><code>${r.sha1}</code></td><td><code>${r.sha256}</code></td></tr>`).join('')}
-  </tbody></table><p>Generated locally in the browser. Files were not uploaded by this tool.</p></body></html>`;
+  <style>body{font:14px Arial;background:#f5f5f5;color:#222;padding:24px}h1{font-size:24px}.meta{background:#fff;border:1px solid #ccc;padding:14px;margin:15px 0}table{border-collapse:collapse;width:100%;background:white;table-layout:fixed;margin-bottom:18px}th,td{border:1px solid #ccc;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-all;overflow-wrap:anywhere}th{background:#eee}code{font:11px/1.45 Consolas,monospace;word-break:break-all}h3{margin:22px 0 8px}@page{size:A4 landscape;margin:10mm}@media print{body{background:#fff;padding:0}}</style>
+  </head><body><h1>Forensic Hash Report</h1>
+  <div class="meta"><strong>Forensic Acquisition Details</strong><br>
+  Device / Computer Name: ${esc(m.deviceName)}<br>
+  MAC Address: ${esc(m.macAddress)}<br>
+  Platform / Device Type: ${esc(m.platform)}<br>
+  Report Time (IST): ${esc(m.istTime)}<br>
+  Browser User-Agent: ${esc(m.userAgent)}</div>
+  <p>Hash entries: ${reportRows.length}</p><table><colgroup><col style="width:4%"><col style="width:8%"><col style="width:12%"><col style="width:8%"><col style="width:10%"><col style="width:14%"><col style="width:17%"><col style="width:27%"></colgroup><thead><tr><th>No.</th><th>Evidence Type</th><th>Evidence Name</th><th>Size</th><th>Hash Generated (IST)</th><th>MD5</th><th>SHA-1</th><th>SHA-256</th></tr></thead><tbody>
+  ${reportRows.map(r=>`<tr><td>${r.index}</td><td>${esc(r.evidenceType|| (r.folder?'Folder':'File'))}</td><td>${esc(r.name)}</td><td>${r.folder ? esc(r.fileCount+' files / '+r.size+' bytes') : esc(r.size)}</td><td>${esc(r.hashTime||'')}</td><td><code>${r.md5}</code></td><td><code>${r.sha1}</code></td><td><code>${r.sha256}</code></td></tr>`).join('')}
+  </tbody></table>${withFiles() ? reportRows.filter(r=>r.folder).map(r=>`<h3>Folder contents: ${esc(r.name)}</h3><table><colgroup><col style="width:22%"><col style="width:7%"><col style="width:16%"><col style="width:20%"><col style="width:35%"></colgroup><thead><tr><th>Relative Path</th><th>Size</th><th>MD5</th><th>SHA-1</th><th>SHA-256</th></tr></thead><tbody>${r.files.map(x=>`<tr><td>${esc(x.path)}</td><td>${x.size}</td><td><code>${x.md5}</code></td><td><code>${x.sha1}</code></td><td><code>${x.sha256}</code></td></tr>`).join('')}</tbody></table>`).join('') : ''}<p>Generated locally in the browser. Files were not uploaded by this tool.</p></body></html>`;
 }
-csvBtn.addEventListener('click',()=>downloadBlob(new Blob([reportCSV()],{type:'text/csv'}),'forensic-hash-report.csv'));
+document.getElementById('clearBtn').addEventListener('click',()=>{ if(!busy) clearAll(); });
+function reportSUM(){
+  return reportRows.flatMap(r=>r.folder ? r.files.map(x=>`${x.sha256}  ${x.path}`) : [`${r.sha256}  ${r.name}`]).join('\n')+'\n';
+}
+sumBtn.addEventListener('click',()=>downloadBlob(new Blob([reportSUM()],{type:'text/plain'}),'forensic-hash-list.sha256'));
+listFilesEl.addEventListener('change',()=>{ if(!busy && reportRows.length) renderFileResults(reportRows); });
+csvBtn.addEventListener('click',()=>downloadBlob(new Blob(['\ufeff'+reportCSV()],{type:'text/csv'}),'forensic-hash-report.csv'));
 txtBtn.addEventListener('click',()=>downloadBlob(new Blob([reportTXT()],{type:'text/plain'}),'forensic-hash-report.txt'));
 htmlBtn.addEventListener('click',()=>downloadBlob(new Blob([reportHTML()],{type:'text/html'}),'forensic-hash-report.html'));
 
