@@ -1,612 +1,254 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>India Cyber & Digital Investigation Portal Hub</title>
-<meta name="description" content="Verified links to India's official cyber crime, telecom, Aadhaar and platform-grievance reporting portals, in one directory.">
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cyber Portal Hub — India Cyber & Digital Investigation Portal Hub</title>
+<meta name="description" content="India's official cyber crime, UPI, telecom, Aadhaar and social media complaint portals in one place.">
+<meta name="theme-color" content="#062744">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1448557659666187" crossorigin="anonymous"></script>
 <style>
-:root{
-  --navy:#062744;
-  --navy2:#0b365b;
-  --cream:#f3e5cf;
-  --cream2:#fffaf2;
-  --cream3:#ead7b9;
-  --red:#8f1017;
-  --red2:#b51d24;
-  --gold:#c69a55;
-  --ink:#15263a;
-  --muted:#687687;
-  --line:#d9c5a6;
-  --shadow:0 7px 18px rgba(63,45,24,.10);
-}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);color:var(--ink);font-family:Segoe UI,Arial,sans-serif}
-.header{background:linear-gradient(135deg,var(--navy),#0a416d);color:white;border-bottom:4px solid var(--gold)}
-.header-inner{max-width:1500px;margin:auto;padding:17px 24px 14px;display:flex;align-items:center;gap:18px}
-.gov{font-size:42px;line-height:1}
-.brand{flex:1;text-align:center}
-.brand h1{margin:0;font-size:28px;letter-spacing:.5px}
-.brand p{margin:4px 0 0;font-size:13px;color:#dce9f3}
-.brand p.sub{font-style:italic;color:#f0e2c8;font-size:13.5px;margin-top:6px}
-.brand p.tag{font-size:12px;color:#b9cadb;max-width:640px;margin:8px auto 0;line-height:1.55}
-.disclaimer{margin:10px auto 0;max-width:900px;background:rgba(244,180,76,.12);border:1px solid rgba(244,180,76,.4);border-radius:8px;padding:8px 16px;font-size:11.5px;color:#ffe3ab;line-height:1.55}
-.digital{font-weight:800;text-align:center;font-size:13px;line-height:1.1}
-.digital b{display:block;font-size:20px;color:#f4b44c}
-.wrap{max-width:1500px;margin:auto;padding:14px 24px 28px}
-.toolbar{display:flex;gap:10px;margin-bottom:12px;align-items:stretch}
-.search{flex:0 1 420px;position:relative}
-.quick-tools{display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:0 20px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14.5px;white-space:nowrap;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
-.quick-tools:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(63,45,24,.18)}
-.quick-tools .qicon{font-size:21px;line-height:1}
-.quick-tools .qtext{display:flex;flex-direction:column;line-height:1.15}
-.quick-tools .qtext b{font-size:14.5px}
-.quick-tools .qtext span{font-size:10.5px;font-weight:500;opacity:.85}
-.search span{position:absolute;left:14px;top:11px;font-size:18px}
+:root{--navy:#062744;--cream2:#fffaf2;--red:#8f1017;--red2:#b51d24;--gold:#c69a55;--ink:#15263a;--line:#d9c5a6;--shadow:0 7px 18px rgba(63,45,24,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#ead7b9,#f6ead7 48%,#ead7b9);color:var(--ink);font:16px/1.5 system-ui,"Segoe UI","Noto Sans Devanagari",Arial,sans-serif;overflow-x:hidden}
+a{color:inherit}button,input{font:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+/* header */
+.sitehead{position:sticky;top:0;z-index:30;min-height:64px;padding:8px 22px;background:linear-gradient(100deg,#061a2a,#0b2b45);display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;border-bottom:4px solid var(--gold)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logoIcon{width:42px;height:42px;display:grid;place-items:center;background:#fff;border-radius:12px;box-shadow:0 0 0 2px var(--gold)}
+.logoIcon img{width:70%;height:70%;object-fit:contain}
+.logo strong{display:block;font-size:18px;line-height:1.05}.logo small{display:block;font-size:10.5px;color:#cfe0ee}
+.nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{color:#fff;text-decoration:none;padding:8px 11px;border-radius:20px;font-size:12.5px;font-weight:800;white-space:nowrap;transition:background .2s}
+.nav a:first-child{background:var(--red2)}.nav a:hover{background:#ffffff26}
+.mbtn{display:none;border:1px solid #ffffff55;background:none;color:#fff;border-radius:10px;width:42px;height:42px;font-size:20px;cursor:pointer}
+/* hero */
+.shell{max-width:1500px;margin:auto}
+.hero{position:relative;overflow:hidden;background:#061827;color:#fff;padding:46px 34px 62px;isolation:isolate}
+.heroGrid{display:grid;grid-template-columns:1fr 240px;gap:30px;align-items:center;max-width:1240px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:1.2px;font-weight:800;color:#ffd45b;margin-bottom:10px}
+.hero h1{font-size:clamp(38px,6vw,64px);line-height:1;margin:0 0 12px;letter-spacing:-2px}
+.hero h1 span{color:#ff4157;display:block}
+.heroSubline{display:flex;gap:8px;align-items:center;font-size:17px;font-weight:800;flex-wrap:wrap}
+.rotating{color:#ffd45b;transition:opacity .2s;min-width:150px;border-bottom:2px solid #ffd45b}
+.sub{max-width:660px;color:#e8f1f8;margin:12px 0 0}
+.searchHero{margin-top:20px;display:flex;max-width:760px;height:54px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 34px #0007,0 0 0 3px #ffffff30}
+.searchHero:focus-within{box-shadow:0 12px 34px #0007,0 0 0 3px var(--gold)}
+.searchHero input{flex:1;border:0;outline:0;color:#102235;padding:0 18px;font-size:14.5px;min-width:0}
+.searchHero button{width:120px;border:0;background:linear-gradient(135deg,#f0283f,#b70e21);color:#fff;font-weight:900;cursor:pointer}
+.popular{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.popular button{padding:7px 14px;border-radius:99px;background:#ffffff18;border:1px solid #ffffff40;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.popular button:hover{background:var(--red2);transform:translateY(-2px)}
+.badge{text-align:center}
+.shield{position:relative;width:130px;height:130px;margin:auto;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#ffffff22,#052038cc);border:2px solid var(--gold);animation:float 4s ease-in-out infinite}
+.shield img{width:62%;height:62%;object-fit:contain}
+.badge strong{display:block;margin-top:14px;font-size:20px;transition:opacity .25s}.badge span{font-size:14px;color:#dbe8f2}
+.heroSlides{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s}.slide.on{opacity:1}
+.slide .art,.slide .art svg,.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide.on .art svg,.slide.on img{animation:kb 14s ease-out both}
+.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,25,.88),rgba(3,18,31,.55) 50%,rgba(3,18,31,.35) 75%,rgba(3,18,31,.7))}
+.flow path{stroke-dasharray:9 12;animation:dash 4s linear infinite}
+.hctl{position:absolute;left:34px;bottom:14px;display:flex;gap:10px;align-items:center;z-index:3}
+.hctl button{border:0;cursor:pointer}
+.hdots{display:flex;gap:7px}.hdots button{width:10px;height:10px;border-radius:50%;background:#ffffff66;padding:0;transition:.3s;position:relative}
+.hdots button:after{content:"";position:absolute;inset:-10px -4px}.hdots button.on{background:#fff;width:28px;border-radius:6px}
+.harr{width:34px;height:34px;border-radius:50%;background:#ffffff26;color:#fff;font-size:18px}
+.hcap{position:absolute;right:20px;bottom:16px;z-index:3;font-size:12.5px;font-weight:800;background:#071a2bbb;border:1px solid var(--gold);border-radius:99px;padding:6px 14px;color:#fff}
+.quickActions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:16px 24px;background:#071a2b}
+.action{min-height:78px;border-radius:14px;display:flex;align-items:center;gap:14px;color:#fff;padding:10px 16px;border:1px solid #ffffff44;box-shadow:0 8px 22px #0003;transition:transform .25s;cursor:pointer;text-align:left;width:100%}
+.action:hover{transform:translateY(-4px)}
+.action .ai{width:50px;height:50px;display:grid;place-items:center;border-radius:12px;background:#ffffff26;font-size:27px}
+.action b{display:block;font-size:18px}.action small{font-size:12.5px}
+.action:after{content:"→";margin-left:auto;font-size:24px}
+.a1{background:linear-gradient(110deg,#ef233c,#a80c20)}.a2{background:linear-gradient(110deg,#0a6ae6,#06439d)}.a3{background:linear-gradient(110deg,#0bb27a,#04684a)}.a4{background:linear-gradient(110deg,#f5a623,#b86e00);text-decoration:none}
+@keyframes float{50%{transform:translateY(-10px)}}@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.09)}}@keyframes dash{to{stroke-dashoffset:-84}}
+/* directory */
+.wrap{max-width:1500px;margin:auto;padding:18px 24px 28px;scroll-margin-top:70px}
+.disclaimer{margin:0 0 12px;background:#fff3d6;border:1px solid #e0b866;border-radius:8px;padding:8px 14px;font-size:12px;color:#5f4a1a;line-height:1.55}
+.toolbar{display:flex;gap:10px;margin-bottom:12px;align-items:stretch;flex-wrap:wrap}
+.search{flex:0 1 420px;position:relative;min-width:240px}.search span{position:absolute;left:14px;top:11px;font-size:18px}
 .search input{width:100%;height:45px;border:1px solid #c9b28f;border-radius:9px;background:var(--cream2);padding:0 15px 0 42px;font-size:15px;outline:0}
 .search input:focus{border-color:var(--red2);box-shadow:0 0 0 3px rgba(143,16,23,.10)}
-.reset{border:0;border-radius:9px;background:var(--navy);color:white;padding:0 20px;font-weight:700;cursor:pointer}
-.info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;background:#e6d0ad;border:1px solid #d1b58b;border-left:4px solid var(--gold);border-radius:9px;padding:10px 14px;margin-bottom:13px;font-size:13px;line-height:1.5;color:var(--ink)}
+.reset{border:0;border-radius:9px;background:var(--navy);color:#fff;padding:0 20px;font-weight:700;cursor:pointer;min-height:45px}
+.quick-tools{display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:0 18px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14px;box-shadow:var(--shadow);min-height:45px}
+.info{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;background:#e6d0ad;border:1px solid #d1b58b;border-left:4px solid var(--gold);border-radius:9px;padding:10px 14px;margin-bottom:13px;font-size:13px}
 .info b{font-size:15px;color:var(--navy)}
-.section{margin:15px 0 8px;display:flex;align-items:center;gap:9px}
-.section:before{content:"";width:5px;height:23px;border-radius:4px;background:var(--red)}
-.section h2{margin:0;font-size:16px;color:var(--navy)}
-.section small{color:#75664f}
-.section{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;background:#123F5A;color:#FFFFFF;padding:8px 12px;border-radius:10px;box-shadow:0 3px 9px rgba(6,39,68,.20);transition:background .15s}
-.section:hover{background:#0B526F}
-.section:before{display:none}
-.section h2,.section small{color:#fff}
-.section small{opacity:.9}
-.cat-icon{width:46px;height:46px;object-fit:contain;flex-shrink:0}
-.cat-emoji{font-size:30px;line-height:46px;width:46px;text-align:center;flex-shrink:0}
-.cat-info{display:flex;flex-direction:column;gap:3px;min-width:0}
-.cat-top{display:flex;align-items:baseline;column-gap:9px;row-gap:0;flex-wrap:wrap}
-.cat-top h2{line-height:1.25}
-.cat-top small{line-height:1.3}
-.cat-sub{font-size:12px;line-height:1.35;color:#fff;opacity:.85}
-@media(max-width:600px){.cat-sub{font-size:11px}.cat-icon{width:40px;height:40px}.cat-emoji{width:40px;font-size:26px;line-height:40px}}
-.cat-toggle{margin-left:auto;width:32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,0.20);color:#FFFFFF;cursor:pointer;display:grid;place-items:center;font-size:13px;flex-shrink:0}
-.cat-toggle span{display:block;color:#fff;transition:transform .2s}
-.section.is-open .cat-toggle span{transform:rotate(180deg)}
-.grid.collapsed{display:none}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+.section{margin:15px 0 8px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;background:#123F5A;color:#fff;padding:8px 12px;border-radius:10px;box-shadow:0 3px 9px rgba(6,39,68,.20)}
+.section:hover{background:#0B526F}.section h2{margin:0;font-size:16px}.section small{opacity:.9}
+.cat-icon{width:46px;height:46px;object-fit:contain;flex-shrink:0}.cat-emoji{font-size:30px;line-height:46px;width:46px;text-align:center;flex-shrink:0}
+.cat-info{display:flex;flex-direction:column;gap:3px;min-width:0}.cat-top{display:flex;align-items:baseline;column-gap:9px;flex-wrap:wrap}.cat-sub{font-size:12px;opacity:.85}
+.cat-toggle{margin-left:auto;width:32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;cursor:pointer;flex-shrink:0}
+.cat-toggle span{display:block;transition:transform .2s}.section.is-open .cat-toggle span{transform:rotate(180deg)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}.grid.collapsed{display:none}
 .card{background:linear-gradient(105deg,#fffaf1,#f8edda);border:1px solid var(--line);border-radius:11px;min-height:145px;padding:12px 13px;display:grid;grid-template-columns:92px 1fr 135px;align-items:center;gap:13px;box-shadow:var(--shadow);transition:.16s}
-.card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(63,45,24,.16);border-color:#c9a978}
-.logo-box{width:78px;height:78px;border-radius:12px;background:white;border:1px solid #dfd2bd;display:grid;place-items:center;overflow:hidden;margin:auto}
-.logo-box img{max-width:68px;max-height:60px;object-fit:contain}
-.logo-fallback{font-size:35px}
-.text h3{margin:0 0 5px;color:#082e55;font-size:16px;line-height:1.22}
-.text .org{font-size:12px;font-weight:700;color:#6d5739;margin-bottom:4px}
-.text p{margin:0;color:#5f6974;font-size:12px;line-height:1.35}
-.open{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,var(--red2),var(--red));color:white;padding:11px 8px;border-radius:8px;font-weight:800;font-size:12px;box-shadow:0 3px 8px rgba(143,16,23,.22)}
-.open:hover{background:#720b10}
-.empty{text-align:center;padding:40px;color:#6b6257;font-weight:700}
+.card:hover{transform:translateY(-2px);border-color:#c9a978}
+.logo-box{width:78px;height:78px;border-radius:12px;background:#fff;border:1px solid #dfd2bd;display:grid;place-items:center;overflow:hidden;margin:auto}
+.logo-box img{max-width:68px;max-height:60px;object-fit:contain}.logo-fallback{font-size:35px}
+.text h3{margin:0 0 5px;color:#082e55;font-size:16px;line-height:1.22}.text .org{font-size:12px;font-weight:700;color:#6d5739;margin-bottom:4px}.text p{margin:0;color:#5f6974;font-size:12px;line-height:1.35}
 .card-actions{display:flex;flex-direction:column;gap:7px}
-.guide-btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,#0c4a7a,var(--navy));color:white;border:0;padding:10px 8px;border-radius:8px;font-weight:800;font-size:11.5px;cursor:pointer;box-shadow:0 3px 8px rgba(6,39,68,.22)}
-.guide-btn:hover{background:#052038}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,15,25,.62);z-index:999;align-items:flex-start;justify-content:center;padding:26px 14px;overflow-y:auto}
-.modal-overlay.open{display:flex}
-.modal-box{background:var(--cream2);border-radius:14px;max-width:640px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;margin-bottom:30px}
-.modal-head{background:linear-gradient(135deg,var(--navy),#0a416d);color:white;padding:18px 20px;position:relative}
-.modal-head h3{margin:0 26px 0 0;font-size:18px;line-height:1.3}
-.modal-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.15);border:0;color:white;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1}
-.modal-close:hover{background:rgba(255,255,255,.3)}
-.urgency-badge{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.3px}
-.urgency-critical{background:#ffdede;color:#8f1017}
-.urgency-high{background:#ffe6c2;color:#8a4a06}
-.urgency-normal{background:#dcecff;color:#0b365b}
-.modal-body{padding:18px 20px 6px}
-.modal-body h4{margin:14px 0 8px;font-size:13px;color:#6d5739;text-transform:uppercase;letter-spacing:.4px}
+.open,.guide-btn{display:block;text-align:center;text-decoration:none;color:#fff;padding:10px 8px;border-radius:8px;font-weight:800;font-size:12px;border:0;cursor:pointer}
+.open{background:linear-gradient(180deg,var(--red2),var(--red))}.guide-btn{background:linear-gradient(180deg,#0c4a7a,var(--navy))}
+.empty{text-align:center;padding:40px;color:#6b6257;font-weight:700}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,15,25,.62);z-index:999;align-items:flex-start;justify-content:center;padding:26px 14px;overflow-y:auto}.modal-overlay.open{display:flex}
+.modal-box{background:var(--cream2);border-radius:14px;max-width:640px;width:100%;overflow:hidden;margin-bottom:30px}
+.modal-head{background:linear-gradient(135deg,var(--navy),#0a416d);color:#fff;padding:18px 20px;position:relative}.modal-head h3{margin:0 26px 0 0;font-size:18px}
+.modal-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.15);border:0;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer}
+.urgency-badge{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;padding:4px 11px;border-radius:20px}
+.urgency-critical{background:#ffdede;color:#8f1017}.urgency-high{background:#ffe6c2;color:#8a4a06}.urgency-normal{background:#dcecff;color:#0b365b}
+.modal-body{padding:18px 20px 6px}.modal-body h4{margin:14px 0 8px;font-size:13px;color:#6d5739;text-transform:uppercase}
 .steps-list{list-style:none;margin:0;padding:0;counter-reset:step}
-.steps-list li{counter-increment:step;position:relative;padding:8px 0 8px 38px;font-size:14px;line-height:1.5;border-bottom:1px dashed var(--line);color:var(--navy);font-weight:600}
-.steps-list li:last-child{border-bottom:0}
-.steps-list li:before{content:counter(step);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:white;font-weight:800;font-size:12.5px;display:grid;place-items:center}
-.precaution-list{list-style:none;margin:0;padding:0}
-.precaution-list li{padding:6px 0 6px 26px;position:relative;font-size:13.5px;line-height:1.5;color:#5f4a2a}
-.precaution-list li:before{content:"⚠";position:absolute;left:0;top:5px;color:#b51d24}
-.modal-footer{padding:16px 20px 20px;display:flex;gap:10px;flex-wrap:wrap}
-.modal-footer a{flex:1;min-width:180px;text-align:center;text-decoration:none;background:linear-gradient(180deg,var(--red2),var(--red));color:white;padding:13px 10px;border-radius:9px;font-weight:800;font-size:13.5px;box-shadow:0 4px 10px rgba(143,16,23,.25)}
-.modal-footer a:hover{background:#720b10}
-@media(max-width:600px){.modal-head h3{font-size:16px}.modal-body{padding:14px 16px 4px}.modal-footer{padding:14px 16px 18px}}
-.footer{background:var(--navy);color:#c6d4df;padding:0;font-size:11px}
-.footer b{color:white}
+.steps-list li{counter-increment:step;position:relative;padding:8px 0 8px 38px;font-size:14px;border-bottom:1px dashed var(--line);color:var(--navy);font-weight:600}
+.steps-list li:before{content:counter(step);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:12.5px;display:grid;place-items:center}
+.precaution-list{list-style:none;margin:0;padding:0}.precaution-list li{padding:6px 0 6px 26px;position:relative;font-size:13.5px;color:#5f4a2a}.precaution-list li:before{content:"⚠";position:absolute;left:0;color:var(--red2)}
+.gsec{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}.gsec h5{margin:0 0 6px;font-size:15px;color:var(--navy);line-height:1.3}.gwhen{font-size:12.5px;color:#5f4a2a;margin:0 0 8px;line-height:1.5}.gnote{font-size:12.5px;background:#fff3d6;border-left:3px solid var(--gold);padding:7px 10px;margin:8px 0 0;border-radius:6px;color:#5f4a1a}.glink{display:inline-block;margin-top:9px;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(180deg,var(--red2),var(--red));padding:7px 12px;border-radius:7px;text-decoration:none}.gsec .steps-list li{font-size:13px;font-weight:500}.modal-footer{padding:16px 20px 20px}.modal-footer a{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;padding:13px;border-radius:9px;font-weight:800}
+/* footer */
+.footer{background:var(--navy);color:#c6d4df;font-size:11px}
 .footer-inner{max-width:1500px;margin:auto;padding:28px 24px 18px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px}
-.footer-col h4{margin:0 0 10px;color:var(--gold);font-size:13px;letter-spacing:.3px;text-transform:uppercase}
-.footer-col p{margin:0 0 8px;font-size:12.5px;line-height:1.55;color:#c6d4df}
-.footer-col a{color:#dce9f3;text-decoration:none}
-.footer-col a:hover{color:var(--gold);text-decoration:underline}
-.slogan{font-style:italic;color:#f0e2c8!important;border-left:2px solid var(--gold);padding-left:9px}
-.social-links{display:flex;gap:10px}
-.social-links a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:15px;font-weight:700}
-.social-links a:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.12);text-align:center;padding:12px 18px;font-size:11px}
-@media(max-width:760px){.footer-inner{grid-template-columns:1fr;text-align:center}.social-links{justify-content:center}}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.card{grid-template-columns:82px 1fr 125px}.stats{display:none}}
-@media(max-width:600px){
- .header-inner{padding:13px 12px}.gov{font-size:30px}.digital{display:none}.brand h1{font-size:19px}.brand p{font-size:10px}.brand p.sub{font-size:11px}.brand p.tag{font-size:10px}.disclaimer{font-size:10px;padding:6px 10px}
- .wrap{padding:10px 10px 22px}.toolbar{flex-direction:column}.reset{height:42px}.search{flex:1}.quick-tools{height:45px;justify-content:center}
- .card{grid-template-columns:70px 1fr;min-height:150px}.logo-box{width:65px;height:65px}
- .card-actions{grid-column:1/-1;flex-direction:row;gap:8px;margin-top:6px}
- .card-actions .guide-btn,.card-actions .open{flex:1;padding:11px 6px;font-size:12px}
- .text h3{font-size:14px}
-}
-</style>
-</head>
-<body>
-<header class="header">
- <div class="header-inner">
-  <div class="gov">🇮🇳</div>
-  <div class="brand">
-   <h1>Cyber &amp; Digital Investigation Portal Hub</h1>
-   <p>Government • Cyber Crime • Telecom • Social Media • Digital Investigation</p>
-   <p class="sub">A single directory of official reporting and grievance links</p>
-   <div class="disclaimer"><strong>Disclaimer:</strong> Independent reference directory only. Not affiliated with, endorsed by, or connected with the Government of India or any listed entity. All logos, portal names, and trademarks belong to their respective owners and are used solely for informational and navigation purposes. This is not an official government website. We are not responsible for any subsequent changes to the URLs, content, or services of third-party/listed portals. Users should verify the destination and information on the respective official website before submitting any information.</div>
-  </div>
-  <div class="digital"><b>Digital India</b>One Window Access</div>
- </div>
-</header>
+.footer-col h4{margin:0 0 10px;color:var(--gold);font-size:13px;text-transform:uppercase}.footer-col p{margin:0 0 8px;font-size:12.5px;line-height:1.55}
+.footer-col a{color:#dce9f3;text-decoration:none}.slogan{font-style:italic;color:#f0e2c8;border-left:2px solid var(--gold);padding-left:9px}
+.foot-blog{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff!important;padding:9px 14px;border-radius:9px;margin-bottom:12px;max-width:260px;font-size:20px}.foot-blog b{display:block;font-size:14px}.foot-blog small{font-size:11px;opacity:.9}.social-links{display:flex;gap:10px}.social-links a{width:34px;height:34px;border-radius:50%;background:#ffffff14;border:1px solid #ffffff2e;display:grid;place-items:center}
+.visit-pill{display:inline-block;background:#ffffff14;border:1px solid var(--gold);color:#fff;border-radius:99px;padding:6px 16px;font-size:13px}.visit-pill b{color:#ffd45b;font-size:15px;letter-spacing:.5px}.footer-bottom{border-top:1px solid #ffffff1f;text-align:center;padding:12px 18px}.footer-bottom a{color:var(--gold)}
+@media(max-width:1100px){.mbtn{display:block}.nav{display:none;position:absolute;left:0;right:0;top:100%;background:#071a2b;padding:10px;flex-direction:column;align-items:stretch;border-bottom:4px solid var(--gold)}.nav.open{display:flex}.nav a{padding:12px 14px;font-size:14px}}
+@media(max-width:1000px){.heroGrid{grid-template-columns:1fr}.badge,.hcap{display:none}.hctl{left:16px}}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.card{grid-template-columns:82px 1fr 125px}}
+@media(max-width:1100px){.quickActions{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.foot-blog{margin-left:auto;margin-right:auto}.hero{padding:30px 16px 62px}.searchHero{height:50px}.searchHero button{width:92px}.quickActions{grid-template-columns:1fr!important;padding:12px}.footer-inner{grid-template-columns:1fr;text-align:center}.social-links{justify-content:center}}
+@media(max-width:600px){.wrap{padding:10px 10px 22px}.card{grid-template-columns:70px 1fr;min-height:150px}.logo-box{width:65px;height:65px}.card-actions{grid-column:1/-1;flex-direction:row}.card-actions>*{flex:1}.text h3{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head>
+<body id="top">
+<header class="sitehead"><a class="logo" href="#top"><span class="logoIcon"><img src="/favicon.ico" alt="Cyber Portal Hub"></span><span><strong>Cyber Portal Hub</strong><small>India's Digital Safety &amp; Investigation Gateway</small></span></a>
+<button class="mbtn" id="mb" aria-label="Menu" aria-expanded="false">☰</button>
+<nav class="nav" id="nav"><a href="#top">⌂ Home</a><a href="#portals" data-cat="cyber">▣ Report</a><a href="#portals" data-cat="upi">⚑ Financial Fraud</a><a href="#portals" data-cat="social">♧ Social Media</a><a href="#portals" data-cat="gov">▦ Government</a><a href="#portals" data-cat="tools">⚒ Tools</a><a href="/awareness.html">▤ Resources</a><a href="/about.html">ⓘ About</a></nav></header>
 
-<main class="wrap">
+<section class="hero" aria-label="Cyber Portal Hub highlights"><div class="heroSlides" id="heroSlides"></div>
+<div class="heroGrid"><div>
+<div class="eyebrow">INDIA'S DIGITAL SAFETY GATEWAY</div><h1>Stay Safe in the <span>Digital World</span></h1>
+<div class="heroSubline">Need help with <span class="rotating" id="heroRotate">Fraud</span></div>
+<p class="sub">All official cyber reporting portals, grievance services and investigation tools in one place, for citizens, police and cyber professionals.</p>
+<div class="searchHero" role="search"><input id="heroSearch" type="search" placeholder="आपको किस Cyber Service की जरूरत है?" aria-label="Search"><button id="heroSearchBtn">🔍 Search</button></div>
+<div class="popular"><button>Fraud</button><button>Hacked</button><button>Lost Mobile</button><button>UPI</button><button>Fake Profile</button><button>Aadhaar</button></div></div>
+<div class="badge"><div class="shield"><img src="/favicon.ico" alt=""></div><strong id="indiaRotate">सुरक्षित भारत • डिजिटल भारत</strong><span>🇮🇳 Jai Hind</span></div></div>
+<div class="hctl"><button class="harr" id="hPrev" aria-label="Previous">‹</button><div class="hdots" id="heroDots"></div><button class="harr" id="hNext" aria-label="Next">›</button></div><div class="hcap" id="heroCap"></div></section>
+
+<div class="quickActions">
+<button class="action a1" data-cat="cyber"><span class="ai">🚨</span><span><b>Report Cyber Crime</b><small>National Cyber Crime Reporting Portal</small></span></button>
+<button class="action a2" data-cat="upi"><span class="ai">💳</span><span><b>Financial Fraud</b><small>UPI / Bank / Payment Related</small></span></button>
+<button class="action a3" data-view="lost"><span class="ai">📞</span><span><b>Lost / Hacked Mobile</b><small>Track, Block &amp; Report</small></span></button>
+<a class="action a4" href="/quiz.html"><span class="ai">🧠</span><span><b>Cyber Safety Quiz</b><small>Test your cyber awareness</small></span></a></div>
+
+<main class="wrap" id="portals">
+ <div class="disclaimer"><strong>Disclaimer:</strong> Independent reference directory only. Not affiliated with, endorsed by, or connected with the Government of India or any listed entity. Logos, portal names and trademarks belong to their respective owners. This is not an official government website. We are not responsible for changes to third-party URLs, content or services. Verify the destination on the official website before submitting any information.</div>
  <div class="toolbar">
-  <div class="search"><span>🔍</span><input id="search" oninput="apply()" placeholder="Search portal, platform, service or keyword…"></div>
-  <button class="reset" onclick="resetAll()">↺ Reset</button>
-  <a class="quick-tools" href="/tools/"><span class="qicon">🛠️</span><span class="qtext"><b>Other Useful Tools</b><span>APK Scanner &amp; more</span></span></a>
-  <a class="quick-tools" href="/gov-portals.html"><span class="qicon">🏛️</span><span class="qtext"><b>Gov. Portals</b><span>India.gov.in &amp; more</span></span></a>
-  <a class="quick-tools" href="/awareness.html"><span class="qicon">📰</span><span class="qtext"><b>Safety Blogs</b><span>15 awareness guides</span></span></a>
+  <div class="search"><span>🔍</span><input id="search" type="search" placeholder="Search portal, platform, service or keyword…"></div>
+  <button class="reset" id="resetBtn">↺ Reset</button>
+  <a class="quick-tools" href="/tools/">🛠️ Other Useful Tools</a>
+  <a class="quick-tools" href="/gov-portals.html">🏛️ Gov. Portals</a>
  </div>
- <div class="info" role="note">
-   <span><b id="count">48</b> portals &amp; tools listed &nbsp;•&nbsp; Each link opens in a new tab</span>
-   <span><span aria-hidden="true">🔐</span> Verify the web address before entering personal or financial details. Independent directory, not a government website.</span>
- </div>
- <div id="content"><div class="section"><img class="cat-icon" src="cat-upi.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>💳</span>'"><div class="cat-info"><div class="cat-top"><h2>UPI &amp; Online Payment Help</h2><small>— 2 portals</small></div><div class="cat-sub">UPI fraud • Payment complaint • Transaction help</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg" alt="UPI Dispute Redressal Mechanism (Wrong UPI Transaction) logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>UPI Dispute Redressal Mechanism (Wrong UPI Transaction)</h3><div class="org">NPCI • UPI</div><p>UPI Dispute Redressal Mechanism for Wrong UPI Transaction.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('UPI Dispute Redressal Mechanism (Wrong UPI Transaction)','https://www.npci.org.in/upi-complaint')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://www.npci.org.in/upi-complaint" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg" alt="UPI Autopay Mandate Management logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>UPI Autopay Mandate Management</h3><div class="org">NPCI • UPI</div><p>UPI Mandate Management.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('UPI Autopay Mandate Management','https://www.upihelp.npci.org.in/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://www.upihelp.npci.org.in/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-telecom.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>📱</span>'"><div class="cat-info"><div class="cat-top"><h2>Mobile, SIM &amp; Telecom Help</h2><small>— 7 portals</small></div><div class="cat-sub">SIM • Mobile number • Lost phone • Telecom services</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Block Your Lost / Stolen Mobile Handset logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Block Your Lost / Stolen Mobile Handset</h3><div class="org">Sanchar Saathi • CEIR</div><p>Block your lost or stolen mobile handset.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Block Your Lost / Stolen Mobile Handset','https://sancharsaathi.gov.in/Home/ceir-services.jsp')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://sancharsaathi.gov.in/Home/ceir-services.jsp" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="CHAKSHU — Report Suspected Fraud Communication logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>CHAKSHU — Report Suspected Fraud Communication</h3><div class="org">Sanchar Saathi</div><p>Report suspected fraud communication / UCC (spam).</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('CHAKSHU — Report Suspected Fraud Communication','https://sancharsaathi.gov.in/sfc/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://sancharsaathi.gov.in/sfc/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Know Mobile Connections in Your Name logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Know Mobile Connections in Your Name</h3><div class="org">TAFCOP</div><p>Check mobile connections registered in your name.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Know Mobile Connections in Your Name','https://tafcop.sancharsaathi.gov.in/telecomUser/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://tafcop.sancharsaathi.gov.in/telecomUser/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Know Genuineness of Your Mobile Handset logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Know Genuineness of Your Mobile Handset</h3><div class="org">CEIR / Sanchar Saathi</div><p>Check genuineness of a mobile handset (KYM).</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Know Genuineness of Your Mobile Handset','https://ceir.sancharsaathi.gov.in/Device/SancharSaathiKym.jsp')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://ceir.sancharsaathi.gov.in/Device/SancharSaathiKym.jsp" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Report Incoming International Call With Indian Number logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Report Incoming International Call With Indian Number</h3><div class="org">Sanchar Saathi</div><p>Report incoming international calls displaying an Indian number.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Report Incoming International Call With Indian Number','https://sancharsaathi.gov.in/InternationalCall/ReportIntCall.jsp')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://sancharsaathi.gov.in/InternationalCall/ReportIntCall.jsp" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Find Wireline Internet Service Providers (ISPs) logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Find Wireline Internet Service Providers (ISPs)</h3><div class="org">Sanchar Saathi</div><p>Find wireline Internet Service Providers in your area.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Find Wireline Internet Service Providers (ISPs)','https://sancharsaathi.gov.in/KnowYourIsp/display-isps.jsp')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://sancharsaathi.gov.in/KnowYourIsp/display-isps.jsp" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="telecom-saathi-icon.png" alt="Trusted Contact Details logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Trusted Contact Details</h3><div class="org">Sanchar Saathi</div><p>Find trusted contact details of financial institutions and stakeholders.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Trusted Contact Details','https://sancharsaathi.gov.in/FinancialInstitutions/fiHome.jsp')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://sancharsaathi.gov.in/FinancialInstitutions/fiHome.jsp" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-cybercrime.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🛡️</span>'"><div class="cat-info"><div class="cat-top"><h2>Cyber Crime &amp; Online Safety</h2><small>— 8 portals</small></div><div class="cat-sub">Cyber fraud • Online complaint • Safety &amp; reporting</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="National Cyber Crime Reporting Portal (NCRP) logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>National Cyber Crime Reporting Portal (NCRP)</h3><div class="org">National Cyber Crime Reporting Portal</div><p>Report cyber crime online.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('National Cyber Crime Reporting Portal (NCRP)','https://cybercrime.gov.in')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Online Safety TIPS logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Online Safety TIPS</h3><div class="org">National Cyber Crime Reporting Portal</div><p>Cyber safety and prevention guidance.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Report Suspect logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Report Suspect</h3><div class="org">National Cyber Crime Reporting Portal</div><p>Report suspicious cyber-related identifiers, websites or persons.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://cybercrime.gov.in/Webform/cyber_suspect.aspx" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="StopNCII.org logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>StopNCII.org</h3><div class="org">StopNCII</div><p>For non-consensual intimate images/videos.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('StopNCII.org','https://stopncii.org/create-your-case/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://stopncii.org/create-your-case/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Take it Down logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Take it Down</h3><div class="org">NCMEC</div><p>Help remove intimate images or videos taken before you turned 18 and shared online without your consent.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Take it Down','https://takeitdown.ncmec.org/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://takeitdown.ncmec.org/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Remove Personal Content from Google Search logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Remove Personal Content from Google Search</h3><div class="org">Google Search</div><p>Request to have your personal content removed from Google Search.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Remove Personal Content from Google Search','https://support.google.com/websearch/answer/3143948')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://support.google.com/websearch/answer/3143948" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Remove Intimate Images From Google logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Remove Intimate Images From Google</h3><div class="org">Google</div><p>Request to remove intimate images from Google.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Remove Intimate Images From Google','https://support.google.com/legal/contact/lr_idmec')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://support.google.com/legal/contact/lr_idmec" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="cyber-crime-safety-icon.png" alt="Secure Your Mobile logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>Secure Your Mobile</h3><div class="org">M-Kavach App</div><p>Install The APP Run &amp; Remove APK From your Mobile.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://play.google.com/store/apps/details?id=org.cdac.updatemkavach" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-gov.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🏛️</span>'"><div class="cat-info"><div class="cat-top"><h2>Government Services &amp; ID Help</h2><small>— 4 portals</small></div><div class="cat-sub">Aadhaar • Government services • Identity-related help</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://gac.gov.in/assets/img/logoOuter.png" alt="File an Appeal With GAC logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>File an Appeal With GAC</h3><div class="org">Grievance Appellate Committee</div><p>File an appeal / grievance with GAC.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('File an Appeal With GAC','https://gac.gov.in/home/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://gac.gov.in/home/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=consumerhelpline.gov.in&amp;sz=128" alt="Consumer help line logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/consumerhelpline.gov.in.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📢</span>')}"></div>
-      <div class="text"><h3>Consumer help line</h3><div class="org">consumer help line 1915</div><p>Jago Grahak Jago.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Consumer help line','https://consumerhelpline.gov.in/public/')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://consumerhelpline.gov.in/public/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Reserve_Bank_of_India_logo.svg" alt="RBI Complaints / Grievance Redressal (14448) logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>
-      <div class="text"><h3>RBI Complaints / Grievance Redressal (14448)</h3><div class="org">Reserve Bank of India</div><p>File a complaint or grievance with the RBI Ombudsman.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('RBI Complaints / Grievance Redressal (14448)','https://rbi.org.in/Scripts/Complaints.aspx')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://rbi.org.in/Scripts/Complaints.aspx" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=uidai.gov.in&amp;sz=128" alt="Lock / Unlock Biometrics logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/uidai.gov.in.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔐</span>')}"></div>
-      <div class="text"><h3>Lock / Unlock Biometrics</h3><div class="org">UIDAI / myAadhaar</div><p>Lock or unlock Aadhaar biometrics.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('Lock / Unlock Biometrics','https://myaadhaarbeta.uidai.gov.in/lock-unlock-biometrics/en')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://myaadhaarbeta.uidai.gov.in/lock-unlock-biometrics/en" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-social.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🌐</span>'"><div class="cat-info"><div class="cat-top"><h2>Social Media &amp; Account Help</h2><small>— 11 portals</small></div><div class="cat-sub">Facebook • Instagram • YouTube • Account complaints</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=whatsapp.com&amp;sz=128" alt="WHATSAPP INDIA GRIEVANCE CHANNEL logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/whatsapp.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🟢</span>')}"></div>
-      <div class="text"><h3>WHATSAPP INDIA GRIEVANCE CHANNEL</h3><div class="org">WhatsApp</div><p>Report issues and file a grievance with WhatsApp India.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('WHATSAPP INDIA GRIEVANCE CHANNEL','https://www.whatsapp.com/contact/forms/1534459096974129?lang=')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://www.whatsapp.com/contact/forms/1534459096974129?lang=" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=x.com&amp;sz=128" alt="X ACCOUNT ACCESS / HACKED ACCOUNT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/x.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>𝕏</span>')}"></div>
-      <div class="text"><h3>X ACCOUNT ACCESS / HACKED ACCOUNT</h3><div class="org">X</div><p>Help for hacked or compromised X accounts.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.x.com/en/forms/account-access/regain-access/hacked-or-compromised" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=instagram.com&amp;sz=128" alt="INSTAGRAM / THREADS IMPERSONATION logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/instagram.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📷</span>')}"></div>
-      <div class="text"><h3>INSTAGRAM / THREADS IMPERSONATION</h3><div class="org">Instagram / Threads</div><p>Report an impersonation account.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('INSTAGRAM / THREADS IMPERSONATION','https://help.instagram.com/contact/636276399721841')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://help.instagram.com/contact/636276399721841" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=facebook.com&amp;sz=128" alt="FACEBOOK IMPOSTOR / OTHER ISSUE logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/facebook.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>ⓕ</span>')}"></div>
-      <div class="text"><h3>FACEBOOK IMPOSTOR / OTHER ISSUE</h3><div class="org">Facebook</div><p>Report an impostor or other account issue.</p></div>
-      <div class="card-actions">
-        <button class="guide-btn" onclick="openGuide('FACEBOOK IMPOSTOR / OTHER ISSUE','https://www.facebook.com/help/contact/295309487309948')">📋 क्या करें? Step Guide</button>
-        <a class="open" href="https://www.facebook.com/help/contact/295309487309948" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=youtube.com&amp;sz=128" alt="RECOVER A HACKED YOUTUBE CHANNEL logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/youtube.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>▶️</span>')}"></div>
-      <div class="text"><h3>RECOVER A HACKED YOUTUBE CHANNEL</h3><div class="org">YouTube</div><p>Help for hacked or compromised YouTube channels.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://support.google.com/youtube/answer/76187" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&amp;sz=128" alt="REPORT A COMPROMISED LINKEDIN ACCOUNT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/linkedin.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>in</span>')}"></div>
-      <div class="text"><h3>REPORT A COMPROMISED LINKEDIN ACCOUNT</h3><div class="org">LinkedIn</div><p>Help for a hacked or compromised LinkedIn account.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.linkedin.com/help/linkedin/answer/a1340402" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=snapchat.com&amp;sz=128" alt="HACKED / COMPROMISED SNAPCHAT ACCOUNT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/snapchat.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>👻</span>')}"></div>
-      <div class="text"><h3>HACKED / COMPROMISED SNAPCHAT ACCOUNT</h3><div class="org">Snapchat</div><p>Help for a compromised Snapchat account.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.snapchat.com/hc/en-us/articles/7012305621908-My-account-is-compromised" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=telegram.org&amp;sz=128" alt="TELEGRAM SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/telegram.org.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>✈️</span>')}"></div>
-      <div class="text"><h3>TELEGRAM SUPPORT</h3><div class="org">Telegram</div><p>Contact Telegram support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://telegram.org/support" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=reddit.com&amp;sz=128" alt="REDDIT HELP / SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/reddit.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>👽</span>')}"></div>
-      <div class="text"><h3>REDDIT HELP / SUPPORT</h3><div class="org">Reddit</div><p>Redditor Help Center and support resources.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://support.reddithelp.com/hc/en-us/p/redditor_help_center" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=pinterest.com&amp;sz=128" alt="REPORT SOMETHING ON PINTEREST logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/pinterest.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📌</span>')}"></div>
-      <div class="text"><h3>REPORT SOMETHING ON PINTEREST</h3><div class="org">Pinterest</div><p>Report content or other issues on Pinterest.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.pinterest.com/en/article/report-something-on-pinterest" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=discord.com&amp;sz=128" alt="DISCORD SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/discord.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🎮</span>')}"></div>
-      <div class="text"><h3>DISCORD SUPPORT</h3><div class="org">Discord</div><p>Official Discord help centre for account and safety issues.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://support.discord.com/hc/en-us" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-shopping.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🛒</span>'"><div class="cat-info"><div class="cat-top"><h2>Online Shopping &amp; E-Commerce Help</h2><small>— 6 portals</small></div><div class="cat-sub">Shopping fraud • Order issues • Consumer complaints</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=flipkart.com&amp;sz=128" alt="FLIPKART HELP CENTER logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/flipkart.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🛒</span>')}"></div>
-      <div class="text"><h3>FLIPKART HELP CENTER</h3><div class="org">Flipkart</div><p>Customer support and help center.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.flipkart.com/helpcentre" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=amazon.in&amp;sz=128" alt="AMAZON INDIA logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/amazon.in.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📦</span>')}"></div>
-      <div class="text"><h3>AMAZON INDIA</h3><div class="org">Amazon India</div><p>Customer service and order/account support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.amazon.in/gp/help/customer/display.html" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=myntra.com&amp;sz=128" alt="MYNTRA logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/myntra.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>👗</span>')}"></div>
-      <div class="text"><h3>MYNTRA</h3><div class="org">Myntra</div><p>Customer support and contact resources.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.myntra.com/contactus" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=meesho.com&amp;sz=128" alt="MEESHO logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/meesho.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🛍️</span>')}"></div>
-      <div class="text"><h3>MEESHO</h3><div class="org">Meesho</div><p>Help and customer support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.meesho.com/help" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=ajio.com&amp;sz=128" alt="AJIO logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/ajio.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>👚</span>')}"></div>
-      <div class="text"><h3>AJIO</h3><div class="org">AJIO</div><p>Help and customer support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.ajio.com/help" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=snapdeal.com&amp;sz=128" alt="SNAPDEAL logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/snapdeal.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📦</span>')}"></div>
-      <div class="text"><h3>SNAPDEAL</h3><div class="org">Snapdeal</div><p>Help center and customer support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.snapdeal.com/help" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-cab.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🚕</span>'"><div class="cat-info"><div class="cat-top"><h2>Cab, Ride &amp; Transport Help</h2><small>— 3 portals</small></div><div class="cat-sub">Cab • Ride • Booking • Service complaints</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=olacabs.com&amp;sz=128" alt="OLA SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/olacabs.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🚕</span>')}"></div>
-      <div class="text"><h3>OLA SUPPORT</h3><div class="org">Ola</div><p>Ola support center.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.olacabs.com/support/home" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=uber.com&amp;sz=128" alt="UBER CUSTOMER SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/uber.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🚗</span>')}"></div>
-      <div class="text"><h3>UBER CUSTOMER SUPPORT</h3><div class="org">Uber</div><p>India rider customer support.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.uber.com/riders/article/india-customer-support?nodeId=9de54d31-c25e-4020-8873-62a3165b2bfd" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=rapido.bike&amp;sz=128" alt="RAPIDO SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/rapido.bike.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🏍️</span>')}"></div>
-      <div class="text"><h3>RAPIDO SUPPORT</h3><div class="org">Rapido</div><p>Rapido support and service information.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.rapido.bike/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-food.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🍔</span>'"><div class="cat-info"><div class="cat-top"><h2>Food Delivery Help</h2><small>— 2 portals</small></div><div class="cat-sub">Order issues • Refunds • Delivery complaints</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=swiggy.com&amp;sz=128" alt="SWIGGY HELP &amp; SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/swiggy.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🍔</span>')}"></div>
-      <div class="text"><h3>SWIGGY HELP &amp; SUPPORT</h3><div class="org">Swiggy</div><p>Help and support for orders and accounts.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.swiggy.com/support" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=zomato.com&amp;sz=128" alt="ZOMATO SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/zomato.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🍕</span>')}"></div>
-      <div class="text"><h3>ZOMATO SUPPORT</h3><div class="org">Zomato</div><p>Customer support and contact resources.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.zomato.com/contact" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-marketplace.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🛍️</span>'"><div class="cat-info"><div class="cat-top"><h2>Online Marketplace Help</h2><small>— 2 portals</small></div><div class="cat-sub">OLX • Marketplace • Buyer &amp; seller complaints</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=olx.in&amp;sz=128" alt="OLX HELP CENTER logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/olx.in.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📋</span>')}"></div>
-      <div class="text"><h3>OLX HELP CENTER</h3><div class="org">OLX</div><p>Help center and reporting/support resources.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://help.olx.in/hc/en-us" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=quikr.com&amp;sz=128" alt="QUIKR SUPPORT logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/quikr.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🗂️</span>')}"></div>
-      <div class="text"><h3>QUIKR SUPPORT</h3><div class="org">Quikr</div><p>Quikr support and service information.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://www.quikr.com/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div><div class="section"><img class="cat-icon" src="cat-tools.png" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>🛠️</span>'"><div class="cat-info"><div class="cat-top"><h2>Cyber &amp; Investigation Tools</h2><small>— 3 portals</small></div><div class="cat-sub">OSINT • Forensics • Cyber security tools</div></div></div><div class="grid"><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=cyberportalhub.org&amp;sz=128" alt="Android APK Scanner logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/cyberportalhub.org.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔍</span>')}"></div>
-      <div class="text"><h3>Android APK Scanner</h3><div class="org">Cyber Portal Hub Tools</div><p>Static analysis of Android APKs — permissions, indicators, signing info — right in your browser, no install needed.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="/tools/scan.html" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=cyberportalhub.org&amp;sz=128" alt="All Type Zip Extractor logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/cyberportalhub.org.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>📦</span>')}"></div>
-      <div class="text"><h3>All Type Zip Extractor</h3><div class="org">Cyber Portal Hub Tools</div><p>Open ZIP, RAR, 7z, TAR, GZ and many more archive formats in your browser, including password-protected ones. Nothing is uploaded.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="/tools/zip-extractor.html" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article><article class="card">
-      <div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=globe.adsbexchange.com&amp;sz=128" alt="LIVE AIR TRAFFIC logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/globe.adsbexchange.com.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>✈️</span>')}"></div>
-      <div class="text"><h3>LIVE AIR TRAFFIC</h3><div class="org">ADS-B Exchange</div><p>Live aircraft traffic map.</p></div>
-      <div class="card-actions">
-        
-        <a class="open" href="https://globe.adsbexchange.com/" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article></div></div>
- <div id="empty" class="empty" style="display:none"></div>
+ <div class="info" role="note"><span><b id="count">0</b> portals &amp; tools listed • Each link opens in a new tab</span><span>🔐 Verify the web address before entering personal or financial details.</span></div>
+ <div id="content"></div><div id="empty" class="empty" style="display:none"></div>
+ <div style="text-align:center;margin-top:10px"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1448557659666187" data-ad-slot="1881700443" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 </main>
 
-<div class="modal-overlay" id="guideModal" onclick="if(event.target===this)closeGuide()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <button class="modal-close" onclick="closeGuide()" aria-label="Close">✕</button>
-      <h3 id="guideTitle"></h3>
-      <span class="urgency-badge" id="guideUrgency"></span>
-    </div>
-    <div class="modal-body">
-      <h4>क्या करें — Step by Step</h4>
-      <ol class="steps-list" id="guideSteps"></ol>
-      <h4 id="guidePrecautionsHeading">ज़रूरी सावधानियाँ</h4>
-      <ul class="precaution-list" id="guidePrecautions"></ul>
-    </div>
-    <div class="modal-footer">
-      <a id="guideLink" href="#" target="_blank" rel="noopener noreferrer">🔗 Official Portal पर जाएँ</a>
-    </div>
-  </div>
-</div>
-<div class="ad-slot" style="max-width:1500px;margin:10px auto 0;padding:0 24px;text-align:center">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-1448557659666187"
-       data-ad-slot="1881700443"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <h4>About</h4>
-      <p>India Cyber Portal Hub is an independently compiled information directory that brings together official grievance, complaint, and reporting channels for cyber crime, telecom, banking, digital payments, social media, e-commerce, and other commonly used government and private-sector services in India — all in one convenient place. It is not a Government of India website or official authority, and does not itself receive, investigate, or process any complaint. Always verify details and submit sensitive information only on the respective official website.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <p><a href="mailto:support@cyberportalhub.org">📧 support@cyberportalhub.org</a></p>
-      <p class="slogan" id="dailySlogan">💡 Think before you click — verify before you trust.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Follow &amp; Connect</h4>
-      <div class="social-links">
-        <a href="#top" aria-label="India Cyber Portal Hub" title="India Cyber Portal Hub">🇮🇳</a>
-        <a href="https://www.facebook.com/cybercrimepolicestationuttarakhand" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">ⓕ</a>
-        <a href="https://www.youtube.com/@cyberportalhub" target="_blank" rel="noopener noreferrer" aria-label="Youtube" title="Youtube">▶️</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom"><b>India Cyber Portal Hub</b> • Independently compiled quick-access directory • Not affiliated with the Government of India or any listed platform • Use official websites and support channels
-    <div style="font-size:10.5px;color:#a0b2c6;margin-top:8px;max-width:1000px;margin-left:auto;margin-right:auto;line-height:1.55;">
-      <strong>Disclaimer:</strong> This website is an independent information reference directory designed to assist users in locating official public grievance and support channels. We are not affiliated with, authorized by, or associated with any Government entity or private platform. All logos, names, and trademarks belong to their respective owners.
-    </div>
-    <br><a href="/privacy.html" style="color:var(--gold)">Privacy Policy</a> &nbsp;•&nbsp; <a href="/contact.html" style="color:var(--gold)">Contact Us</a> &nbsp;•&nbsp; <a href="/about.html" style="color:var(--gold)">About Us</a> &nbsp;•&nbsp; <a href="/tools/" style="color:var(--gold)">Tools</a> &nbsp;•&nbsp; <a href="/awareness.html" style="color:var(--gold)">Safety Blogs</a></div>
-</footer>
+<div class="modal-overlay" id="guideModal"><div class="modal-box">
+ <div class="modal-head"><button class="modal-close" id="gClose" aria-label="Close">✕</button><h3 id="guideTitle"></h3><span class="urgency-badge" id="guideUrgency"></span></div>
+ <div class="modal-body"><h4 id="guideStepsHeading">क्या करें — Step by Step</h4><ol class="steps-list" id="guideSteps"></ol><div id="guideSections"></div><h4 id="guidePrecautionsHeading">ज़रूरी सावधानियाँ</h4><ul class="precaution-list" id="guidePrecautions"></ul></div>
+ <div class="modal-footer"><a id="guideLink" href="#" target="_blank" rel="noopener noreferrer">🔗 Official Portal पर जाएँ</a></div></div></div>
+
+<footer class="footer"><div class="footer-inner">
+ <div class="footer-col"><h4>About</h4><p>India Cyber Portal Hub is an independently compiled directory of official grievance, complaint and reporting channels for cyber crime, telecom, banking, payments, social media and e-commerce in India. It is not a Government of India website and does not itself receive or process any complaint. Always submit sensitive information only on the respective official website.</p></div>
+ <div class="footer-col"><h4>Contact</h4><p><a href="mailto:support@cyberportalhub.org">📧 support@cyberportalhub.org</a></p><p class="slogan" id="dailySlogan"></p></div>
+ <div class="footer-col"><h4>Follow &amp; Connect</h4><a class="foot-blog" href="/awareness.html"><span>📰</span><span><b>Safety Blogs</b><small>15 awareness guides</small></span></a><div class="social-links"><a href="#top" aria-label="Home">🇮🇳</a><a href="https://www.facebook.com/cybercrimepolicestationuttarakhand" target="_blank" rel="noopener noreferrer" aria-label="Facebook">ⓕ</a><a href="https://www.youtube.com/@cyberportalhub" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶️</a></div></div></div>
+ <div class="footer-bottom"><div class="visit" style="margin-bottom:10px"><span class="visit-pill">👁️ Total Visitors: <b id="visitCount">…</b></span></div><b>India Cyber Portal Hub</b> • Not affiliated with the Government of India or any listed platform<br><br><a href="/privacy.html">Privacy Policy</a> • <a href="/contact.html">Contact Us</a> • <a href="/about.html">About Us</a> • <a href="/tools/">Tools</a> • <a href="/awareness.html">Safety Blogs</a></div></footer>
 
 <script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+/* ===== DATA: [category, title, org, description, link, icon] ===== */
 const P=[
-["UPI Related Complaints Portal", "https://www.npci.org.in/", "UPI Dispute Redressal Mechanism (Wrong UPI Transaction)", "NPCI • UPI", "UPI Dispute Redressal Mechanism for Wrong UPI Transaction.", "https://www.npci.org.in/upi-complaint", "https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg"],
-["UPI Related Complaints Portal", "https://www.npci.org.in/", "UPI Autopay Mandate Management", "NPCI • UPI", "UPI Mandate Management.", "https://www.upihelp.npci.org.in/", "https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Block Your Lost / Stolen Mobile Handset", "Sanchar Saathi • CEIR", "Block your lost or stolen mobile handset.", "https://sancharsaathi.gov.in/Home/ceir-services.jsp", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "CHAKSHU — Report Suspected Fraud Communication", "Sanchar Saathi", "Report suspected fraud communication / UCC (spam).", "https://sancharsaathi.gov.in/sfc/", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Know Mobile Connections in Your Name", "TAFCOP", "Check mobile connections registered in your name.", "https://tafcop.sancharsaathi.gov.in/telecomUser/", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Know Genuineness of Your Mobile Handset", "CEIR / Sanchar Saathi", "Check genuineness of a mobile handset (KYM).", "https://ceir.sancharsaathi.gov.in/Device/SancharSaathiKym.jsp", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Report Incoming International Call With Indian Number", "Sanchar Saathi", "Report incoming international calls displaying an Indian number.", "https://sancharsaathi.gov.in/InternationalCall/ReportIntCall.jsp", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Find Wireline Internet Service Providers (ISPs)", "Sanchar Saathi", "Find wireline Internet Service Providers in your area.", "https://sancharsaathi.gov.in/KnowYourIsp/display-isps.jsp", "telecom-saathi-icon.png"],
-["Telecom & Sanchar Saathi Portal", "https://sancharsaathi.gov.in", "Trusted Contact Details", "Sanchar Saathi", "Find trusted contact details of financial institutions and stakeholders.", "https://sancharsaathi.gov.in/FinancialInstitutions/fiHome.jsp", "telecom-saathi-icon.png"],
-["Cyber Crime & Safety", "https://cybercrime.gov.in", "National Cyber Crime Reporting Portal (NCRP)", "National Cyber Crime Reporting Portal", "Report cyber crime online.", "https://cybercrime.gov.in", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://cybercrime.gov.in", "Online Safety TIPS", "National Cyber Crime Reporting Portal", "Cyber safety and prevention guidance.", "https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://cybercrime.gov.in", "Report Suspect", "National Cyber Crime Reporting Portal", "Report suspicious cyber-related identifiers, websites or persons.", "https://cybercrime.gov.in/Webform/cyber_suspect.aspx", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://stopncii.org", "StopNCII.org", "StopNCII", "For non-consensual intimate images/videos.", "https://stopncii.org/create-your-case/", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://takeitdown.ncmec.org", "Take it Down", "NCMEC", "Help remove intimate images or videos taken before you turned 18 and shared online without your consent.", "https://takeitdown.ncmec.org/", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://www.google.com", "Remove Personal Content from Google Search", "Google Search", "Request to have your personal content removed from Google Search.", "https://support.google.com/websearch/answer/3143948", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://www.google.com", "Remove Intimate Images From Google", "Google", "Request to remove intimate images from Google.", "https://support.google.com/legal/contact/lr_idmec", "cyber-crime-safety-icon.png"],
-["Cyber Crime & Safety", "https://play.google.com/store/apps/details?id=org.cdac.updatemkavach", "Secure Your Mobile", "M-Kavach App", "Install The APP Run & Remove APK From your Mobile.", "https://play.google.com/store/apps/details?id=org.cdac.updatemkavach", "cyber-crime-safety-icon.png"],
-["Government & Identity", "https://gac.gov.in", "File an Appeal With GAC", "Grievance Appellate Committee", "File an appeal / grievance with GAC.", "https://gac.gov.in/home/", "https://gac.gov.in/assets/img/logoOuter.png"],
-["Government & Identity", "https://consumerhelpline.gov.in", "Consumer help line", "consumer help line 1915", "Jago Grahak Jago.", "https://consumerhelpline.gov.in/public/", "📢"],
-["Government & Identity", "https://rbi.org.in", "RBI Complaints / Grievance Redressal (14448)", "Reserve Bank of India", "File a complaint or grievance with the RBI Ombudsman.", "https://rbi.org.in/Scripts/Complaints.aspx", "https://commons.wikimedia.org/wiki/Special:FilePath/Reserve_Bank_of_India_logo.svg"],
-["Government & Identity", "https://uidai.gov.in", "Lock / Unlock Biometrics", "UIDAI / myAadhaar", "Lock or unlock Aadhaar biometrics.", "https://myaadhaarbeta.uidai.gov.in/lock-unlock-biometrics/en", "🔐"],
-["Social Media & Platforms", "https://www.whatsapp.com", "WHATSAPP INDIA GRIEVANCE CHANNEL", "WhatsApp", "Report issues and file a grievance with WhatsApp India.", "https://www.whatsapp.com/contact/forms/1534459096974129?lang=", "🟢"],
-["Social Media & Platforms", "https://x.com", "X ACCOUNT ACCESS / HACKED ACCOUNT", "X", "Help for hacked or compromised X accounts.", "https://help.x.com/en/forms/account-access/regain-access/hacked-or-compromised", "𝕏"],
-["Social Media & Platforms", "https://www.instagram.com", "INSTAGRAM / THREADS IMPERSONATION", "Instagram / Threads", "Report an impersonation account.", "https://help.instagram.com/contact/636276399721841", "📷"],
-["Social Media & Platforms", "https://www.facebook.com", "FACEBOOK IMPOSTOR / OTHER ISSUE", "Facebook", "Report an impostor or other account issue.", "https://www.facebook.com/help/contact/295309487309948", "ⓕ"],
-["Social Media & Platforms", "https://www.youtube.com", "RECOVER A HACKED YOUTUBE CHANNEL", "YouTube", "Help for hacked or compromised YouTube channels.", "https://support.google.com/youtube/answer/76187", "▶️"],
-["Social Media & Platforms", "https://www.linkedin.com", "REPORT A COMPROMISED LINKEDIN ACCOUNT", "LinkedIn", "Help for a hacked or compromised LinkedIn account.", "https://www.linkedin.com/help/linkedin/answer/a1340402", "in"],
-["Social Media & Platforms", "https://www.snapchat.com", "HACKED / COMPROMISED SNAPCHAT ACCOUNT", "Snapchat", "Help for a compromised Snapchat account.", "https://help.snapchat.com/hc/en-us/articles/7012305621908-My-account-is-compromised", "👻"],
-["Social Media & Platforms", "https://telegram.org", "TELEGRAM SUPPORT", "Telegram", "Contact Telegram support.", "https://telegram.org/support", "✈️"],
-["Social Media & Platforms", "https://www.reddit.com", "REDDIT HELP / SUPPORT", "Reddit", "Redditor Help Center and support resources.", "https://support.reddithelp.com/hc/en-us/p/redditor_help_center", "👽"],
-["Social Media & Platforms", "https://www.pinterest.com", "REPORT SOMETHING ON PINTEREST", "Pinterest", "Report content or other issues on Pinterest.", "https://help.pinterest.com/en/article/report-something-on-pinterest", "📌"],
-["Social Media & Platforms", "https://discord.com", "DISCORD SUPPORT", "Discord", "Official Discord help centre for account and safety issues.", "https://support.discord.com/hc/en-us", "🎮"],
-["E-Commerce / Shopping", "https://www.flipkart.com", "FLIPKART HELP CENTER", "Flipkart", "Customer support and help center.", "https://www.flipkart.com/helpcentre", "🛒"],
-["E-Commerce / Shopping", "https://www.amazon.in", "AMAZON INDIA", "Amazon India", "Customer service and order/account support.", "https://www.amazon.in/gp/help/customer/display.html", "📦"],
-["E-Commerce / Shopping", "https://www.myntra.com", "MYNTRA", "Myntra", "Customer support and contact resources.", "https://www.myntra.com/contactus", "👗"],
-["E-Commerce / Shopping", "https://www.meesho.com", "MEESHO", "Meesho", "Help and customer support.", "https://www.meesho.com/help", "🛍️"],
-["E-Commerce / Shopping", "https://www.ajio.com", "AJIO", "AJIO", "Help and customer support.", "https://www.ajio.com/help", "👚"],
-["E-Commerce / Shopping", "https://www.snapdeal.com", "SNAPDEAL", "Snapdeal", "Help center and customer support.", "https://www.snapdeal.com/help", "📦"],
-["Cab / Ride / Mobility", "https://www.olacabs.com", "OLA SUPPORT", "Ola", "Ola support center.", "https://help.olacabs.com/support/home", "🚕"],
-["Cab / Ride / Mobility", "https://www.uber.com", "UBER CUSTOMER SUPPORT", "Uber", "India rider customer support.", "https://help.uber.com/riders/article/india-customer-support?nodeId=9de54d31-c25e-4020-8873-62a3165b2bfd", "🚗"],
-["Cab / Ride / Mobility", "https://www.rapido.bike", "RAPIDO SUPPORT", "Rapido", "Rapido support and service information.", "https://www.rapido.bike/", "🏍️"],
-["Food Delivery", "https://www.swiggy.com", "SWIGGY HELP & SUPPORT", "Swiggy", "Help and support for orders and accounts.", "https://www.swiggy.com/support", "🍔"],
-["Food Delivery", "https://www.zomato.com", "ZOMATO SUPPORT", "Zomato", "Customer support and contact resources.", "https://www.zomato.com/contact", "🍕"],
-["Classified / Marketplace", "https://www.olx.in", "OLX HELP CENTER", "OLX", "Help center and reporting/support resources.", "https://help.olx.in/hc/en-us", "📋"],
-["Classified / Marketplace", "https://www.quikr.com", "QUIKR SUPPORT", "Quikr", "Quikr support and service information.", "https://www.quikr.com/", "🗂️"],
-["Other Useful Tools", "/tools/", "Android APK Scanner", "Cyber Portal Hub Tools", "Static analysis of Android APKs — permissions, indicators, signing info — right in your browser, no install needed.", "/tools/scan.html", "🔍"],
-["Other Useful Tools", "/tools/", "All Type Zip Extractor", "Cyber Portal Hub Tools", "Open ZIP, RAR, 7z, TAR, GZ and many more archive formats in your browser, including password-protected ones. Nothing is uploaded.", "/tools/zip-extractor.html", "📦"],
-["Other Useful Tools", "https://globe.adsbexchange.com", "LIVE AIR TRAFFIC", "ADS-B Exchange", "Live aircraft traffic map.", "https://globe.adsbexchange.com/", "✈️"]
+["UPI Related Complaints Portal","UPI Dispute Redressal Mechanism (Wrong UPI Transaction)","NPCI • UPI","UPI Dispute Redressal Mechanism for Wrong UPI Transaction.","https://www.npci.org.in/upi-complaint","https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg"],
+["UPI Related Complaints Portal","UPI Autopay Mandate Management","NPCI • UPI","UPI Mandate Management.","https://www.upihelp.npci.org.in/","https://commons.wikimedia.org/wiki/Special:FilePath/UPI_logo.svg"],
+["Cyber Crime & Safety","National Cyber Crime Reporting Portal (NCRP)","National Cyber Crime Reporting Portal","Report cyber crime online.","https://cybercrime.gov.in","cyber-crime-safety-icon.png"],
+["Cyber Crime & Safety","Sanchar Saathi","Department of Telecommunications","Block lost/stolen phones, report fraud calls (Chakshu) and check mobile connections in your name.","https://sancharsaathi.gov.in/","telecom-saathi-icon.png"],
+["Cyber Crime & Safety","Block Your Lost / Stolen Mobile Handset","Sanchar Saathi • CEIR","Block your lost or stolen mobile handset.","https://sancharsaathi.gov.in/Home/ceir-services.jsp","telecom-saathi-icon.png",1],
+["Cyber Crime & Safety","StopNCII.org","StopNCII","For non-consensual intimate images/videos.","https://stopncii.org/create-your-case/","cyber-crime-safety-icon.png"],
+["Cyber Crime & Safety","Take it Down","NCMEC","Help remove intimate images or videos taken before you turned 18 and shared online without your consent.","https://takeitdown.ncmec.org/","cyber-crime-safety-icon.png"],
+["Cyber Crime & Safety","Remove Personal Content from Google Search","Google Search","Request to have your personal content removed from Google Search.","https://support.google.com/websearch/answer/3143948","cyber-crime-safety-icon.png"],
+["Cyber Crime & Safety","Remove Intimate Images From Google","Google","Request to remove intimate images from Google.","https://support.google.com/legal/contact/lr_idmec","cyber-crime-safety-icon.png"],
+["Cyber Crime & Safety","Secure Your Mobile","M-Kavach App","Install The APP Run & Remove APK From your Mobile.","https://play.google.com/store/apps/details?id=org.cdac.updatemkavach","cyber-crime-safety-icon.png"],
+["Government & Identity","File an Appeal With GAC","Grievance Appellate Committee","File an appeal / grievance with GAC.","https://gac.gov.in/home/","https://gac.gov.in/assets/img/logoOuter.png"],
+["Government & Identity","Consumer help line","consumer help line 1915","Jago Grahak Jago.","https://consumerhelpline.gov.in/public/","📢"],
+["Government & Identity","RBI Complaints / Grievance Redressal (14448)","Reserve Bank of India","File a complaint or grievance with the RBI Ombudsman.","https://rbi.org.in/Scripts/Complaints.aspx","https://commons.wikimedia.org/wiki/Special:FilePath/Reserve_Bank_of_India_logo.svg"],
+["Government & Identity","Lock / Unlock Biometrics","UIDAI / myAadhaar","Lock or unlock Aadhaar biometrics.","https://myaadhaarbeta.uidai.gov.in/lock-unlock-biometrics/en","🔐"],
+["Social Media & Platforms","WHATSAPP INDIA GRIEVANCE CHANNEL","WhatsApp","Report issues and file a grievance with WhatsApp India.","https://www.whatsapp.com/contact/forms/1534459096974129?lang=","🟢"],
+["Social Media & Platforms","X ACCOUNT ACCESS / HACKED ACCOUNT","X","Help for hacked or compromised X accounts.","https://help.x.com/en/forms/account-access/regain-access/hacked-or-compromised","𝕏"],
+["Social Media & Platforms","INSTAGRAM / THREADS IMPERSONATION","Instagram / Threads","Report an impersonation account.","https://help.instagram.com/contact/636276399721841","📷"],
+["Social Media & Platforms","FACEBOOK IMPOSTOR / OTHER ISSUE","Facebook","Report an impostor or other account issue.","https://www.facebook.com/help/contact/295309487309948","ⓕ"],
+["Social Media & Platforms","RECOVER A HACKED YOUTUBE CHANNEL","YouTube","Help for hacked or compromised YouTube channels.","https://support.google.com/youtube/answer/76187","▶️"],
+["Social Media & Platforms","REPORT A COMPROMISED LINKEDIN ACCOUNT","LinkedIn","Help for a hacked or compromised LinkedIn account.","https://www.linkedin.com/help/linkedin/answer/a1340402","in"],
+["Social Media & Platforms","HACKED / COMPROMISED SNAPCHAT ACCOUNT","Snapchat","Help for a compromised Snapchat account.","https://help.snapchat.com/hc/en-us/articles/7012305621908-My-account-is-compromised","👻"],
+["Social Media & Platforms","TELEGRAM SUPPORT","Telegram","Contact Telegram support.","https://telegram.org/support","✈️"],
+["Social Media & Platforms","REDDIT HELP / SUPPORT","Reddit","Redditor Help Center and support resources.","https://support.reddithelp.com/hc/en-us/p/redditor_help_center","👽"],
+["Social Media & Platforms","REPORT SOMETHING ON PINTEREST","Pinterest","Report content or other issues on Pinterest.","https://help.pinterest.com/en/article/report-something-on-pinterest","📌"],
+["Social Media & Platforms","DISCORD SUPPORT","Discord","Official Discord help centre for account and safety issues.","https://support.discord.com/hc/en-us","🎮"],
+["E-Commerce / Shopping","FLIPKART HELP CENTER","Flipkart","Customer support and help center.","https://www.flipkart.com/helpcentre","🛒"],
+["E-Commerce / Shopping","AMAZON INDIA","Amazon India","Customer service and order/account support.","https://www.amazon.in/gp/help/customer/display.html","📦"],
+["E-Commerce / Shopping","MYNTRA","Myntra","Customer support and contact resources.","https://www.myntra.com/contactus","👗"],
+["E-Commerce / Shopping","MEESHO","Meesho","Help and customer support.","https://www.meesho.com/help","🛍️"],
+["E-Commerce / Shopping","AJIO","AJIO","Help and customer support.","https://www.ajio.com/help","👚"],
+["E-Commerce / Shopping","SNAPDEAL","Snapdeal","Help center and customer support.","https://www.snapdeal.com/help","📦"],
+["Cab / Ride / Mobility","OLA SUPPORT","Ola","Ola support center.","https://help.olacabs.com/support/home","🚕"],
+["Cab / Ride / Mobility","UBER CUSTOMER SUPPORT","Uber","India rider customer support.","https://help.uber.com/riders/article/india-customer-support?nodeId=9de54d31-c25e-4020-8873-62a3165b2bfd","🚗"],
+["Cab / Ride / Mobility","RAPIDO SUPPORT","Rapido","Rapido support and service information.","https://www.rapido.bike/","🏍️"],
+["Food Delivery","SWIGGY HELP & SUPPORT","Swiggy","Help and support for orders and accounts.","https://www.swiggy.com/support","🍔"],
+["Food Delivery","ZOMATO SUPPORT","Zomato","Customer support and contact resources.","https://www.zomato.com/contact","🍕"],
+["Classified / Marketplace","OLX HELP CENTER","OLX","Help center and reporting/support resources.","https://help.olx.in/hc/en-us","📋"],
+["Classified / Marketplace","QUIKR SUPPORT","Quikr","Quikr support and service information.","https://www.quikr.com/","🗂️"],
+["Other Useful Tools","Android APK Scanner","Cyber Portal Hub Tools","Static analysis of Android APKs — permissions, indicators, signing info — right in your browser, no install needed.","/tools/scan.html","🔍"],
+["Other Useful Tools","All Type Zip Extractor","Cyber Portal Hub Tools","Open ZIP, RAR, 7z, TAR, GZ and many more archive formats in your browser, including password-protected ones. Nothing is uploaded.","/tools/zip-extractor.html","📦"],
+["Other Useful Tools","LIVE AIR TRAFFIC","ADS-B Exchange","Live aircraft traffic map.","https://globe.adsbexchange.com/","✈️"]
 ];
 
+/* ===== STEP GUIDES ===== */
 const GUIDES={
+"Block Your Lost / Stolen Mobile Handset":{
+  urgency:"critical", urgencyLabel:"⏱ फ़ोन खोते ही तुरंत करें",
+  steps:["पहले Police complaint/FIR/Lost Report कराएं और उसकी copy रखें।","मोबाइल का IMEI Number तैयार रखें (Settings > About Phone या box पर लिखा होता है)।","Sanchar Saathi → Block Lost/Stolen Mobile Handset खोलें।","Required details भरें।","Identity/mobile verification करें।","Request submit करें और मिलने वाला Request ID सुरक्षित रखें।","फ़ोन मिलने पर उसी पोर्टल से Unblock भी कर सकते हैं।"],
+  precautions:["फ़ोन में saved passwords और banking apps तुरंत दूसरे डिवाइस से logout/change करें।","SIM card को भी अपने telecom operator से block करवाएं ताकि OTP का गलत इस्तेमाल न हो।","Google/Apple account को किसी और device से 'sign out' या 'erase device' करें।"]
+},
+"Sanchar Saathi":{
+  urgency:"high", urgencyLabel:"Check • Report • Block • Verify",
+  sections:[
+   {icon:"👁️",title:"चक्षु – संदिग्ध धोखाधड़ी संचार की रिपोर्ट करें",link:"https://sancharsaathi.gov.in/sfc/",
+    when:"अगर आपको suspicious Call, SMS या WhatsApp message मिला है, जैसे: Fake KYC update • Bank/Wallet/SIM बंद होने की धमकी • Fake Police/Government officer • Fake investment/job/loan offer • Impersonation • Sextortion या अन्य suspicious communication।",
+    steps:["Sanchar Saathi खोलें → चक्षु – Report Suspected Fraud Communication","Communication का माध्यम चुनें → Call / SMS / WhatsApp","Suspected number/message की details भरें।","Fraud category चुनें।","उपलब्ध screenshot/evidence upload करें।","अपना mobile number verify करें।","Report submit करें।"],
+    note:"अगर पैसे का fraud हो चुका है, तो केवल चक्षु पर report न करें। तुरंत 1930 पर call करें और cybercrime.gov.in पर financial cyber fraud report करें।"},
+   {icon:"📵",title:"CEIR – खोया/चोरी हुआ मोबाइल ब्लॉक करें",link:"https://sancharsaathi.gov.in/Home/ceir-services.jsp",
+    when:"मोबाइल खो गया हो या चोरी हो गया हो।",
+    steps:["पहले Police complaint/FIR/Lost Report कराएं।","मोबाइल का IMEI Number तैयार रखें।","Sanchar Saathi → Block Lost/Stolen Mobile Handset","Required details भरें।","Identity/mobile verification करें।","Request submit करें।","मिलने वाला Request ID सुरक्षित रखें।"],
+    note:"इसके बाद request का status भी check कर सकते हैं। फ़ोन मिल जाए तो उसी पोर्टल से Unblock करने की सुविधा भी है।"},
+   {icon:"👥",title:"TAFCOP – आपके नाम पर चल रहे मोबाइल कनेक्शन जानें",link:"https://tafcop.sancharsaathi.gov.in/telecomUser/",
+    when:"अगर आपको शक है कि आपके नाम पर कोई unknown SIM/mobile connection चल रहा है।",
+    steps:["Sanchar Saathi खोलें।","Know Mobile Connections in Your Name चुनें।","अपना mobile number enter करें।","OTP से verify करें।","आपके नाम पर जारी mobile connections की list देखें।","Unknown/unwanted number को report करें।"]},
+   {icon:"📱",title:"KYM – मोबाइल/IMEI की असलियत जांचें",link:"https://ceir.sancharsaathi.gov.in/Device/SancharSaathiKym.jsp",
+    when:"मोबाइल खरीदने से पहले ज़रूर करें।",
+    steps:["फ़ोन के dialer में *#06# डायल करके IMEI number निकालें।","Sanchar Saathi → Know Genuineness of Your Mobile Handset","IMEI enter करें या available scanner का उपयोग करें।","Verification result देखें।","Second-hand फ़ोन खरीदते समय भी IMEI verify करें।"]},
+   {icon:"🌍",title:"RICWIN – Indian नंबर वाली International Call की रिपोर्ट",link:"https://sancharsaathi.gov.in/InternationalCall/ReportIntCall.jsp",
+    when:"जब कोई international call आए लेकिन caller ID में Indian +91 number दिखे।",
+    steps:["Sanchar Saathi खोलें।","Report Incoming International Call with Indian Number चुनें।","Caller number/details दें।","Call की information verify करें।","Report submit करें।"],
+    note:"इससे illegal telecom setups के विरुद्ध कार्रवाई में मदद मिलती है।"},
+   {icon:"🌐",title:"KYI – अपने इलाके के licensed Wireline ISP जानें",link:"https://sancharsaathi.gov.in/KnowYourIsp/display-isps.jsp",
+    when:"अपने area में उपलब्ध licensed Wireline Internet Service Providers की जानकारी देखने के लिए।",
+    steps:["Sanchar Saathi खोलें।","Know Your Wireline Internet Service Provider चुनें।","Location/details select करें।","उपलब्ध licensed ISP की जानकारी देखें।"]},
+   {icon:"☎️",title:"Trusted Contact Details – आधिकारिक संपर्क सत्यापित करें",link:"https://sancharsaathi.gov.in/FinancialInstitutions/fiHome.jsp",
+    when:"जब कोई कहे: \"मैं Bank से बोल रहा हूँ\", \"मैं Police से बोल रहा हूँ\", \"आपका KYC बंद होने वाला है\"।",
+    steps:["Sanchar Saathi → Trusted Contact Details","Bank/Financial Institution/Government organisation search करें।","Official phone number/email/website verify करें।","उसी verified contact से संस्था से खुद independently संपर्क करें।"]}
+  ],
+  precautions:[
+    "कॉल करने वाले के दिए नंबर/लिंक पर भरोसा न करें — हमेशा Trusted Contact Details से verify करके खुद संपर्क करें।",
+    "किसी को भी OTP, UPI PIN, CVV या Aadhaar details फोन/मैसेज पर न बताएं।",
+    "पैसे का नुकसान हुआ हो तो तुरंत 1930 पर call करें और cybercrime.gov.in पर शिकायत दर्ज करें।"
+  ]
+},
 "UPI Dispute Redressal Mechanism (Wrong UPI Transaction)":{
   urgency:"critical", urgencyLabel:"⏱ तुरंत करें — पहले 24 घंटे सबसे ज़रूरी",
   steps:[
@@ -639,87 +281,6 @@ const GUIDES={
     "Screenshot और chat/call records delete न करें, ये सबूत के तौर पर काम आएंगे।",
     "\"Refund\" या \"reverse\" के नाम पर आया कोई भी नया QR code या payment request scan न करें — ये दोबारा fraud होता है।",
     "Unknown app (screen-sharing/remote access) install करने से बचें।"
-  ]
-},
-"Block Your Lost / Stolen Mobile Handset":{
-  urgency:"critical", urgencyLabel:"⏱ फ़ोन खोते ही तुरंत करें",
-  steps:[
-    "सबसे पहले नज़दीकी पुलिस स्टेशन में FIR/GD entry दर्ज कराएं और उसकी copy रखें।",
-    "अपने mobile number को किसी दूसरे फ़ोन से तुरंत बैंक/UPI apps से inform करें ताकि misuse रोका जा सके।",
-    "CEIR (Sanchar Saathi) पोर्टल पर जाकर IMEI number की मदद से हैंडसेट को block करें।",
-    "फ़ोन मिलने पर उसी पोर्टल से unblock भी कर सकते हैं।",
-    "जुड़े हुए Google/Apple account को किसी और device से 'sign out' या 'erase device' करें।"
-  ],
-  precautions:[
-    "IMEI number पहले से नोट करके रखें (Settings > About Phone या box पर लिखा होता है)।",
-    "फ़ोन में saved passwords, banking apps तुरंत दूसरे डिवाइस से logout/change करें।",
-    "SIM card को भी अपने telecom operator से block करवाएं ताकि OTP का गलत इस्तेमाल न हो।"
-  ]
-},
-"CHAKSHU — Report Suspected Fraud Communication":{
-  urgency:"high", urgencyLabel:"⏱ जितनी जल्दी हो, रिपोर्ट करें",
-  steps:[
-    "Fraud call/SMS/WhatsApp message का screenshot या call detail (number, date, time) सुरक्षित रखें।",
-    "उस number पर कभी वापस call करके personal जानकारी शेयर न करें।",
-    "CHAKSHU पोर्टल पर जाकर number और incident की डिटेल के साथ रिपोर्ट submit करें।",
-    "अगर पैसे का नुकसान भी हुआ है तो 1930 पर तुरंत अलग से complaint भी दर्ज करें।"
-  ],
-  precautions:[
-    "\"KYC update\", \"parcel held at customs\", \"electricity bill due\" जैसे urgent messages पर बिना verify किए click न करें।",
-    "अनजान लिंक पर कभी personal detail या OTP न डालें।",
-    "Caller ID हमेशा असली नहीं होती — number spoof भी किया जा सकता है, इसलिए सिर्फ number देखकर भरोसा न करें।"
-  ]
-},
-"Know Mobile Connections in Your Name":{
-  urgency:"normal", urgencyLabel:"ℹ️ आपके नाम पर कितने कनेक्शन हैं, जानें",
-  steps:[
-    "10-digit mobile number दर्ज करें।",
-    "Captcha भरें और OTP प्राप्त करें (Get OTP)।",
-    "OTP भरकर Login करें।"
-  ],
-  precautions:[
-    "यहाँ आपके मोबाइल नंबर से लिंक अन्य नंबर दिखाई देंगे — अगर कोई नंबर आपका नहीं है, तो उसे तुरंत रिपोर्ट करें।"
-  ]
-},
-"Know Genuineness of Your Mobile Handset":{
-  urgency:"normal", urgencyLabel:"ℹ️ अपने मोबाइल हैंडसेट की असलियत जानें",
-  steps:[
-    "Captcha और mobile number दर्ज करें।",
-    "OTP प्राप्त करें और submit करें।",
-    "अपने हैंडसेट का IMEI number दर्ज करके submit करें।"
-  ],
-  precautions:[
-    "यहाँ से आप जान सकते हैं कि आपका मोबाइल हैंडसेट चोरी या रिपोर्टेड तो नहीं है — नया/सेकंड-हैंड फ़ोन लेने से पहले ज़रूर चेक करें।"
-  ]
-},
-"Report Incoming International Call With Indian Number":{
-  urgency:"high", urgencyLabel:"⏱ पिछले 30 दिनों के भीतर की कॉल ही report करें",
-  steps:[
-    "Indian number से आने वाली suspected international call को report करें।",
-    "Receiving mobile number, call में दिखा Indian number, call की date/time और country की जानकारी भरें।"
-  ],
-  precautions:[
-    "Report सिर्फ पिछले 30 दिनों के भीतर आई कॉल के लिए ही की जा सकती है।",
-    "Online report के अलावा 1963 या 1800110420 पर भी report कर सकते हैं।"
-  ]
-},
-"Find Wireline Internet Service Providers (ISPs)":{
-  urgency:"normal", urgencyLabel:"ℹ️ नया कनेक्शन लेने से पहले जानकारी लें",
-  steps:[
-    "नया broadband/fiber connection लेने से पहले अपने area में उपलब्ध wireline ISPs जानने के लिए इस सेवा का उपयोग करें।",
-    "अपने area का pin code दर्ज करें।",
-    "उस एरिया में उपलब्ध सभी सेवाओं की सूची देखें।"
-  ],
-  precautions:[]
-},
-"Trusted Contact Details":{
-  urgency:"normal", urgencyLabel:"ℹ️ Contact details verify करने के लिए इस्तेमाल करें",
-  steps:[
-    "किसी Bank या Financial Institution की trusted contact details verify करने के लिए इस सेवा का उपयोग करें।",
-    "खासकर तब उपयोग करें जब किसी financial institution की website, email या contact number की authenticity check करनी हो।"
-  ],
-  precautions:[
-    "इसे Bank के पूरी तरह genuine होने की गारंटी न मानें — यह केवल official/trusted contact details verify करने में मदद करता है।"
   ]
 },
 "National Cyber Crime Reporting Portal (NCRP)":{
@@ -831,7 +392,7 @@ const GUIDES={
   steps:[
     "सबसे पहले अपने बैंक की internal grievance/customer care में शिकायत दर्ज करें और complaint number लें।",
     "अगर 30 दिन में संतोषजनक समाधान नहीं मिलता, RBI के Complaint Management System (CMS) पर Ombudsman के पास शिकायत दर्ज करें।",
-    "ज़रूरी documents (statement, complaint copy, bank का reply) साथ में अपलोड करें।",
+    "ज़रूरी documents (statement, complaint copy, बैंक का reply) साथ में अपलोड करें।",
     "आप 14448 पर कॉल करके भी guidance ले सकते हैं।"
   ],
   precautions:[
@@ -881,127 +442,137 @@ const GUIDES={
 }
 };
 
-const cats=[...new Set(P.map(x=>x[0]))];
-document.getElementById("count").textContent=P.length;
+/* ===== CATEGORIES ===== */
+const CAT_KEY={cyber:"Cyber Crime & Safety",upi:"UPI Related Complaints Portal",social:"Social Media & Platforms",gov:"Government & Identity",tools:"Other Useful Tools"};
 const CAT_META={
-"UPI Related Complaints Portal":{icon:"cat-upi.png",emoji:"💳",title:"UPI &amp; Online Payment Help",sub:"UPI fraud • Payment complaint • Transaction help"},
-"Telecom & Sanchar Saathi Portal":{icon:"cat-telecom.png",emoji:"📱",title:"Mobile, SIM &amp; Telecom Help",sub:"SIM • Mobile number • Lost phone • Telecom services"},
-"Cyber Crime & Safety":{icon:"cat-cybercrime.png",emoji:"🛡️",title:"Cyber Crime &amp; Online Safety",sub:"Cyber fraud • Online complaint • Safety &amp; reporting"},
-"Government & Identity":{icon:"cat-gov.png",emoji:"🏛️",title:"Government Services &amp; ID Help",sub:"Aadhaar • Government services • Identity-related help"},
-"Social Media & Platforms":{icon:"cat-social.png",emoji:"🌐",title:"Social Media &amp; Account Help",sub:"Facebook • Instagram • YouTube • Account complaints"},
-"E-Commerce / Shopping":{icon:"cat-shopping.png",emoji:"🛒",title:"Online Shopping &amp; E-Commerce Help",sub:"Shopping fraud • Order issues • Consumer complaints"},
-"Cab / Ride / Mobility":{icon:"cat-cab.png",emoji:"🚕",title:"Cab, Ride &amp; Transport Help",sub:"Cab • Ride • Booking • Service complaints"},
-"Food Delivery":{icon:"cat-food.png",emoji:"🍔",title:"Food Delivery Help",sub:"Order issues • Refunds • Delivery complaints"},
-"Classified / Marketplace":{icon:"cat-marketplace.png",emoji:"🛍️",title:"Online Marketplace Help",sub:"OLX • Marketplace • Buyer &amp; seller complaints"},
-"Other Useful Tools":{icon:"cat-tools.png",emoji:"🛠️",title:"Cyber &amp; Investigation Tools",sub:"OSINT • Forensics • Cyber security tools"}
-};
-function catMeta(cat){return CAT_META[cat]||{title:cat.replace(/&/g,"&amp;"),sub:""}}
+"UPI Related Complaints Portal":{icon:"cat-upi.png",emoji:"💳",title:"🔴 UPI / Payment Fraud – Report &amp; Recover",sub:"Wrong payment • UPI fraud • Payment dispute"},
+"Cyber Crime & Safety":{icon:"cat-cybercrime.png",emoji:"🛡️",title:"🔴 Cyber Crime – Report Your Complaint",sub:"Cyber fraud • चक्षु • संचार साथी • Online crime • Immediate reporting"},
+"Government & Identity":{icon:"cat-gov.png",emoji:"🏛️",title:"🔴 Aadhaar / ID Fraud – Report &amp; Protect",sub:"Identity misuse • Aadhaar Lock / Unlock Biometrics • Government complaints"},
+"Social Media & Platforms":{icon:"cat-social.png",emoji:"🌐",title:"🔴 Social Media Fraud – Report &amp; Recover",sub:"Fake account • Hacking • Impersonation • Account complaint"},
+"E-Commerce / Shopping":{icon:"cat-shopping.png",emoji:"🛒",title:"🔴 Online Shopping Fraud – Report &amp; Complain",sub:"Payment fraud • Fake seller • Non-delivery • Refund"},
+"Cab / Ride / Mobility":{icon:"cat-cab.png",emoji:"🚕",title:"🔴 Cab / Ride Fraud – Report &amp; Complain",sub:"Ride fraud • Payment issue • Driver/booking complaint"},
+"Food Delivery":{icon:"cat-food.png",emoji:"🍔",title:"🔴 Food Delivery Fraud – Report &amp; Refund",sub:"Wrong order • Payment issue • Refund complaint"},
+"Classified / Marketplace":{icon:"cat-marketplace.png",emoji:"🛍️",title:"🔴 Marketplace Fraud – Report Buyer/Seller",sub:"OLX • Fake buyer/seller • Payment fraud"},
+"Other Useful Tools":{icon:"cat-tools.png",emoji:"🛠️",title:"🛠️ Cyber Investigation &amp; Verification Tools",sub:"OSINT • Forensics • Cyber security • Verification"}};
+const cats=[...new Set(P.map(x=>x[0]))];
+const catState={};let curCat="",curTitles=null;
+$("#count").textContent=P.filter(p=>!p[6]).length;
 
-const NO_FAVICON_DOMAINS=["sancharsaathi.gov.in", "tafcop.sancharsaathi.gov.in", "ceir.sancharsaathi.gov.in", "cybercrime.gov.in", "www.cybercrime.gov.in"];
-function logo(url,name,icon){
- let domain='';try{domain=new URL(url,location.href).hostname.replace(/^www\./,'')}catch(e){}
- if(icon && (/^https?:\/\//i.test(icon) || /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(icon))){
-   return `<div class="logo-box"><img src="${icon}" alt="${name} logo" width="68" height="60" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>`;
- }
- const fallbackEmoji=(icon||'🔗').replace(/'/g,"&#39;");
- if(NO_FAVICON_DOMAINS.includes(domain)){
-   return `<div class="logo-box"><span class="logo-fallback">${fallbackEmoji}</span></div>`;
- }
- return `<div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" alt="${name} logo" width="68" height="60" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fb==='0'||!this.dataset.fb){this.dataset.fb='1';this.src='https://icons.duckduckgo.com/ip3/${domain}.ico'}else{this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>${fallbackEmoji}</span>')}"></div>`;
-}
-const catState={};
-function isOpen(cat,searching){
-  if(searching) return true;
-  if(!(cat in catState)) catState[cat]=false;
-  return catState[cat];
-}
-function toggleCat(sec){
-  const grid=sec.nextElementSibling;
-  const wasOpen=!grid.classList.contains("collapsed");
-  grid.classList.toggle("collapsed",wasOpen);
-  sec.classList.toggle("is-open",!wasOpen);
-  sec.querySelector(".cat-toggle").setAttribute("aria-expanded",String(!wasOpen));
-  catState[cats[sec.dataset.i]]=!wasOpen;
-}
+function logo(link,name,icon){
+ const esc=s=>String(s).replace(/"/g,"&quot;");
+ if(icon&&(/^https?:\/\//i.test(icon)||/\.(png|jpe?g|svg|webp|gif|ico)$/i.test(icon)))
+  return `<div class="logo-box"><img src="${icon}" alt="${esc(name)} logo" width="68" height="60" loading="lazy" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>🔗</span>')"></div>`;
+ let d="";try{d=new URL(link,location.href).hostname.replace(/^www\./,"")}catch(e){}
+ const fb=(icon||"🔗").replace(/'/g,"&#39;");
+ return `<div class="logo-box"><img src="https://www.google.com/s2/favicons?domain=${d}&sz=128" alt="${esc(name)} logo" width="68" height="60" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=logo-fallback>${fb}</span>')"></div>`}
+
 function render(list){
- const content=document.getElementById("content"); content.innerHTML="";
- let total=0;
- const searching=!!document.getElementById("search").value.trim();
- cats.forEach(cat=>{
-   const arr=list.filter(p=>p[0]===cat); if(!arr.length)return;
-   total+=arr.length;
-   const open=isOpen(cat,searching);
-   const m=catMeta(cat);
-   content.insertAdjacentHTML("beforeend",`<div class="section${open?" is-open":""}" data-i="${cats.indexOf(cat)}" onclick="toggleCat(this)">${m.icon?`<img class="cat-icon" src="${m.icon}" alt="" width="46" height="46" loading="lazy" decoding="async" onerror="this.outerHTML='<span class=cat-emoji>${m.emoji||""}</span>'">`:""}<div class="cat-info"><div class="cat-top"><h2>${m.title}</h2><small>— ${arr.length} portal${arr.length>1?"s":""}</small></div>${m.sub?`<div class="cat-sub">${m.sub}</div>`:""}</div><button class="cat-toggle" type="button" aria-expanded="${open}" aria-label="Open or close ${m.title}"><span>▼</span></button></div>`);
-   const grid=document.createElement("div"); grid.className="grid"+(open?"":" collapsed");
-   grid.innerHTML=arr.map(p=>{
-     const hasGuide=!!GUIDES[p[2]];
-     const guideBtn=hasGuide?`<button class="guide-btn" onclick="openGuide('${p[2].replace(/'/g,"\\'")}','${p[5]}')">📋 क्या करें? Step Guide</button>`:"";
-     return `<article class="card">
-      ${logo(p[1],p[2],p[6])}
-      <div class="text"><h3>${p[2]}</h3><div class="org">${p[3]}</div><p>${p[4]}</p></div>
-      <div class="card-actions">
-        ${guideBtn}
-        <a class="open" href="${p[5]}" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a>
-      </div>
-   </article>`;
-   }).join("");
-   content.appendChild(grid);
- });
- const em=document.getElementById("empty"); em.textContent=total?"":"No matching portal found."; em.style.display=total?"none":"block";
-}
+ const c=$("#content");c.innerHTML="";let total=0;
+ const forceOpen=!!$("#search").value.trim()||!!curCat||!!curTitles;
+ cats.forEach((cat,ci)=>{
+  const arr=list.filter(p=>p[0]===cat);if(!arr.length)return;total+=arr.length;
+  const open=forceOpen||!!catState[cat],m=CAT_META[cat]||{title:cat,sub:""};
+  c.insertAdjacentHTML("beforeend",`<div class="section${open?" is-open":""}" data-i="${ci}">${m.icon?`<img class="cat-icon" src="${m.icon}" alt="" width="46" height="46" loading="lazy" onerror="this.outerHTML='<span class=cat-emoji>${m.emoji}</span>'">`:""}<div class="cat-info"><div class="cat-top"><h2>${m.title}</h2><small>— ${arr.length} portal${arr.length>1?"s":""}</small></div><div class="cat-sub">${m.sub}</div></div><button class="cat-toggle" type="button" aria-expanded="${open}" aria-label="Open or close"><span>▼</span></button></div>`);
+  const g=document.createElement("div");g.className="grid"+(open?"":" collapsed");
+  g.innerHTML=arr.map(p=>{
+   const gb=GUIDES[p[1]]?`<button class="guide-btn" data-guide="${cats.length?P.indexOf(p):0}">📋 क्या करें? Step Guide</button>`:"";
+   return `<article class="card">${logo(p[4],p[1],p[5])}<div class="text"><h3>${p[1].replace(/&/g,"&amp;")}</h3><div class="org">${p[2]}</div><p>${p[3].replace(/&/g,"&amp;")}</p></div><div class="card-actions">${gb}<a class="open" href="${p[4]}" target="_blank" rel="noopener noreferrer">🔗 OPEN PORTAL</a></div></article>`}).join("");
+  c.appendChild(g)});
+ const em=$("#empty");em.textContent=total?"":"No matching portal found.";em.style.display=total?"none":"block"}
+
 function apply(){
- const q=document.getElementById("search").value.toLowerCase().trim();
- render(P.filter(p=>!q || p.join(" ").toLowerCase().includes(q)));
-}
-function resetAll(){document.getElementById("search").value="";apply()}
+ const q=$("#search").value.toLowerCase().trim();
+ render(P.filter(p=>(!p[6]||(curTitles&&curTitles.includes(p[1])))&&(!curCat||p[0]===curCat)&&(!curTitles||curTitles.includes(p[1]))&&(!q||p.join(" ").toLowerCase().includes(q))))}
+function showCat(key,noScroll){curTitles=null;curCat=CAT_KEY[key]||"";$("#search").value="";apply();if(!noScroll)$("#portals").scrollIntoView()}
+function doSearch(q){curCat="";curTitles=null;$("#search").value=q;apply();$("#portals").scrollIntoView()}
+const VIEWS={
+ fraud:{titles:["Sanchar Saathi","National Cyber Crime Reporting Portal (NCRP)","Secure Your Mobile"]},
+ hacked:{cat:"Social Media & Platforms"},
+ lostmobile:{titles:["Sanchar Saathi"]},
+ fakeprofile:{cat:"Social Media & Platforms"},
+ lost:{titles:["Block Your Lost / Stolen Mobile Handset","Secure Your Mobile"]}};
+const CHIPS={"Fraud":"fraud","Hacked":"hacked","Lost Mobile":"lostmobile","Fake Profile":"fakeprofile"};
+function showView(k){const v=VIEWS[k];curCat=v.cat||"";curTitles=v.titles||null;$("#search").value="";apply();$("#portals").scrollIntoView()}
+function resetAll(){curCat="";curTitles=null;$("#search").value="";apply()}
 
-function openGuide(title,link){
-  const g=GUIDES[title]; if(!g) return;
-  document.getElementById("guideTitle").textContent=title;
-  const badge=document.getElementById("guideUrgency");
-  badge.textContent=g.urgencyLabel;
-  badge.className="urgency-badge urgency-"+g.urgency;
-  document.getElementById("guideSteps").innerHTML=g.steps.map(s=>`<li>${s}</li>`).join("");
-  const hasPrecautions=g.precautions&&g.precautions.length>0;
-  document.getElementById("guidePrecautionsHeading").style.display=hasPrecautions?"":"none";
-  document.getElementById("guidePrecautions").style.display=hasPrecautions?"":"none";
-  document.getElementById("guidePrecautions").innerHTML=hasPrecautions?g.precautions.map(s=>`<li>${s}</li>`).join(""):"";
-  document.getElementById("guideLink").href=link;
-  document.getElementById("guideModal").classList.add("open");
-  document.body.style.overflow="hidden";
-}
-function closeGuide(){
-  document.getElementById("guideModal").classList.remove("open");
-  document.body.style.overflow="";
-}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeGuide();});
+$("#content").addEventListener("click",e=>{
+ const g=e.target.closest(".guide-btn");if(g){openGuide(P[+g.dataset.guide]);return}
+ const s=e.target.closest(".section");if(!s)return;
+ const grid=s.nextElementSibling,was=!grid.classList.contains("collapsed");
+ grid.classList.toggle("collapsed",was);s.classList.toggle("is-open",!was);catState[cats[s.dataset.i]]=!was});
+$("#search").addEventListener("input",()=>{curCat="";curTitles=null;apply()});
+$("#resetBtn").onclick=resetAll;
 
-try{render(P);}catch(e){console.error('render failed',e);}
+function openGuide(p){
+ const gd=GUIDES[p[1]];if(!gd)return;
+ $("#guideTitle").textContent=p[1];
+ const b=$("#guideUrgency");b.textContent=gd.urgencyLabel;b.className="urgency-badge urgency-"+gd.urgency;
+ const sec=gd.sections;
+ $("#guideSteps").style.display=$("#guideStepsHeading").style.display=sec?"none":"";
+ $("#guideSteps").innerHTML=sec?"":gd.steps.map(s=>`<li>${s}</li>`).join("");
+ $("#guideSections").innerHTML=sec?sec.map(x=>`<div class="gsec"><h5>${x.icon} ${x.title}</h5><p class="gwhen"><b>कब इस्तेमाल करें?</b> ${x.when}</p><ol class="steps-list">${x.steps.map(t=>`<li>${t}</li>`).join("")}</ol>${x.note?`<p class="gnote">⚠️ ${x.note}</p>`:""}<a class="glink" href="${x.link}" target="_blank" rel="noopener noreferrer">🔗 यह सेवा खोलें</a></div>`).join(""):"";
+ const hp=gd.precautions&&gd.precautions.length;
+ $("#guidePrecautionsHeading").style.display=$("#guidePrecautions").style.display=hp?"":"none";
+ $("#guidePrecautions").innerHTML=hp?gd.precautions.map(s=>`<li>${s}</li>`).join(""):"";
+ $("#guideLink").href=p[4];$("#guideModal").classList.add("open");document.body.style.overflow="hidden"}
+function closeGuide(){$("#guideModal").classList.remove("open");document.body.style.overflow=""}
+$("#gClose").onclick=closeGuide;$("#guideModal").onclick=e=>{if(e.target.id==="guideModal")closeGuide()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeGuide()});
 
-const SLOGANS=[
- "Think before you click — verify before you trust.",
- "OTP is your key. Never hand it to anyone, ever.",
- "No bank ever asks for your PIN or OTP on call.",
- "A stranger offering easy money online is a red flag.",
- "Update your passwords like you update your wardrobe — regularly.",
- "Cyber safety starts with you, not your antivirus alone.",
- "If it feels urgent and scary, it's probably a scam.",
- "Screenshots don't verify identity — always double-check the source.",
- "Two-factor authentication: a small step, a big shield.",
- "Report suspicious links instead of forwarding them.",
- "Your personal data is currency — spend it carefully.",
- "Free Wi-Fi, real risk — avoid banking on public networks.",
- "Investment returns that sound too good, usually are.",
- "Lock your phone, lock your identity.",
- "One careless click can cost more than money — your peace of mind too."
-];
-(function(){
-  const el=document.getElementById("dailySlogan");
-  if(!el) return;
-  const daysSinceEpoch=Math.floor(Date.now()/86400000); // changes automatically every 24 hours
-  el.textContent="💡 "+SLOGANS[daysSinceEpoch % SLOGANS.length];
+/* nav + quick actions */
+$$("[data-cat]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();showCat(b.dataset.cat);$("#nav").classList.remove("open")}));
+$("#mb").onclick=()=>{const o=$("#nav").classList.toggle("open");$("#mb").setAttribute("aria-expanded",o)};
+$("#heroSearchBtn").onclick=()=>doSearch($("#heroSearch").value);
+$("#heroSearch").onkeydown=e=>{if(e.key==="Enter")doSearch(e.target.value)};
+$$(".popular button").forEach(x=>x.onclick=()=>{const k=CHIPS[x.textContent.trim()];k?showView(k):doSearch(x.textContent)});
+$$("[data-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+
+/* ===== hero carousel ===== */
+const st=n=>Array.from({length:n},(_,i)=>`<circle cx="${(i*197)%1600}" cy="${(i*83)%260}" r="${1+i%2}" fill="#fff" opacity="${.35+(i%3)*.2}"/>`).join("");
+function mt(n,a,b,c1,c2,c3){return `<svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="s${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="1600" height="600" fill="url(#s${n})"/>${st(40)}<circle cx="1230" cy="190" r="64" fill="#ffe2b0" opacity=".9"/><path d="M0 430 L170 270 L250 340 L430 150 L610 350 L780 230 L990 410 L1190 200 L1400 390 L1600 290V600H0Z" fill="${c1}"/><path d="M0 480 L220 340 L390 450 L600 320 L840 470 L1080 340 L1320 470 L1600 360V600H0Z" fill="${c2}"/><path d="M0 540 L260 450 L520 530 L800 440 L1100 535 L1380 450 L1600 520V600H0Z" fill="${c3}"/></svg>`}
+function cy(){return `<svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="cg" cx=".7" cy=".45" r=".7"><stop offset="0" stop-color="#0f4c8a"/><stop offset="1" stop-color="#050f1e"/></radialGradient></defs><rect width="1600" height="600" fill="url(#cg)"/><g stroke="#35b4ff" stroke-width="2" fill="none" opacity=".55" class="flow"><path d="M0 120H300V220H520"/><path d="M0 300H220V380H480V470H700"/><path d="M1600 100H1380V200H1220"/><path d="M1600 420H1400V330H1250"/></g><path d="M1060 130 L1190 180 V300 C1190 385 1135 440 1060 480 C985 440 930 385 930 300 V180Z" fill="#0a3a6b" stroke="#52c4ff" stroke-width="7"/><rect x="1020" y="285" width="80" height="62" rx="9" fill="#52c4ff"/><path d="M1035 285V262a25 25 0 0 1 50 0V285" fill="none" stroke="#52c4ff" stroke-width="9"/></svg>`}
+function di(){return `<svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice"><rect width="1600" height="600" fill="#06182c"/><g opacity=".5"><path d="M-100 380 Q500 200 1700 300V360Q600 270 -100 440Z" fill="#ff9933"/><path d="M-100 440 Q500 270 1700 360V420Q600 340 -100 500Z" fill="#fff" opacity=".8"/><path d="M-100 500 Q500 340 1700 420V480Q600 410 -100 560Z" fill="#138808"/></g></svg>`}
+const HERO=[
+ {img:"/hero/kedarnath.jpg",cap:"जय बाबा केदार • देवभूमि उत्तराखंड",art:()=>mt(0,"#0b1d3a","#f08a4b","#1d2f52","#13203d","#0b1226")},
+ {img:"/hero/uttarakhand.jpg",cap:"समृद्ध भारत • सुरक्षित भारत",art:()=>mt(1,"#0a2b4a","#4aa3c9","#173f63","#0e2a47","#091a30")},
+ {img:"/hero/cyber-safety.jpg",cap:"Cyber Safety • सोचें, जाँचें, फिर क्लिक करें",art:cy},
+ {img:"/hero/digital-india.jpg",cap:"Digital India • Helpline 1930",art:di}];
+(function(){let k=0,tm=null;const box=$("#heroSlides"),dots=$("#heroDots"),cap=$("#heroCap");
+ box.innerHTML=HERO.map((s,i)=>`<div class="slide${i?"":" on"}"><div class="art">${s.art()}</div><img src="${s.img}" alt="" loading="${i?"lazy":"eager"}" onerror="this.remove()"></div>`).join("");
+ dots.innerHTML=HERO.map((s,i)=>`<button aria-label="Slide ${i+1}" class="${i?"":"on"}"></button>`).join("");
+ const sl=$$(".slide",box),dt=$$("button",dots);cap.textContent=HERO[0].cap;
+ function go(n){k=(n+HERO.length)%HERO.length;sl.forEach((e,i)=>e.classList.toggle("on",i===k));dt.forEach((e,i)=>e.classList.toggle("on",i===k));cap.textContent=HERO[k].cap}
+ function play(){clearInterval(tm);if(!matchMedia("(prefers-reduced-motion:reduce)").matches)tm=setInterval(()=>go(k+1),6500)}
+ dt.forEach((b,i)=>b.onclick=()=>{go(i);play()});$("#hPrev").onclick=()=>{go(k-1);play()};$("#hNext").onclick=()=>{go(k+1);play()};
+ const h=$(".hero");h.onmouseenter=()=>clearInterval(tm);h.onmouseleave=play;document.addEventListener("visibilitychange",()=>document.hidden?clearInterval(tm):play());play();
+ const words=["Fraud","Hacked Account","Lost Mobile","UPI Fraud","Fake Profile","Data Breach","Cyber Complaint"],hindi=["सुरक्षित भारत • डिजिटल भारत","साइबर सुरक्षित भारत","सतर्क नागरिक • सुरक्षित डिजिटल जीवन","सोचें • जाँचें • फिर क्लिक करें"];
+ if(!matchMedia("(prefers-reduced-motion:reduce)").matches){let a=0,b=0;const w=$("#heroRotate"),h2=$("#indiaRotate");
+  setInterval(()=>{a=(a+1)%words.length;w.style.opacity=0;setTimeout(()=>{w.textContent=words[a];w.style.opacity=1},180)},2300);
+  setInterval(()=>{b=(b+1)%hindi.length;h2.style.opacity=0;setTimeout(()=>{h2.textContent=hindi[b];h2.style.opacity=1},260)},3600)}
 })();
+
+/* slogan of the day */
+const SLOGANS=["Think before you click — verify before you trust.","OTP is your key. Never hand it to anyone, ever.","No bank ever asks for your PIN or OTP on call.","A stranger offering easy money online is a red flag.","Two-factor authentication: a small step, a big shield.","If it feels urgent and scary, it's probably a scam.","Report suspicious links instead of forwarding them.","Lock your phone, lock your identity."];
+$("#dailySlogan").textContent="💡 "+SLOGANS[Math.floor(Date.now()/86400000)%SLOGANS.length];
+
+/* visitor counter (counts once per browser per day) */
+(function(){const el=$("#visitCount");if(!el)return;
+ const base="https://api.counterapi.dev/v1/cyberportalhub-org/visitors";
+ const today=new Date().toISOString().slice(0,10);let seen=null;
+ try{seen=localStorage.getItem("cph_visit")}catch(e){}
+ fetch(seen===today?base+"/":base+"/up").then(r=>r.json()).then(d=>{
+  const n=d.count!==undefined?d.count:d.value!==undefined?d.value:(d.data&&d.data.up_count);
+  if(typeof n!=="number")throw 0;
+  el.textContent=n.toLocaleString("en-IN");
+  if(seen!==today)try{localStorage.setItem("cph_visit",today)}catch(e){}
+ }).catch(()=>{const v=el.closest(".visit");if(v)v.style.display="none"});
+})();
+
+/* initial load: supports old links like ?cat=upi and ?q=fraud */
+(function(){const u=new URLSearchParams(location.search);let c=u.get("cat"),q=u.get("q");
+ if(c==="telecom")c="cyber";
+ if(c&&CAT_KEY[c]){showCat(c,true);setTimeout(()=>$("#portals").scrollIntoView(),50)}
+ else if(q){doSearch(q)}else apply();
+ try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})();
 </script>
-</body>
-</html>
+</body></html>
