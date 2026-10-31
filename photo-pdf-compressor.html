@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo, Signature & PDF Compressor – Resize, Compress & Reduce KB | Cyber Portal Hub</title>
+<meta name="description" content="Free Photo, Signature and PDF Resize & Compress tool - फोटो, सिग्नेचर और PDF का size (KB) कम करें। Passport photo, exam photo, PAN photo और signature के लिए। सब कुछ आपके browser में, कोई upload नहीं।">
+<meta name="keywords" content="photo resize, photo compress, signature resize, passport photo resize, image compressor, pdf compressor, फोटो resize, सिग्नेचर compress, PDF compress">
+<meta name="theme-color" content="#7b171b">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<style>
+:root{--bg:#f7ead2;--paper:#fff8ea;--maroon:#7b171b;--red:#b51620;--blue:#124c68;--brown:#4a2115;--muted:#765e4b;--border:#e4c99c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--brown);font:16px/1.55 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",Arial,sans-serif;background:radial-gradient(circle at 8% 8%,#fff9ed,transparent 28%),radial-gradient(circle at 92% 12%,#efd9ad,transparent 28%),linear-gradient(135deg,#fbf0dc,#f1ddba)}
+.wrap{position:relative;z-index:1;max-width:900px;margin:auto;padding:0 16px 40px}
+header{margin:0 -16px 22px;padding:15px 22px;color:#fff;background:linear-gradient(100deg,#650c11,#8b171c 55%,#650c11);box-shadow:0 5px 18px #6c241d33;border-bottom:4px solid #c69a55}
+.headrow{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:900px;margin:auto}
+.brand{display:flex;align-items:center;gap:12px}.logo{font-size:38px}
+.brand h1{margin:0;font-size:21px;line-height:1.15}.brand small{color:#ffe3b5;font-size:12px}
+.site{background:#ffd34e;color:#54170e;text-decoration:none;font-weight:800;padding:9px 14px;border-radius:22px;white-space:nowrap}
+.hero{background:var(--paper);border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 12px 30px #6c241d18}
+.hero h2{margin:0 0 5px;color:var(--blue);font-size:28px}.hero .sub{margin:0 0 18px;color:var(--muted)}
+.notice{background:#fff2cf;border-left:5px solid #d49a20;padding:11px 13px;border-radius:10px;margin-bottom:20px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field label{display:block;font-weight:800;margin:0 0 7px}
+select,input[type=number],input[type=file]{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;background:#fff;font:inherit;color:var(--brown)}
+.full{grid-column:1/-1}
+.custom{display:none;margin-top:10px}.custom.on{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.filebox{border:2px dashed #c99d67;border-radius:14px;padding:18px;background:#fffaf0}
+.preview{margin-top:16px;min-height:110px;display:flex;justify-content:center;align-items:center;border-radius:14px;background:#f5ead8;overflow:hidden;padding:12px}
+.preview img{max-width:100%;max-height:300px;object-fit:contain;border-radius:8px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button,.download{border:0;border-radius:11px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.primary{background:var(--maroon);color:#fff}.download{background:#198754;color:#fff}
+button:disabled,.download.disabled{opacity:.45;pointer-events:none}
+.result{margin-top:18px;padding:15px;border-radius:13px;background:#edf7ef;border:1px solid #b9ddc2;display:none}
+.result.show{display:block}.result.err{background:#fdecec;border-color:#e6b4b4}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-weight:700;margin-bottom:10px}
+.hint{font-size:13px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}footer a{color:var(--maroon)}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{padding:17px}.hero h2{font-size:23px}.site{font-size:13px;padding:8px 10px}header{padding:12px 16px}.brand h1{font-size:18px}.brand small{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="headrow">
+  <div class="brand"><div class="logo">🖼️</div><div><h1>Photo, Signature &amp; PDF Compressor</h1><small>Resize • Compress • Reduce KB • Download</small></div></div>
+  <a class="site" href="/">← Cyber Portal Hub</a>
+</div></header>
+
+<section class="hero">
+  <h2>फोटो / सिग्नेचर Resize &amp; Compress</h2>
+  <p class="sub">Photo और Signature का dimension बदलें, file size (KB) कम करें और तुरंत download करें।</p>
+  <div class="notice">🔒 <b>Privacy:</b> आपकी image किसी server पर upload नहीं होती। Processing आपके browser में ही होती है।</div>
+  <div class="grid">
+    <div class="field">
+      <label for="preset">आकार चुनें / Choose Size</label>
+      <select id="preset">
+        <option value="compress">मूल आकार – सिर्फ Compress / Original – Compress Only</option>
+        <option value="passport">पासपोर्ट फोटो – 413 × 531 px</option>
+        <option value="exam">परीक्षा फोटो – 200 × 230 px</option>
+        <option value="pan">PAN फोटो – 213 × 213 px</option>
+        <option value="signature">हस्ताक्षर – 140 × 60 px</option>
+        <option value="custom">Custom Size – अपना dimension चुनें</option>
+      </select>
+      <div id="custom" class="custom"><input id="cw" type="number" min="1" placeholder="Width (px)"><input id="ch" type="number" min="1" placeholder="Height (px)"></div>
+    </div>
+    <div class="field">
+      <label for="maxkb">अधिकतम File Size / Max Size (KB)</label>
+      <input id="maxkb" type="number" min="5" max="10000" value="200">
+      <div class="hint">उदाहरण: 20 KB, 50 KB, 100 KB, 200 KB</div>
+    </div>
+    <div class="field full">
+      <label for="file">Image चुनें / Choose Image</label>
+      <div class="filebox"><input id="file" type="file" accept="image/jpeg,image/png,image/webp,image/*"><div class="hint" style="margin-top:7px">JPG, PNG या WEBP चुनें। HEIC/HEIF को पहले JPG में बदलें।</div></div>
+    </div>
+  </div>
+  <div id="preview" class="preview"><span class="hint">Image preview यहाँ दिखाई देगा</span></div>
+  <div class="actions">
+    <button id="convert" class="primary">🔄 Convert / Compress</button>
+    <a id="download" class="download disabled" download>⬇ Download Image</a>
+  </div>
+  <div id="result" class="result"><div class="stats"><span id="dims"></span><span id="size"></span></div><div id="message"></div></div>
+</section>
+
+<section class="hero" style="margin-top:20px">
+  <h2>📄 PDF Compressor</h2>
+  <p class="sub">PDF का file size कम करें और compressed PDF डाउनलोड करें।</p>
+  <div class="notice">🔒 <b>Privacy:</b> PDF आपके browser में ही process होती है। कोई file server पर upload नहीं की जाती।<br>ℹ️ ध्यान दें: compress करने पर PDF के pages image बन जाते हैं, इसलिए text select/copy नहीं हो पाएगा।</div>
+  <div class="grid">
+    <div class="field full">
+      <label for="pdfFile">PDF चुनें / Choose PDF</label>
+      <div class="filebox"><input id="pdfFile" type="file" accept="application/pdf"><div class="hint" style="margin-top:7px">PDF file चुनें। यह tool हर page को optimized image quality में बदलकर नया छोटा PDF बनाता है।</div></div>
+    </div>
+    <div class="field">
+      <label for="pdfQuality">Compression Quality</label>
+      <select id="pdfQuality">
+        <option value="0.75">High Quality – कम compression</option>
+        <option value="0.60" selected>Balanced – Recommended</option>
+        <option value="0.45">Strong Compression – छोटा PDF</option>
+        <option value="0.30">Maximum Compression – सबसे छोटा</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="pdfScale">PDF Resolution</label>
+      <select id="pdfScale">
+        <option value="1.4">High – बेहतर quality</option>
+        <option value="1.15" selected>Balanced – Recommended</option>
+        <option value="0.9">Low – smaller file</option>
+      </select>
+    </div>
+  </div>
+  <div id="pdfInfo" class="hint" style="margin-top:12px"></div>
+  <div class="actions">
+    <button id="compressPdf" class="primary">📉 Compress PDF</button>
+    <a id="downloadPdf" class="download disabled" download="compressed.pdf">⬇ Download Compressed PDF</a>
+  </div>
+  <div id="pdfResult" class="result"><div class="stats"><span id="pdfPages"></span><span id="pdfSize"></span></div><div id="pdfMessage"></div></div>
+</section>
+
+<footer>Independent utility of <a href="/">Cyber Portal Hub</a> • <a href="/tools/">More Tools</a> • No file is uploaded to any server.</footer>
+</div>
+
+<script>
+const PDFJS_URL="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+const PDFJS_WORKER="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+const presets={compress:[0,0,200],passport:[413,531,100],exam:[200,230,50],pan:[213,213,50],signature:[140,60,30]};
+let selectedFile=null,outputBlob=null;
+const $=id=>document.getElementById(id);
+const preset=$("preset"),maxkb=$("maxkb"),file=$("file"),preview=$("preview"),result=$("result"),download=$("download");
+
+preset.addEventListener("change",()=>{
+  const p=presets[preset.value];
+  $("custom").classList.toggle("on",preset.value==="custom");
+  if(p)maxkb.value=p[2];
+  result.classList.remove("show");disableDownload();
+});
+
+file.addEventListener("change",async()=>{
+  selectedFile=file.files[0]||null;
+  result.classList.remove("show");disableDownload();preview.innerHTML="";
+  if(!selectedFile){preview.innerHTML='<span class="hint">Image preview यहाँ दिखाई देगा</span>';return}
+  try{const img=await loadImage(selectedFile);const im=document.createElement("img");im.src=img.src;preview.appendChild(im)}
+  catch(e){preview.innerHTML='<span class="hint">Image नहीं खुल सकी। JPG/PNG/WEBP file चुनें।</span>'}
+});
+
+function loadImage(f){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=r.result};
+    r.onerror=reject;r.readAsDataURL(f);
+  });
+}
+function blobFromCanvas(c,q){return new Promise(res=>c.toBlob(res,"image/jpeg",q))}
+
+async function compressCanvas(canvas,target){
+  let q=.95,blob;
+  do{blob=await blobFromCanvas(canvas,q);q-=.07}while(blob&&blob.size>target&&q>.10);
+  if(blob&&blob.size>target){
+    let scale=.90,current=canvas;
+    while(blob.size>target&&scale>.25){
+      const c=document.createElement("canvas");
+      c.width=Math.max(1,Math.round(canvas.width*scale));
+      c.height=Math.max(1,Math.round(canvas.height*scale));
+      c.getContext("2d").drawImage(canvas,0,0,c.width,c.height);
+      current=c;q=.80;
+      do{blob=await blobFromCanvas(current,q);q-=.10}while(blob.size>target&&q>.30);
+      if(blob.size<=target)return{blob,canvas:current};
+      scale*=.85;
+    }
+    return{blob,canvas:current};
+  }
+  return{blob,canvas};
+}
+
+$("convert").addEventListener("click",async()=>{
+  if(!selectedFile){showResult("पहले image चुनें। / Please choose an image first.",true);return}
+  try{
+    const img=await loadImage(selectedFile);
+    const iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height;
+    let W=iw,H=ih;
+    if(preset.value==="custom"){
+      W=parseInt($("cw").value,10);H=parseInt($("ch").value,10);
+      if(!W||!H){showResult("Custom width और height भरें।",true);return}
+    }else{
+      const p=presets[preset.value];
+      if(p&&p[0]){W=p[0];H=p[1]}
+      else{const sc=Math.min(1,2400/Math.max(iw,ih));W=Math.round(iw*sc);H=Math.round(ih*sc)}
+    }
+    const canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);
+    const sc=Math.max(W/iw,H/ih),dw=iw*sc,dh=ih*sc;
+    ctx.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh);
+    const target=Math.max(5,parseFloat(maxkb.value)||200)*1024;
+    const out=await compressCanvas(canvas,target);
+    outputBlob=out.blob;
+    download.href=URL.createObjectURL(outputBlob);
+    download.download=(selectedFile.name.replace(/\.[^.]+$/,"")||"image")+"-resized.jpg";
+    download.classList.remove("disabled");
+    const kb=(outputBlob.size/1024).toFixed(1);
+    const reduction=(1-outputBlob.size/selectedFile.size)*100;
+    $("dims").textContent=`📐 ${out.canvas.width} × ${out.canvas.height}px`;
+    $("size").textContent=`📦 ${kb} KB`;
+    const over=outputBlob.size>target;
+    $("message").innerHTML=(over?`⚠️ ${kb} KB से और कम नहीं हो सका — बड़ा dimension/कम KB की जगह दूसरा size चुनें। `:"✅ Image तैयार है। ")+
+      (reduction>0?`Original: ${(selectedFile.size/1024).toFixed(1)} KB → Output: ${kb} KB (${reduction.toFixed(0)}% smaller).`:`Output size: ${kb} KB.`);
+    result.classList.remove("err");result.classList.add("show");
+  }catch(e){showResult("Image process नहीं हो सकी। दूसरी JPG/PNG/WEBP image try करें।",true);console.error(e)}
+});
+
+function showResult(msg,error){
+  $("message").textContent=(error?"⚠️ ":"")+msg;$("dims").textContent="";$("size").textContent="";
+  result.classList.toggle("err",!!error);result.classList.add("show");
+}
+function disableDownload(){download.removeAttribute("href");download.classList.add("disabled")}
+
+/* ===== PDF COMPRESSOR (no page limit) ===== */
+const CDN={
+  jspdf:["https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js","https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"],
+  pdfjs:[PDFJS_URL,"https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs"],
+  worker:[PDFJS_WORKER,"https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs"]
+};
+let pdfBlob=null,pdfjsLib=null;
+const pdfFile=$("pdfFile"),pdfResult=$("pdfResult"),downloadPdf=$("downloadPdf");
+pdfFile.addEventListener("change",()=>{
+  const f=pdfFile.files[0];
+  $("pdfInfo").textContent=f?`Selected: ${f.name} • ${(f.size/1048576).toFixed(2)} MB`:"";
+  pdfResult.classList.remove("show");disablePdfDownload();
+});
+function disablePdfDownload(){downloadPdf.removeAttribute("href");downloadPdf.classList.add("disabled")}
+
+function loadScript(url){
+  return new Promise((res,rej)=>{const s=document.createElement("script");s.src=url;s.onload=res;s.onerror=()=>rej(new Error("load failed: "+url));document.head.appendChild(s)});
+}
+async function ensureJsPdf(){
+  if(window.jspdf&&window.jspdf.jsPDF)return;
+  let last;
+  for(const u of CDN.jspdf){try{await loadScript(u);if(window.jspdf&&window.jspdf.jsPDF)return}catch(e){last=e}}
+  throw last||new Error("jsPDF load नहीं हुई");
+}
+async function ensurePdfjs(){
+  if(pdfjsLib)return pdfjsLib;
+  let last;
+  for(let k=0;k<CDN.pdfjs.length;k++){
+    try{
+      const lib=await import(CDN.pdfjs[k]);
+      lib.GlobalWorkerOptions.workerSrc=CDN.worker[k];
+      // Preload the worker code in the main thread: if the browser blocks Web Workers
+      // (privacy browsers / strict CSP), pdf.js falls back to this copy and still works.
+      try{globalThis.pdfjsWorker=await import(CDN.worker[k])}catch(e){console.warn("worker preload failed",e)}
+      pdfjsLib=lib;return lib;
+    }catch(e){last=e}
+  }
+  throw last||new Error("pdf.js load नहीं हुई");
+}
+
+async function renderPdf(pdf,quality,scale,onPage){
+  const {jsPDF}=window.jspdf;
+  let out=null;
+  for(let n=1;n<=pdf.numPages;n++){
+    onPage(n);
+    const page=await pdf.getPage(n);
+    const base=page.getViewport({scale:1});
+    let vp=page.getViewport({scale});
+    const cap=Math.min(1,4000/Math.max(vp.width,vp.height));   // safety for very large pages (memory)
+    if(cap<1)vp=page.getViewport({scale:scale*cap});
+    const canvas=document.createElement("canvas");
+    canvas.width=Math.max(1,Math.ceil(vp.width));canvas.height=Math.max(1,Math.ceil(vp.height));
+    const ctx=canvas.getContext("2d",{alpha:false});
+    ctx.fillStyle="#fff";ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({canvasContext:ctx,viewport:vp}).promise;
+    const pw=base.width*25.4/72,ph=base.height*25.4/72;          // original page size in mm
+    const orientation=pw>=ph?"landscape":"portrait";
+    if(!out)out=new jsPDF({orientation,unit:"mm",format:[pw,ph],compress:true});
+    else out.addPage([pw,ph],orientation);
+    out.addImage(canvas.toDataURL("image/jpeg",quality),"JPEG",0,0,pw,ph,undefined,"FAST");
+    canvas.width=canvas.height=0;page.cleanup();
+  }
+  return out.output("blob");
+}
+
+$("compressPdf").addEventListener("click",async()=>{
+  const f=pdfFile.files[0];
+  if(!f){showPdfResult("पहले PDF चुनें। / Please choose a PDF first.",true);return}
+  const btn=$("compressPdf"),old=btn.textContent;
+  btn.disabled=true;disablePdfDownload();pdfResult.classList.remove("show");
+  try{
+    btn.textContent="⏳ Loading...";
+    await ensureJsPdf();
+    const pdfjs=await ensurePdfjs();
+    const task=pdfjs.getDocument({data:new Uint8Array(await f.arrayBuffer())});
+    task.onPassword=(update,reason)=>{
+      const pw=prompt(reason===2?"गलत password। दोबारा डालें:":"यह PDF password-protected है। Password डालें:");
+      if(pw===null){task.destroy();return}
+      update(pw);
+    };
+    const pdf=await task.promise;
+    let q=parseFloat($("pdfQuality").value),sc=parseFloat($("pdfScale").value);
+    let attempt=1,best=null;
+    const run=async()=>renderPdf(pdf,q,sc,n=>{btn.textContent=`⏳ Page ${n}/${pdf.numPages}`+(attempt>1?` (try ${attempt})`:"")});
+    best=await run();
+    while(best.size>=f.size&&attempt<3){           // already small / text PDF: retry lighter automatically
+      attempt++;q=Math.max(.2,q*.75);sc=Math.max(.6,sc*.85);
+      const b=await run();if(b.size<best.size)best=b;
+    }
+    pdfBlob=best;
+    const oldMB=f.size/1048576,newMB=pdfBlob.size/1048576,saved=(1-pdfBlob.size/f.size)*100;
+    if(saved>0){   // never hand out a file that is bigger than the original
+      downloadPdf.href=URL.createObjectURL(pdfBlob);
+      downloadPdf.download=(f.name.replace(/\.pdf$/i,"")||"document")+"-compressed.pdf";
+      downloadPdf.classList.remove("disabled");
+    }
+    $("pdfPages").textContent=`📄 ${pdf.numPages} pages`;
+    $("pdfSize").textContent=saved>0?`📦 ${newMB.toFixed(2)} MB`:`📦 Original: ${oldMB.toFixed(2)} MB`;
+    $("pdfMessage").innerHTML=saved>0
+      ?`✅ PDF compressed successfully. Original: ${oldMB.toFixed(2)} MB → Output: ${newMB.toFixed(2)} MB (${saved.toFixed(0)}% smaller).`
+      :`ℹ️ यह PDF पहले से बहुत optimized है (ज़्यादातर text), इसलिए और छोटी नहीं हो सकी। Original file ही इस्तेमाल करें।`;
+    pdfResult.classList.remove("err");pdfResult.classList.add("show");
+  }catch(e){
+    console.error(e);
+    showPdfResult("PDF compress नहीं हो सकी। (Error: "+((e&&e.message)||e)+") — PDF दोबारा चुनें, internet जाँचें या दूसरा browser try करें।",true);
+  }finally{btn.disabled=false;btn.textContent=old}
+});
+function showPdfResult(msg,error){
+  $("pdfPages").textContent="";$("pdfSize").textContent="";
+  $("pdfMessage").textContent=(error?"⚠️ ":"")+msg;
+  pdfResult.classList.toggle("err",!!error);pdfResult.classList.add("show");
+}
+</script>
+</body>
+</html>
