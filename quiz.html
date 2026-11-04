@@ -79,8 +79,10 @@ a.btn{display:inline-block;text-decoration:none;text-align:center}
 .social-links a:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);text-align:center;padding:12px 18px;font-size:11px}
 @media(max-width:760px){.footer-inner{grid-template-columns:1fr;text-align:center}.social-links{justify-content:center}}
-</style></head><body id="top">
-<header class="top"><div><a class="logo" href="/"><i><img data-logo alt=""></i><span><b>Cyber Portal Hub</b><small>साइबर सुरक्षा क्विज़</small></span></a><a class="back" data-back href="/">← साइट पर वापस / Back to Site</a><nav><a href="/" data-back>Home</a><a href="/directory.html" data-back>Directory</a><a class="on" href="/quiz.html">Quiz</a></nav></div></header>
+</style><link rel="canonical" href="https://cyberportalhub.org/quiz">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1448557659666187" crossorigin="anonymous"></script>
+</head><body id="top">
+<header class="top"><div><a class="logo" href="/"><i><img data-logo alt=""></i><span><b>Cyber Portal Hub</b><small>साइबर सुरक्षा क्विज़</small></span></a><a class="back" data-back href="/">← साइट पर वापस / Back to Site</a><nav><a href="/" data-back>Home</a><a href="/#portals" data-back>Directory</a><a class="on" href="/quiz">Quiz</a></nav></div></header>
 <main class="wrap">
 <section id="s-start"><div class="hero"><div class="brandrow"><img id="pLogo" alt="Uttarakhand Police" onerror="this.remove()"><span><b>उत्तराखंड पुलिस साइबर जागरूकता</b><small>Uttarakhand Police Cyber Awareness</small></span></div><h1>साइबर सुरक्षा <em>क्विज़</em><small>Cyber Safety Quiz</small></h1><p>डिजिटल अरेस्ट, फिशिंग, मैलवेयर, रैंसमवेयर, UPI फ्रॉड और कंप्यूटर बेसिक्स — अपनी साइबर जागरूकता जाँचें और सर्टिफिकेट पाएँ।<br><span class="en" style="color:#dbe8f2">Test your cyber awareness on digital arrest, phishing, malware, ransomware, UPI fraud and computer basics — and earn a certificate.</span></p></div>
 <div class="card"><div class="pills"><span>📝 20 प्रश्न / Questions</span><span>🔘 4 विकल्प / Options</span><span>⏱ <span id="tl">10</span> मिनट / min</span><span>📜 सर्टिफिकेट / Certificate</span></div>
@@ -124,7 +126,7 @@ a.btn{display:inline-block;text-decoration:none;text-align:center}
     <div style="font-size:10.5px;color:#a0b2c6;margin-top:8px;max-width:1000px;margin-left:auto;margin-right:auto;line-height:1.55;">
       <strong>Disclaimer:</strong> This website is an independent information reference directory designed to assist users in locating official public grievance and support channels. We are not affiliated with, authorized by, or associated with any Government entity or private platform. All logos, names, and trademarks belong to their respective owners.
     </div>
-    <br><a href="/privacy.html" style="color:var(--gold)">Privacy Policy</a> &nbsp;•&nbsp; <a href="/contact.html" style="color:var(--gold)">Contact Us</a> &nbsp;•&nbsp; <a href="/about.html" style="color:var(--gold)">About Us</a> &nbsp;•&nbsp; <a href="/tools/" style="color:var(--gold)">Tools</a> &nbsp;•&nbsp; <a href="/awareness.html" style="color:var(--gold)">Safety Blogs</a></div>
+    <br><a href="/privacy" style="color:var(--gold)">Privacy Policy</a> &nbsp;•&nbsp; <a href="/contact" style="color:var(--gold)">Contact Us</a> &nbsp;•&nbsp; <a href="/about" style="color:var(--gold)">About Us</a> &nbsp;•&nbsp; <a href="/tools/" style="color:var(--gold)">Tools</a> &nbsp;•&nbsp; <a href="/awareness" style="color:var(--gold)">Safety Blogs</a></div>
 </footer>
 <div id="cert" role="dialog" aria-modal="true" aria-label="सर्टिफिकेट"><div class="cbox"><div class="cbar"><button class="btn" id="cDl">⬇ PNG डाउनलोड</button><button class="btn gold" id="cPr">🖨 प्रिंट / PDF</button><button class="btn alt" id="cX">✕ बंद करें</button></div><img id="cimg" alt="Certificate"></div></div>
 
@@ -485,7 +487,7 @@ PT.forEach((p,i)=>{const n=sp(p[0]);
   POOL.push({id:"p"+i,cat:6,make:()=>mk(6,`${n[0]} के लिए कौन-सी सुविधा/पोर्टल सही है?`,`Which service/portal is right for: ${n[1]}?`,[[p[1],p[1]],...sh(PT.map((_,j)=>j).filter(j=>j!==i)).slice(0,3).map(j=>[PT[j][1],PT[j][1]])],0,`${n[0]}: ${p[1]}`,`${n[1]}: ${p[1]}`)})});
 let Q=[],A=[],cur=0,user="",cid="",when="",score=0,endAt=0,t0=0,tmr=null,done=false,tookSec=0;
 const fmt=n=>String(n/60|0).padStart(2,"0")+":"+String(n%60).padStart(2,"0");
-$$("[data-logo]").forEach(i=>i.src=LOGO);$("#pLogo").src=PARTNER.logo;$("#tl").textContent=QUIZ_MIN;
+$$("[data-logo]").forEach(i=>i.src=LOGO);$("#pLogo").onerror=function(){this.style.display="none"};$("#pLogo").src=PARTNER.logo;$("#tl").textContent=QUIZ_MIN;
 function tick(){const l=Math.max(0,Math.ceil((endAt-Date.now())/1000)),t=$("#tm");t.textContent="⏱ "+fmt(l);t.classList.toggle("low",l<=60);if(l<=0)finish(true)}
 
 function pick(){
