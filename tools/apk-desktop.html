@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Android APK Analyzer — Cyber Portal Hub Tools</title>
+<meta name="description" content="Free Android APK Analyzer: analyze a suspicious APK in your browser — hashes, permissions, signing certificate, third-party SDKs, risk indicators and a downloadable report. Nothing is uploaded. Windows desktop edition also available.">
+<link rel="canonical" href="https://cyberportalhub.org/tools/apk-desktop">
 <link rel="icon" href="../favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --ink: #12181F;
@@ -187,17 +189,47 @@
   footer{ padding: 40px 0 64px; }
   footer p{ font-size: 13px; color: var(--paper-dim); max-width: 640px; }
 
+
+  /* ---- in-browser analyzer ---- */
+  #analyze{ padding-top: 40px; }
+  .az-note{ font-size:14px; color:#C7BFAF; margin:0 0 18px; max-width:70ch; }
+  .az-drop{ border:2px dashed var(--paper-dim); background:var(--ink-soft); padding:30px 20px; text-align:center; cursor:pointer; transition:border-color .15s, background .15s; }
+  .az-drop:hover, .az-drop.over{ border-color:var(--amber); background:#18212b; }
+  .az-drop b{ display:block; font-size:18px; color:var(--paper); margin-bottom:6px; font-family:var(--serif); }
+  .az-drop span{ font-size:14px; color:var(--paper-dim); }
+  .az-status{ font-family:var(--mono); font-size:13px; color:var(--amber); margin:14px 0 0; min-height:20px; }
+  .az-err{ color:#ff9b8a; }
+  .az-out{ margin-top:18px; }
+  .az-card{ background:var(--ink-soft); border:1px solid var(--rule); padding:20px 22px; margin-bottom:16px; }
+  .az-card h3{ margin:0 0 12px; font-family:var(--serif); font-size:19px; font-weight:600; }
+  .az-badge{ display:inline-block; padding:6px 18px; border-radius:4px; color:#fff; font-weight:700; font-size:20px; letter-spacing:.04em; }
+  .az-score{ font-family:var(--mono); color:var(--paper-dim); margin-left:10px; font-size:14px; }
+  .az-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  .az-table td, .az-table th{ border-top:1px solid var(--rule); padding:8px 6px; text-align:left; vertical-align:top; }
+  .az-table tr:first-child td, .az-table tr:first-child th{ border-top:none; }
+  .az-table td:first-child{ color:var(--paper-dim); width:190px; }
+  .az-mono{ font-family:var(--mono); font-size:12.5px; overflow-wrap:anywhere; }
+  .az-actions button.btn-ghost{ background:transparent; color:var(--paper); }
+  .az-perm td:first-child, .az-ind td:first-child{ width:44%; color:var(--paper); }
+  .az-flag td{ background:rgba(169,80,63,.14); }
+  .az-pill{ display:inline-block; font-family:var(--mono); font-size:12px; padding:2px 8px; border:1px solid var(--steel); margin:2px 4px 2px 0; color:var(--paper); }
+  .az-pill.ok{ border-color:#5a9a6a; color:#9ad3a8; } .az-pill.no{ opacity:.55; }
+  .az-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+  .az-actions button{ cursor:pointer; font-family:var(--sans); }
+  details.az-d summary{ cursor:pointer; color:var(--amber); font-size:14px; margin-top:8px; }
+  @media (max-width:720px){ .az-table td:first-child{ width:105px; } .az-perm td:first-child, .az-ind td:first-child{ width:52%; } .az-card{ padding:16px; } }
   @media (max-width: 720px){
     .hero{ grid-template-columns: 1fr; padding-top: 48px; }
     .download-panel{ grid-template-columns: 1fr; }
   }
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1448557659666187" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <a class="back-btn" href="index.html">← Back to Tools</a>
+    <a class="back-btn" href="/tools/">← Back to Tools</a>
     <div class="brand">v3.3</div>
   </div>
 </header>
@@ -206,9 +238,10 @@
   <section class="hero" style="border-bottom:none; padding-bottom:0;">
     <div>
       <h1>Android APK Analyzer</h1>
-      <p class="lede">Desktop (Windows EXE) edition. For the no-install browser version, use the <a href="scan.html">APK Scanner</a> instead.</p>
+      <p class="lede">Analyze a suspicious APK <b>right here in your browser</b> (nothing is uploaded), or download the Windows desktop edition for offline casework.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="AndroidAPKAnalyzerV3-source.zip" download>Download source package</a>
+        <a class="btn btn-primary" href="#analyze">Analyze an APK now</a>
+        <a class="btn btn-ghost" href="AndroidAPKAnalyzerV3-source.zip" download>Download source package</a>
         <a class="btn btn-ghost" href="#build">Build instructions</a>
       </div>
     </div>
@@ -222,6 +255,20 @@
         <dt>Execution</dt><dd>Static only — APK is never run</dd>
         <dt>Runtime</dt><dd>Python 3.11+</dd>
       </dl>
+    </div>
+  </section>
+
+  <section id="analyze">
+    <div style="max-width:none">
+      <h2>Analyze an APK in your browser</h2>
+      <p class="az-note">Choose an .apk file to get its hashes, permissions, signing certificate, risk indicators and a downloadable report. The file is read locally by your browser — <b>it is never uploaded, installed or executed.</b> Results are static-analysis indicators, not proof of malware.</p>
+      <div class="az-drop" id="azDrop" tabindex="0" role="button" aria-label="Choose an APK file">
+        <b>Drop an .apk here, or click to choose</b>
+        <span>Very large files (200 MB+) may be slow or fail on phones — use the desktop edition for those.</span>
+        <input type="file" id="azFile" accept=".apk,application/vnd.android.package-archive" hidden>
+      </div>
+      <div class="az-status" id="azStatus" aria-live="polite"></div>
+      <div class="az-out" id="azOut"></div>
     </div>
   </section>
 
@@ -317,7 +364,7 @@
   <section>
     <div class="col">
       <h2>Download</h2>
-      <p><a href="scan.html">Prefer not to install anything? Use the in-browser scanner instead</a> — same static triage, no build required.</p>
+      <p><a href="#analyze">Prefer not to install anything? Analyze an APK right here in your browser</a> — same static triage, no build required.</p>
       <div class="download-panel">
         <div class="dl-card">
           <h3>Source package</h3>
@@ -340,5 +387,337 @@
   </div>
 </footer>
 
+
+<script>
+/* Cyber Portal Hub — in-browser APK static analyzer (nothing is uploaded, APK is never executed) */
+const ApkAnalyzer=(function(){
+'use strict';
+const td8=new TextDecoder('utf-8'),td16=new TextDecoder('utf-16le');
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const colon=h=>h.toUpperCase().match(/.{2}/g).join(':');
+async function digest(alg,u8){try{if(globalThis.crypto&&crypto.subtle)return hex(await crypto.subtle.digest(alg,u8))}catch(e){}return null}
+
+/* ---------- MD5 ---------- */
+function md5(u8){
+  const K=[],r=[7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+  for(let i=0;i<64;i++)K[i]=Math.floor(Math.abs(Math.sin(i+1))*4294967296)|0;
+  let h0=0x67452301|0,h1=0xefcdab89|0,h2=0x98badcfe|0,h3=0x10325476|0;
+  const M=new Int32Array(16);
+  function block(dv,off){
+    for(let i=0;i<16;i++)M[i]=dv.getInt32(off+i*4,true);
+    let a=h0,b=h1,c=h2,d=h3;
+    for(let i=0;i<64;i++){
+      let f,g;
+      if(i<16){f=(b&c)|(~b&d);g=i}else if(i<32){f=(d&b)|(~d&c);g=(5*i+1)&15}
+      else if(i<48){f=b^c^d;g=(3*i+5)&15}else{f=c^(b|~d);g=(7*i)&15}
+      const t=d;d=c;c=b;
+      const x=(a+f+K[i]+M[g])|0;
+      b=(b+((x<<r[i])|(x>>>(32-r[i]))))|0;a=t;
+    }
+    h0=(h0+a)|0;h1=(h1+b)|0;h2=(h2+c)|0;h3=(h3+d)|0;
+  }
+  const dv=new DataView(u8.buffer,u8.byteOffset,u8.byteLength),full=Math.floor(u8.length/64);
+  for(let i=0;i<full;i++)block(dv,i*64);
+  const rem=u8.length-full*64,tail=new Uint8Array(rem<56?64:128);
+  tail.set(u8.subarray(full*64));tail[rem]=0x80;
+  const tv=new DataView(tail.buffer),bits=u8.length*8;
+  tv.setUint32(tail.length-8,bits>>>0,true);tv.setUint32(tail.length-4,Math.floor(bits/4294967296),true);
+  for(let i=0;i<tail.length/64;i++)block(tv,i*64);
+  const o=new DataView(new ArrayBuffer(16));[h0,h1,h2,h3].forEach((h,i)=>o.setInt32(i*4,h,true));
+  return hex(o.buffer);
+}
+
+/* ---------- ASN.1 / X.509 ---------- */
+function tlv(u8,pos){const tag=u8[pos];let l=u8[pos+1],p=pos+2;if(l&0x80){const n=l&0x7f;l=0;for(let i=0;i<n;i++)l=l*256+u8[p++]}return{tag,pos,start:p,len:l,end:p+l}}
+function kids(u8,n){const o=[];let p=n.start;while(p<n.end){const c=tlv(u8,p);o.push(c);p=c.end}return o}
+function oid(u8,n){const b=u8.subarray(n.start,n.end);const a=[Math.floor(b[0]/40),b[0]%40];let v=0;for(let i=1;i<b.length;i++){v=v*128+(b[i]&0x7f);if(!(b[i]&0x80)){a.push(v);v=0}}return a.join('.')}
+const OIDN={'2.5.4.3':'CN','2.5.4.6':'C','2.5.4.7':'L','2.5.4.8':'ST','2.5.4.10':'O','2.5.4.11':'OU','2.5.4.5':'serialNumber','1.2.840.113549.1.9.1':'emailAddress','0.9.2342.19200300.100.1.25':'DC'};
+const SIGA={'1.2.840.113549.1.1.11':'SHA256withRSA','1.2.840.113549.1.1.5':'SHA1withRSA','1.2.840.113549.1.1.4':'MD5withRSA','1.2.840.113549.1.1.12':'SHA384withRSA','1.2.840.113549.1.1.13':'SHA512withRSA','1.2.840.10045.4.3.2':'SHA256withECDSA','1.2.840.10045.4.3.3':'SHA384withECDSA','1.2.840.10045.4.1':'SHA1withECDSA','1.2.840.10040.4.3':'SHA1withDSA','2.16.840.1.101.3.4.3.2':'SHA256withDSA','1.2.840.113549.1.1.10':'RSASSA-PSS'};
+const KEYA={'1.2.840.113549.1.1.1':'RSA','1.2.840.10045.2.1':'EC','1.2.840.10040.4.1':'DSA'};
+function str(u8,n){const b=u8.subarray(n.start,n.end);return n.tag===0x1e?new TextDecoder('utf-16be').decode(b):td8.decode(b)}
+function name(u8,n){const parts=[];for(const rdn of kids(u8,n))for(const atv of kids(u8,rdn)){const k=kids(u8,atv);parts.push((OIDN[oid(u8,k[0])]||oid(u8,k[0]))+'='+str(u8,k[1]))}return parts.join(', ')}
+function time(u8,n){const s=td8.decode(u8.subarray(n.start,n.end));let y,r;if(n.tag===0x17){y=+s.slice(0,2);y+=y>=50?1900:2000;r=s.slice(2)}else{y=+s.slice(0,4);r=s.slice(4)}
+  return new Date(Date.UTC(y,+r.slice(0,2)-1,+r.slice(2,4),+r.slice(4,6),+r.slice(6,8),+r.slice(8,10))).toISOString().replace('.000Z','Z')}
+async function parseCert(der){
+  const root=tlv(der,0),k0=kids(der,root),tbs=k0[0],sigAlg=k0[1],t=kids(der,tbs);let i=t[0].tag===0xa0?1:0;
+  const serial=hex(der.subarray(t[i].start,t[i].end)).replace(/^0+(?=.)/,'');
+  const sigOid=oid(der,kids(der,t[i+1])[0]),issuer=name(der,t[i+2]),val=kids(der,t[i+3]),subject=name(der,t[i+4]),spki=kids(der,t[i+5]);
+  const kalg=KEYA[oid(der,kids(der,spki[0])[0])]||'unknown';let bits=null;
+  if(kalg==='RSA'){try{const bs=spki[1],inner=tlv(der,bs.start+1),m=kids(der,inner)[0];let len=m.len;if(der[m.start]===0)len--;bits=len*8}catch(e){}}
+  return{subject,issuer,serial,notBefore:time(der,val[0]),notAfter:time(der,val[1]),sigAlg:SIGA[sigOid]||sigOid,keyAlg:kalg,keyBits:bits,
+    selfSigned:subject===issuer,sha256:await digest('SHA-256',der),sha1:await digest('SHA-1',der),md5:md5(der)};
+}
+
+/* ---------- Android binary XML ---------- */
+const RES={0x01010003:'name',0x0101021b:'versionCode',0x0101021c:'versionName',0x0101020c:'minSdkVersion',0x01010270:'targetSdkVersion',0x0101000f:'debuggable',0x01010010:'exported',0x01010280:'allowBackup',0x010104ec:'usesCleartextTraffic',0x01010001:'label',0x01010006:'permission',0x01010021:'priority'};
+function axml(u8){
+  const dv=new DataView(u8.buffer,u8.byteOffset,u8.byteLength);
+  if(dv.getUint16(0,true)!==0x0003)throw new Error('AndroidManifest.xml is not binary XML');
+  let pos=dv.getUint16(2,true),pool=[],resmap=[],stack=[],root=null;
+  function readPool(p){
+    const n=dv.getUint32(p+8,true),flags=dv.getUint32(p+16,true),sOff=dv.getUint32(p+20,true),utf8=!!(flags&0x100),out=[];
+    for(let i=0;i<n;i++){
+      let q=p+sOff+dv.getUint32(p+28+i*4,true);
+      if(utf8){let l=u8[q++];if(l&0x80)l=((l&0x7f)<<8)|u8[q++];let bl=u8[q++];if(bl&0x80)bl=((bl&0x7f)<<8)|u8[q++];out.push(td8.decode(u8.subarray(q,q+bl)))}
+      else{let l=dv.getUint16(q,true);q+=2;if(l&0x8000){l=((l&0x7fff)<<16)|dv.getUint16(q,true);q+=2}out.push(td16.decode(u8.subarray(q,q+l*2)))}
+    }
+    return out;
+  }
+  while(pos+8<=u8.length){
+    const type=dv.getUint16(pos,true),hs=dv.getUint16(pos+2,true),size=dv.getUint32(pos+4,true);if(size<8)break;
+    if(type===0x0001)pool=readPool(pos);
+    else if(type===0x0180){for(let i=0;i<(size-hs)/4;i++)resmap.push(dv.getUint32(pos+hs+i*4,true))}
+    else if(type===0x0102){
+      const nm=pool[dv.getUint32(pos+20,true)]||'',aStart=dv.getUint16(pos+24,true),aSize=dv.getUint16(pos+26,true),aCnt=dv.getUint16(pos+28,true),attrs={};
+      for(let i=0;i<aCnt;i++){
+        const a=pos+16+aStart+i*aSize,ni=dv.getUint32(a+4,true),raw=dv.getUint32(a+8,true),dt=u8[a+15],data=dv.getUint32(a+16,true);
+        let an=pool[ni]||'';if(!an&&resmap[ni]!==undefined)an=RES[resmap[ni]]||('res_'+resmap[ni].toString(16));
+        let v;if(dt===3)v=pool[raw]??pool[data];else if(dt===0x10)v=dv.getInt32(a+16,true);else if(dt===0x11)v='0x'+data.toString(16);
+        else if(dt===0x12)v=data!==0;else if(dt===1)v='@0x'+data.toString(16);else if(dt===4)v=new DataView(new Uint32Array([data]).buffer).getFloat32(0,true);else v=data;
+        attrs[an]=v;
+      }
+      const el={tag:nm,attrs,children:[]};if(stack.length)stack[stack.length-1].children.push(el);else root=el;stack.push(el);
+    }else if(type===0x0103)stack.pop();
+    pos+=size;
+  }
+  return root;
+}
+function walk(n,f){f(n);for(const c of n.children)walk(c,f)}
+
+/* ---------- Signing (v1 META-INF + v2/v3/v3.1 block) ---------- */
+function eocd(u8){const dv=new DataView(u8.buffer,u8.byteOffset,u8.byteLength);for(let i=u8.length-22;i>=Math.max(0,u8.length-65557);i--)if(dv.getUint32(i,true)===0x06054b50)return{cd:dv.getUint32(i+16,true)};return null}
+function sigBlock(u8){
+  const e=eocd(u8);if(!e||e.cd<32)return{};const dv=new DataView(u8.buffer,u8.byteOffset,u8.byteLength);
+  if(td8.decode(u8.subarray(e.cd-16,e.cd))!=='APK Sig Block 42')return{};
+  const size=dv.getUint32(e.cd-24,true)+dv.getUint32(e.cd-20,true)*4294967296,start=e.cd-size-8,out={};let p=start+8;
+  while(p<e.cd-24){const len=dv.getUint32(p,true)+dv.getUint32(p+4,true)*4294967296,id=dv.getUint32(p+8,true);out[id]=u8.subarray(p+12,p+8+len);p+=8+len}
+  return out;
+}
+function blockCerts(v,v3){ // returns array of DER cert Uint8Arrays
+  const dv=new DataView(v.buffer,v.byteOffset,v.byteLength),certs=[];let p=4;const end=4+dv.getUint32(0,true);
+  while(p<end){const sl=dv.getUint32(p,true),sEnd=p+4+sl;let q=p+4;
+    const sdl=dv.getUint32(q,true),sd=q+4,sdEnd=sd+sdl;let r=sd;
+    const dl=dv.getUint32(r,true);r+=4+dl;const cl=dv.getUint32(r,true),cEnd=r+4+cl;r+=4;
+    while(r<cEnd){const l=dv.getUint32(r,true);certs.push(v.subarray(r+4,r+4+l));r+=4+l}
+    p=sEnd}
+  return certs;
+}
+
+/* ---------- DEX ---------- */
+function dexStrings(u8){
+  if(u8.length<112||u8[0]!==0x64||u8[1]!==0x65||u8[2]!==0x78)return[];
+  const dv=new DataView(u8.buffer,u8.byteOffset,u8.byteLength),n=dv.getUint32(0x38,true),off=dv.getUint32(0x3c,true),out=[];
+  for(let i=0;i<n;i++){let p=dv.getUint32(off+i*4,true);while(u8[p]&0x80)p++;p++;let e=p;while(e<u8.length&&u8[e]!==0)e++;out.push(td8.decode(u8.subarray(p,e)))}
+  return out;
+}
+
+/* ---------- Risk knowledge ---------- */
+const PERMS={
+ 'android.permission.BIND_ACCESSIBILITY_SERVICE':[25,'Can read on-screen text and simulate taps -- used to steal banking credentials/OTPs typed into other apps.'],
+ 'android.permission.SYSTEM_ALERT_WINDOW':[20,'Can draw an overlay on top of other apps -- used to show a fake login screen over a real banking app to capture credentials.'],
+ 'android.permission.REQUEST_INSTALL_PACKAGES':[20,"Can prompt install of another APK -- common in 'dropper' apps that install a second, more dangerous payload."],
+ 'android.permission.RECEIVE_SMS':[20,'Can intercept incoming SMS -- most commonly used to silently capture bank OTP codes.'],
+ 'android.permission.READ_SMS':[20,'Can read all stored SMS -- used to harvest OTPs and personal messages.'],
+ 'android.permission.SEND_SMS':[25,'Can send SMS without further confirmation -- used for premium-rate SMS fraud or to spread the app to contacts.'],
+ 'android.permission.BIND_DEVICE_ADMIN':[20,'Can gain device-admin rights -- makes the app hard to uninstall and can lock/wipe the device.'],
+ 'android.permission.READ_CONTACTS':[10,'Can read the full contact list -- often exfiltrated for further phishing.'],
+ 'android.permission.RECORD_AUDIO':[10,'Can record audio -- used for covert surveillance.'],
+ 'android.permission.CAMERA':[5,'Can access the camera -- used for covert surveillance.'],
+ 'android.permission.READ_PHONE_STATE':[10,'Can read device/SIM identifiers -- used to fingerprint the device for fraud tracking.']};
+const APIS=[
+ {id:'DexClassLoader',weight:20,test:s=>s.has('Ldalvik/system/DexClassLoader;')||s.has('DexClassLoader')||s.has('Ldalvik/system/InMemoryDexClassLoader;'),desc:'Loads additional code at runtime -- lets the app run a second-stage payload hidden from static scanning.'},
+ {id:'Runtime.exec',weight:20,test:s=>s.has('Ljava/lang/Runtime;')&&s.has('exec'),desc:'Executes OS-level shell commands directly.'},
+ {id:'ProcessBuilder',weight:10,test:s=>s.has('Ljava/lang/ProcessBuilder;'),desc:'Spawns external processes -- similar risk to Runtime.exec.'},
+ {id:'getDeviceId',weight:10,test:s=>s.has('getDeviceId'),desc:"Reads the device's hardware ID -- fraud-network fingerprinting."},
+ {id:'getSubscriberId',weight:10,test:s=>s.has('getSubscriberId'),desc:'Reads the SIM IMSI -- ties infection to a phone number.'},
+ {id:'getSimSerialNumber',weight:10,test:s=>s.has('getSimSerialNumber'),desc:'Reads the SIM serial number -- device fingerprinting.'}];
+const LEVELS=[[70,'CRITICAL','Do not install on any real device. Treat as confirmed malicious pending further review.'],[40,'HIGH','Do not install on a personal/real device. Analyze further in an isolated sandbox before drawing conclusions.'],[15,'MEDIUM','Review the flagged items manually before trusting this APK.'],[0,'LOW','No high-risk indicator matched. This does NOT guarantee safety.']];
+const NEXT=['Preserve the original APK and its SHA-256 as evidence.',"Verify the signing certificate against the real publisher's.",'Decompile with JADX and review the flagged code paths.','Run in an isolated sandbox before drawing final conclusions.','If this impersonates a real bank/service, report it to CERT-In (cert-in.org.in) and the impersonated organization.'];
+const SERVICES=[
+ {name:'Firebase (Google)',p:['com/google/firebase','firebaseio.com','firebaseapp.com','firebasedatabase.app']},
+ {name:'Google Play Services (GMS)',p:['com/google/android/gms']},
+ {name:'Google Analytics / Tag Manager',p:['google-analytics.com','googletagmanager.com']},
+ {name:'AdMob / Google Ads',p:['com/google/android/gms/ads','googleadservices.com','doubleclick.net']},
+ {name:'Facebook SDK',p:['com/facebook','graph.facebook.com']},
+ {name:'AWS (Amazon Web Services)',p:['amazonaws.com','com/amazonaws']},
+ {name:'OneSignal (Push notifications)',p:['com/onesignal','onesignal.com']},
+ {name:'Crashlytics',p:['com/crashlytics','crashlytics.com']},
+ {name:'AppsFlyer',p:['com/appsflyer']},
+ {name:'Branch.io',p:['io/branch']},
+ {name:'Adjust',p:['com/adjust']},
+ {name:'Razorpay',p:['com/razorpay','razorpay.com']},
+ {name:'Stripe',p:['com/stripe','stripe.com']},
+ {name:'PayU',p:['payu.in','com/payu']},
+ {name:'Paytm',p:['paytm.com','com/paytm']},
+ {name:'Unity Ads / Unity',p:['com/unity3d']},
+ {name:'Mixpanel',p:['mixpanel.com','com/mixpanel']},
+ {name:'Cloudflare',p:['cloudflare.com']}];
+const BENIGN_URL=/schemas\.android\.com|www\.w3\.org|ns\.adobe\.com|xmlpull\.org|apache\.org\/|developer\.android\.com|www\.example\.com|java\.sun\.com|xml\.org|localhost/i;
+
+/* ---------- main ---------- */
+async function analyze(buf,fileName,JSZip,progress){
+  const say=m=>progress&&progress(m),u8=new Uint8Array(buf),R={file:{name:fileName,size:u8.length},errors:[]};
+  say('Hashing file...');
+  R.file.md5=md5(u8);R.file.sha1=await digest('SHA-1',u8);R.file.sha256=await digest('SHA-256',u8);
+  say('Opening APK (ZIP)...');
+  let zip;try{zip=await JSZip.loadAsync(buf)}catch(e){throw new Error('Not an APK: file is not a valid ZIP archive')}
+  const names=Object.keys(zip.files).filter(n=>!zip.files[n].dir);
+  if(!zip.file('AndroidManifest.xml'))throw new Error('Not an APK: AndroidManifest.xml not found');
+  R.contents={files:names.length,dex:names.filter(n=>/^classes\d*\.dex$/.test(n)),abis:[...new Set(names.filter(n=>/^lib\/[^/]+\/.+\.so$/.test(n)).map(n=>n.split('/')[1]))],
+    payloads:names.filter(n=>/^(assets|res\/raw)\/.+\.(apk|dex|jar|so|bin|dat|enc)$/i.test(n)).slice(0,30)};
+  say('Parsing manifest...');
+  const M=R.manifest={permissions:[],components:{activity:[],service:[],receiver:[],provider:[]},actions:[]};
+  try{
+    const root=axml(await zip.file('AndroidManifest.xml').async('uint8array'));
+    M.package=root.attrs.package;M.versionName=root.attrs.versionName;M.versionCode=root.attrs.versionCode;
+    walk(root,n=>{const a=n.attrs;
+      if(n.tag==='uses-sdk'){M.minSdk=a.minSdkVersion;M.targetSdk=a.targetSdkVersion}
+      else if(n.tag==='uses-permission'||n.tag==='uses-permission-sdk-23'){if(a.name&&!M.permissions.includes(a.name))M.permissions.push(a.name)}
+      else if(n.tag==='application'){M.debuggable=a.debuggable===true;M.allowBackup=a.allowBackup;M.cleartext=a.usesCleartextTraffic;M.appClass=a.name}
+      else if(n.tag==='action'&&a.name&&!M.actions.includes(a.name))M.actions.push(a.name);
+      else if(M.components[n.tag]!==undefined)M.components[n.tag].push({name:a.name,exported:a.exported,permission:a.permission});
+      else if(n.tag==='activity-alias'){(M.components.alias=M.components.alias||[]).push({name:a.name,exported:a.exported})}});
+  }catch(e){M.error='Could not parse manifest reliably: '+e.message}
+  say('Reading signing information...');
+  const S=R.signing={v1:false,v2:false,v3:false,v31:false,certs:[]},seen=new Set();
+  const addCert=async(der,src)=>{try{const c=await parseCert(der);if(!seen.has(c.sha256)){seen.add(c.sha256);c.source=src;S.certs.push(c)}}catch(e){R.errors.push('certificate ('+src+'): '+e.message)}};
+  for(const n of names.filter(n=>/^META-INF\/[^/]+\.(RSA|DSA|EC)$/i.test(n))){S.v1=true;
+    try{const d=await zip.file(n).async('uint8array'),root=tlv(d,0),ct=kids(d,root)[1],sd=kids(d,ct)[0],certs=kids(d,sd).find(x=>x.tag===0xa0);
+      if(certs)for(const c of kids(d,certs))await addCert(d.subarray(c.pos,c.end),'v1 ('+n.split('/').pop()+')')}catch(e){R.errors.push(n+': '+e.message)}}
+  try{const B=sigBlock(u8);
+    if(B[0x7109871a]){S.v2=true;for(const c of blockCerts(B[0x7109871a]))await addCert(c,'v2')}
+    if(B[0xf05368c0]){S.v3=true;for(const c of blockCerts(B[0xf05368c0],true))await addCert(c,'v3')}
+    if(B[0x1b93ad61]){S.v31=true;for(const c of blockCerts(B[0x1b93ad61],true))await addCert(c,'v3.1')}}catch(e){R.errors.push('signing block: '+e.message)}
+  S.signed=S.v1||S.v2||S.v3||S.v31;S.debugCert=S.certs.some(c=>/CN=Android Debug/i.test(c.subject));
+  say('Scanning embedded strings...');
+  const strings=new Set();
+  for(const d of R.contents.dex){try{for(const s of dexStrings(await zip.file(d).async('uint8array')))strings.add(s)}catch(e){R.errors.push(d+': '+e.message)}}
+  const urls=new Set();
+  for(const s of strings){if(s.length>8&&s.length<600){const m=s.match(/https?:\/\/[^\s"'<>\\]{4,200}/g);if(m)m.forEach(u=>{if(!BENIGN_URL.test(u))urls.add(u)});
+      if(/^\d{1,3}(\.\d{1,3}){3}(:\d+)?$/.test(s)&&!/^(0\.0\.0\.0|127\.|255\.)/.test(s))urls.add(s)}}
+  R.urls=[...urls].slice(0,100);R.urlCount=urls.size;
+  say('Detecting third-party SDKs and services...');
+  let hay=[...strings].join('\n');
+  try{const ar=zip.file('resources.arsc');if(ar){const b=await ar.async('uint8array');hay+='\n'+new TextDecoder('latin1').decode(b)+'\n'+td16.decode(b.subarray(0,b.length&~1))}}catch(e){}
+  R.services=[];
+  for(const sv of SERVICES){const hit=sv.p.filter(x=>hay.includes(x));if(hit.length)R.services.push({name:sv.name,evidence:hit})}
+  say('Scoring risk...');
+  const ind=R.indicators=[];let score=0;
+  for(const p of M.permissions)if(PERMS[p]){ind.push({kind:'permission',id:p,weight:PERMS[p][0],desc:PERMS[p][1]});score+=PERMS[p][0]}
+  for(const a of APIS)if(a.test(strings)){ind.push({kind:'api',id:a.id,weight:a.weight,desc:a.desc});score+=a.weight}
+  if(M.debuggable){ind.push({kind:'flag',id:'debuggable',weight:10,desc:'App is debuggable in a release build -- allows attaching a debugger and inspecting/manipulating runtime state; should never be true in a shipped app.'});score+=10}
+  if(R.urlCount>=3){ind.push({kind:'network',id:R.urlCount+' embedded URLs/domains',weight:5,desc:'Multiple hardcoded network endpoints -- verify whether they belong to the real service.'});score+=5}
+  if(!S.signed){ind.push({kind:'signing',id:'unsigned',weight:10,desc:'APK carries no v1/v2/v3 signature -- cannot be verified or installed normally; common for repackaged/test builds.'});score+=10}
+  if(R.contents.payloads.length){ind.push({kind:'payload',id:R.contents.payloads.length+' embedded payload file(s)',weight:5,desc:'Executable-looking files (apk/dex/jar/so) stored in assets or res/raw -- may be a second-stage payload.'});score+=5}
+  const lv=LEVELS.find(l=>score>=l[0]);R.risk={score,level:lv[1],action:lv[2]};R.next=NEXT;
+  return R;
+}
+
+/* ---------- reports ---------- */
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COL={CRITICAL:'#b30000',HIGH:'#d9480f',MEDIUM:'#c98a00',LOW:'#2b8a3e'};
+function txt(R){
+  const L=[],M=R.manifest,S=R.signing,line='='.repeat(70);
+  L.push(line,'ANDROID APK FORENSIC REPORT (browser edition)',line,'APK file: '+R.file.name,'Size    : '+R.file.size+' bytes','MD5     : '+R.file.md5,'SHA-1   : '+R.file.sha1,'SHA-256 : '+R.file.sha256,'');
+  L.push('RISK LEVEL: '+R.risk.level+'  (score '+R.risk.score+')',R.risk.action,'');
+  L.push('APP','  Package: '+M.package,'  Version: '+M.versionName+' ('+M.versionCode+')','  minSdk / targetSdk: '+M.minSdk+' / '+M.targetSdk,'  Debuggable: '+(M.debuggable?'YES (risk)':'no'),'');
+  L.push('PERMISSIONS ('+M.permissions.length+')',...M.permissions.map(p=>'  '+(PERMS[p]?'[!] ':'    ')+p),'');
+  L.push('SIGNING','  Schemes: v1='+S.v1+' v2='+S.v2+' v3='+S.v3+' v3.1='+S.v31);
+  S.certs.forEach((c,i)=>L.push('  Certificate #'+(i+1)+' ['+c.source+']','    Subject : '+c.subject,'    Issuer  : '+c.issuer,'    Valid   : '+c.notBefore+' -> '+c.notAfter,'    Algo    : '+c.sigAlg+', '+c.keyAlg+(c.keyBits?' '+c.keyBits+'-bit':''),'    SHA-256 : '+c.sha256));
+  if(!S.certs.length)L.push('  No certificate found (unsigned or unparsable).');
+  L.push('','INDICATORS',...(R.indicators.length?R.indicators.map(i=>'  [+'+i.weight+'] '+i.id+' -- '+i.desc):['  No predefined high-risk pattern matched in this scan.']),'');
+  L.push('THIRD-PARTY SDKS / SERVICES ('+R.services.length+')',...(R.services.length?R.services.map(x=>'  '+x.name+'  [matched: '+x.evidence.join(', ')+']'):['  None of the known SDK/service signatures were found.']),'');
+  if(R.urls.length)L.push('EMBEDDED URLS/DOMAINS ('+R.urlCount+')',...R.urls.slice(0,50).map(u=>'  '+u),'');
+  L.push('RECOMMENDED NEXT STEPS',...R.next.map((s,i)=>(i+1)+'. '+s),'','Static analysis only. Findings are indicators, not proof. The APK was not installed or executed.');
+  return L.join('\n');
+}
+function html(R){
+  const M=R.manifest,S=R.signing,c=COL[R.risk.level];
+  const permRows=M.permissions.map(p=>`<tr${PERMS[p]?' style="background:#fff1f0"':''}><td class="mono">${esc(p)}</td><td>${PERMS[p]?esc(PERMS[p][1]):''}</td></tr>`).join('');
+  const certRows=S.certs.map((x,i)=>`<table><tr><td colspan="2"><b>Certificate #${i+1}</b> (${esc(x.source)})</td></tr><tr><td>Subject</td><td>${esc(x.subject)}</td></tr><tr><td>Issuer</td><td>${esc(x.issuer)}</td></tr><tr><td>Valid</td><td>${esc(x.notBefore)} → ${esc(x.notAfter)}</td></tr><tr><td>Algorithm</td><td>${esc(x.sigAlg)}, ${esc(x.keyAlg)}${x.keyBits?' '+x.keyBits+'-bit':''}</td></tr><tr><td>Certificate SHA-256</td><td class="mono">${esc(x.sha256)}</td></tr></table>`).join('')||'<p>No certificate found (unsigned or unparsable).</p>';
+  const ind=R.indicators.map(i=>`<tr><td class="mono">${esc(i.id)}</td><td>+${i.weight}</td><td>${esc(i.desc)}</td></tr>`).join('')||'<tr><td colspan="3">No predefined high-risk pattern matched in this scan.</td></tr>';
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Android APK Forensic Report</title><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:900px;margin:24px auto;padding:0 16px;color:#222}h1{margin:0 0 6px}h2{margin:26px 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px}table{border-collapse:collapse;width:100%;font-size:14px;margin-bottom:10px}td,th{border:1px solid #ddd;padding:6px 8px;vertical-align:top;text-align:left}.mono{font-family:Consolas,monospace;word-break:break-all}.risk-badge{display:inline-block;padding:6px 16px;border-radius:6px;color:#fff;font-weight:700;font-size:20px;background:${c}}.note{color:#666;font-size:13px}</style></head><body>
+<h1>Android APK Forensic Report</h1><p class="note">Generated in the browser by Cyber Portal Hub — static analysis only; the APK was not installed or executed.</p>
+<h2>Risk level</h2><span class="risk-badge">${R.risk.level}</span> score ${R.risk.score}<p>${esc(R.risk.action)}</p>
+<h2>File</h2><table><tr><td>Name</td><td>${esc(R.file.name)}</td></tr><tr><td>Size</td><td>${R.file.size} bytes</td></tr><tr><td>MD5</td><td class="mono">${R.file.md5}</td></tr><tr><td>SHA-1</td><td class="mono">${R.file.sha1}</td></tr><tr><td>SHA-256</td><td class="mono">${R.file.sha256}</td></tr></table>
+<h2>App</h2><table><tr><td>Package</td><td>${esc(M.package)}</td></tr><tr><td>Version</td><td>${esc(M.versionName)} (${esc(M.versionCode)})</td></tr><tr><td>minSdk / targetSdk</td><td>${esc(M.minSdk)} / ${esc(M.targetSdk)}</td></tr><tr><td>Debuggable</td><td>${M.debuggable?'<b style="color:#b30000">YES</b> (risk)':'no'}</td></tr></table>
+<h2>Declared permissions (${M.permissions.length})</h2><table>${permRows}</table>
+<h2>Signing certificate</h2><p>Schemes: v1=${S.v1} v2=${S.v2} v3=${S.v3} v3.1=${S.v31}</p>${certRows}
+<h2>Indicators</h2><table><tr><th>Indicator</th><th>Weight</th><th>Why it matters</th></tr>${ind}</table>
+<h2>Third-party SDKs &amp; services (${R.services.length})</h2>${R.services.length?`<table>${R.services.map(x=>`<tr><td>${esc(x.name)}</td><td class="mono">${esc(x.evidence.join(', '))}</td></tr>`).join('')}</table>`:'<p>None of the known SDK/service signatures were found.</p>'}<p class="note">Presence of an SDK is common and not suspicious by itself; it shows which external services the app talks to.</p>
+${R.urls.length?`<h2>Embedded URLs/domains (${R.urlCount})</h2><table>${R.urls.slice(0,50).map(u=>`<tr><td class="mono">${esc(u)}</td></tr>`).join('')}</table>`:''}
+<h2>Recommended next steps</h2><ol>${R.next.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p class="note">Findings are indicators, not proof. Verify manually before drawing conclusions.</p></body></html>`;
+}
+return{analyze,txt,html,PERMS,md5,LEVELS,esc,COL};
+})();
+
+
+(function(){
+  const A=ApkAnalyzer,esc=A.esc,$=s=>document.querySelector(s);
+  const drop=$('#azDrop'),input=$('#azFile'),status=$('#azStatus'),out=$('#azOut');
+  const JSZ=['https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'];
+  function load(u){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=u;s.onload=res;s.onerror=()=>rej(new Error('could not load '+u));document.head.appendChild(s)})}
+  async function ensureZip(){if(window.JSZip)return;let e;for(const u of JSZ){try{await load(u);if(window.JSZip)return}catch(x){e=x}}throw e||new Error('ZIP library unavailable')}
+  const fmt=n=>n>=1048576?(n/1048576).toFixed(2)+' MB':(n/1024).toFixed(1)+' KB';
+  function dl(name,mime,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:mime}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+  drop.addEventListener('click',()=>input.click());
+  drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click()}});
+  ['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add('over')}));
+  ['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('over')}));
+  drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)run(f)});
+  input.addEventListener('change',()=>{if(input.files[0])run(input.files[0])});
+
+  function render(R){
+    const M=R.manifest,S=R.signing,c=A.COL[R.risk.level],P=A.PERMS;
+    const pill=(t,on)=>`<span class="az-pill ${on?'ok':'no'}">${t}</span>`;
+    const permRows=M.permissions.map(p=>`<tr${P[p]?' class="az-flag"':''}><td class="az-mono">${esc(p)}</td><td>${P[p]?esc(P[p][1]):''}</td></tr>`).join('');
+    const flagged=M.permissions.filter(p=>P[p]).length;
+    const certs=S.certs.map((x,i)=>`<table class="az-table"><tr><td colspan="2"><b>Certificate #${i+1}</b> <span class="az-mono">(${esc(x.source)})</span></td></tr>
+      <tr><td>Subject</td><td>${esc(x.subject)}</td></tr><tr><td>Issuer</td><td>${esc(x.issuer)}${x.selfSigned?' <i>(self-signed)</i>':''}</td></tr>
+      <tr><td>Valid</td><td>${esc(x.notBefore)} → ${esc(x.notAfter)}</td></tr><tr><td>Algorithm</td><td>${esc(x.sigAlg)}, ${esc(x.keyAlg)}${x.keyBits?' '+x.keyBits+'-bit':''}</td></tr>
+      <tr><td>Certificate SHA-256</td><td class="az-mono">${esc(x.sha256)}</td></tr><tr><td>Certificate SHA-1</td><td class="az-mono">${esc(x.sha1)}</td></tr></table>`).join('')||'<p>No certificate found (unsigned or unparsable).</p>';
+    const ind=R.indicators.map(i=>`<tr class="az-flag"><td class="az-mono">${esc(i.id)}</td><td>${esc(i.desc)} <span class="az-mono">(+${i.weight})</span></td></tr>`).join('')||'<tr><td colspan="2">No predefined high-risk pattern matched in this scan.</td></tr>';
+    const cm=M.components;
+    return `
+    <div class="az-card"><h3>Risk level</h3><span class="az-badge" style="background:${c}">${R.risk.level}</span><span class="az-score">score ${R.risk.score}</span>
+      <p style="margin:12px 0 0">${esc(R.risk.action)}</p>
+      <p style="margin:8px 0 0;font-size:13px;color:#a99f8a">This score is a heuristic built from the indicators below. Many legitimate apps also request sensitive permissions, so treat it as a triage aid.</p>
+      <div class="az-actions" style="margin-top:14px"><button class="btn btn-primary" id="azHtml">Download HTML report</button><button class="btn btn-ghost" id="azTxt">Download TXT report</button></div></div>
+    <div class="az-card"><h3>File</h3><table class="az-table"><tr><td>Name</td><td>${esc(R.file.name)}</td></tr><tr><td>Size</td><td>${fmt(R.file.size)} (${R.file.size} bytes)</td></tr>
+      <tr><td>MD5</td><td class="az-mono">${R.file.md5}</td></tr><tr><td>SHA-1</td><td class="az-mono">${R.file.sha1||'n/a'}</td></tr><tr><td>SHA-256</td><td class="az-mono">${R.file.sha256||'n/a (needs https)'}</td></tr></table></div>
+    <div class="az-card"><h3>App</h3>${M.error?`<p class="az-err">${esc(M.error)}</p>`:''}<table class="az-table"><tr><td>Package</td><td class="az-mono">${esc(M.package)}</td></tr>
+      <tr><td>Version</td><td>${esc(M.versionName)} (${esc(M.versionCode)})</td></tr><tr><td>minSdk / targetSdk</td><td>${esc(M.minSdk)} / ${esc(M.targetSdk)}</td></tr>
+      <tr><td>Debuggable</td><td>${M.debuggable?'<b style="color:#ff9b8a">YES</b> (risk)':'no'}</td></tr>
+      <tr><td>Components</td><td>${cm.activity.length} activities, ${cm.service.length} services, ${cm.receiver.length} receivers, ${cm.provider.length} providers</td></tr>
+      <tr><td>Contents</td><td>${R.contents.files} files, ${R.contents.dex.length} DEX${R.contents.abis.length?', native ABIs: '+esc(R.contents.abis.join(', ')):''}</td></tr></table></div>
+    <div class="az-card"><h3>Indicators</h3><table class="az-table az-ind">${ind}</table></div>
+    <div class="az-card"><h3>Permissions (${M.permissions.length}${flagged?', '+flagged+' flagged':''})</h3>
+      <details class="az-d" ${flagged?'open':''}><summary>Show permission list</summary><table class="az-table az-perm">${permRows||'<tr><td>None declared</td></tr>'}</table></details></div>
+    <div class="az-card"><h3>Signing</h3><p>${pill('v1 (JAR)',S.v1)}${pill('v2',S.v2)}${pill('v3',S.v3)}${pill('v3.1',S.v31)}</p>${S.debugCert?'<p class="az-err">Signed with an Android <b>debug</b> certificate — not a production release.</p>':''}${certs}</div>
+    <div class="az-card"><h3>Third-party SDKs &amp; services (${R.services.length})</h3>${R.services.length?`<table class="az-table az-ind">${R.services.map(x=>`<tr><td>${esc(x.name)}</td><td class="az-mono">${esc(x.evidence.join(', '))}</td></tr>`).join('')}</table>`:'<p>None of the known SDK/service signatures were found.</p>'}<p style="margin:10px 0 0;font-size:13px;color:#a99f8a">An SDK being present is common and not suspicious by itself — it shows which external services the app talks to.</p></div>
+    ${R.urls.length?`<div class="az-card"><h3>Embedded URLs / domains (${R.urlCount})</h3><details class="az-d"><summary>Show list</summary><table class="az-table">${R.urls.slice(0,50).map(u=>`<tr><td class="az-mono">${esc(u)}</td></tr>`).join('')}</table></details></div>`:''}
+    <div class="az-card"><h3>Recommended next steps</h3><ol style="margin:0;padding-left:20px">${R.next.map(s=>`<li style="margin:4px 0">${esc(s)}</li>`).join('')}</ol></div>`;
+  }
+
+  async function run(file){
+    out.innerHTML='';status.className='az-status';
+    if(!/\.apk$/i.test(file.name)){status.className='az-status az-err';status.textContent='Please choose a file with the .apk extension.';return}
+    if(file.size>400*1048576){status.className='az-status az-err';status.textContent='File is larger than 400 MB — too big for the browser version. Use the desktop edition.';return}
+    try{
+      status.textContent='Reading file...';
+      await ensureZip();
+      const buf=await file.arrayBuffer();
+      const R=await A.analyze(buf,file.name,window.JSZip,m=>{status.textContent=m});
+      out.innerHTML=render(R);
+      status.textContent='Done — static analysis of '+file.name+' completed in your browser.';
+      const base=file.name.replace(/\.apk$/i,'')+'_report';
+      $('#azHtml').onclick=()=>dl(base+'.html','text/html',A.html(R));
+      $('#azTxt').onclick=()=>dl(base+'.txt','text/plain',A.txt(R));
+      out.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(e){console.error(e);status.className='az-status az-err';status.textContent='Could not analyze: '+(e&&e.message||e)}
+    input.value='';
+  }
+})();
+</script>
 </body>
 </html>

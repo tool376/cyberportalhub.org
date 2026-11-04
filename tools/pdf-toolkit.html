@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Document & PDF Tools</title>
+<meta name="description" content="Free Document & PDF Tools: merge, split, rotate, watermark, convert, OCR and more directly in your browser. Your files are not uploaded.">
+<link rel="canonical" href="https://cyberportalhub.org/tools/pdf-toolkit">
 <link rel="icon" href="../favicon.ico" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&amp;family=Noto+Sans+Devanagari:wght@400;600&amp;display=swap" rel="stylesheet">
 <style>
 :root{--navy:#063b63;--red:#a91520;--cream:#fff8ea;--border:#e4d5b8;--text:#17324a}
 *{box-sizing:border-box}
@@ -37,10 +39,11 @@ footer{text-align:center;padding:28px;color:#6a6a6a;font-size:12px}
 small{color:#697a87}
 .warn{background:#fff4e5;border:1px solid #ffd8a8;color:#8a4b00;border-radius:10px;padding:10px 12px;font-size:12px}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1448557659666187" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-  <a class="back-btn" href="index.html">← Back to Tools</a>
+  <a class="back-btn" href="/tools/">← Back to Tools</a>
   <h1>Document & PDF Tools</h1>
   <p>Organize • Optimize • Convert • Edit • Secure • Intelligence</p>
 </header>
@@ -751,7 +754,7 @@ $('previewBtn').addEventListener('click', async () => {
       imgs.push(c.toDataURL('image/jpeg'));
     }
     st.innerHTML = imgs.map((s, i) =>
-      `<div><small>Page ${i + 1}</small><br><img src="${s}" style="max-width:100%;border:1px solid #ddd"></div>`
+      `<div><small>Page ${i + 1}</small><br><img src="${s}" alt="Page preview" style="max-width:100%;border:1px solid #ddd"></div>`
     ).join('');
   } catch (e) { st.textContent = e.message; }
 });
